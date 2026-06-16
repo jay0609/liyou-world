@@ -1,0 +1,246 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ========================================
+   璃幽宇宙 — 全局样式 (引自 DESIGN.md)
+   ======================================== */
+
+/* === CSS 自定义属性 === */
+:root {
+  /* 主色调 — 全部对齐 DESIGN.md */
+  --liyou-moon-white: #F8F6F3;
+  --liyou-moon-white-soft: #F3F0EC;
+  --liyou-light-purple: #C4B5D4;
+  --liyou-light-purple-soft: #E8E0F0;
+  --liyou-pink: #E8A0B4;
+  --liyou-pink-glow: #F0C0D0;
+  --liyou-deep-indigo: #1E1833;
+  --liyou-deep-indigo-soft: #2D2648;
+  --liyou-glow-gold: #E8C67A;
+  --liyou-star-white: #FFFFFF;
+
+  /* 功能性色 */
+  --liyou-text-primary: #2D2648;
+  --liyou-text-secondary: #6B6380;
+  --liyou-text-muted: #9B93AD;
+  --liyou-text-inverse: #F8F6F3;
+  --liyou-border: rgba(196, 181, 212, 0.3);
+  --liyou-border-active: rgba(232, 160, 180, 0.5);
+  --liyou-success: #7BC89C;
+  --liyou-warning: #E8C67A;
+  --liyou-error: #E08880;
+
+  /* 间距 */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+  --space-3xl: 64px;
+  --space-4xl: 96px;
+}
+
+/* === 基础重置 === */
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--liyou-moon-white);
+  color: var(--liyou-text-primary);
+  font-family: 'Inter', 'Noto Sans SC', 'PingFang SC', -apple-system, sans-serif;
+  font-size: 0.9375rem;
+  line-height: 1.7;
+}
+
+/* === 自定义字体声明 (沐瑶软笔手写体 - 自托管) === */
+@font-face {
+  font-family: 'Muyao Soft Brush';
+  src: url('/fonts/muyao-soft-brush.woff2') format('woff2'),
+       url('/fonts/muyao-soft-brush.ttf') format('truetype');
+  font-display: swap;
+}
+
+/* === 工具类 === */
+@layer components {
+  /* 毛玻璃卡片 */
+  .glass-card {
+    background: rgba(252, 250, 247, 0.75);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(196, 181, 212, 0.25);
+    border-radius: 16px;
+    box-shadow: 0 4px 24px rgba(30, 24, 51, 0.04);
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .glass-card:hover {
+    background: rgba(252, 250, 247, 0.9);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 40px rgba(30, 24, 51, 0.08), 0 0 20px rgba(232, 160, 180, 0.08);
+  }
+
+  /* 毛玻璃导航 */
+  .glass-nav {
+    background: rgba(252, 250, 247, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(196, 181, 212, 0.15);
+  }
+
+  .glass-nav.scrolled {
+    background: rgba(252, 250, 247, 0.98);
+    box-shadow: 0 1px 8px rgba(30, 24, 51, 0.06);
+  }
+
+  /* 主按钮 */
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--liyou-pink);
+    color: var(--liyou-text-inverse);
+    font-weight: 600;
+    border-radius: 12px;
+    padding: 12px 28px;
+    min-height: 48px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    border: none;
+    font-size: 0.9375rem;
+  }
+
+  .btn-primary:hover {
+    filter: brightness(1.08);
+    transform: scale(1.03);
+    box-shadow: 0 0 24px rgba(232, 160, 180, 0.4);
+  }
+
+  .btn-primary:active {
+    transform: scale(0.98);
+    box-shadow: 0 0 12px rgba(232, 160, 180, 0.2);
+  }
+
+  .btn-primary:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+  }
+
+  /* 次按钮 */
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: 1px solid var(--liyou-light-purple);
+    color: var(--liyou-text-primary);
+    font-weight: 600;
+    border-radius: 12px;
+    padding: 12px 28px;
+    min-height: 48px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    font-size: 0.9375rem;
+  }
+
+  .btn-secondary:hover {
+    background: var(--liyou-light-purple-soft);
+    border-color: var(--liyou-pink);
+  }
+
+  /* 幽灵按钮 */
+  .btn-ghost {
+    background: transparent;
+    border: none;
+    color: var(--liyou-text-secondary);
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: color 0.2s ease;
+  }
+
+  .btn-ghost:hover {
+    color: var(--liyou-pink);
+  }
+}
+
+/* === 滚动条美化 === */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(196, 181, 212, 0.4);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(196, 181, 212, 0.6);
+}
+
+/* === 选中颜色 === */
+::selection {
+  background: rgba(232, 160, 180, 0.25);
+  color: var(--liyou-text-primary);
+}
+
+/* ========================================
+   装饰动画 & 元素
+   ======================================== */
+
+/* 闪烁星星 */
+@keyframes twinkle {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.3); }
+}
+
+.decor-star {
+  display: inline-block;
+  animation: twinkle 2s ease-in-out infinite;
+  pointer-events: none;
+  user-select: none;
+}
+
+.decor-star:nth-child(2n) { animation-delay: 0.5s; }
+.decor-star:nth-child(3n) { animation-delay: 1s; }
+.decor-star:nth-child(5n) { animation-delay: 1.5s; }
+
+/* 手绘风双线边框 */
+.decor-border-double {
+  border: 2px double rgba(196, 181, 212, 0.4);
+}
+
+/* 装饰性章节分隔 */
+.section-divider {
+  text-align: center;
+  margin: 32px 0;
+  color: var(--liyou-light-purple);
+  font-size: 0.75rem;
+  letter-spacing: 0.5em;
+  opacity: 0.5;
+}
+
+/* 页面角落装饰 */
+.page-corner {
+  position: fixed;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.25;
+  font-size: 2rem;
+  color: var(--liyou-light-purple);
+}
+
+.page-corner-tl { top: 80px; left: 16px; }
+.page-corner-tr { top: 80px; right: 16px; }
+.page-corner-bl { bottom: 16px; left: 16px; }
+.page-corner-br { bottom: 16px; right: 16px; }
+

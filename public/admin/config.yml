@@ -1,0 +1,79 @@
+# 璃幽宇宙 · Decap CMS 配置
+# 访问 liyou.world/admin 即可打开可视化管理后台
+
+backend:
+  name: github
+  repo: YOUR_GITHUB_USER/YOUR_REPO_NAME  # ← 替换为你的 GitHub 仓库
+  branch: main
+  base_url: https://liyou.world
+  auth_endpoint: /api/auth
+
+media_folder: "public/images/uploads"
+public_folder: "/images/uploads"
+
+site_url: https://liyou.world
+display_url: https://liyou.world
+logo_url: /favicon.svg
+
+locale: "zh_Hans"
+
+# ---- 内容集合 ----
+collections:
+  # 📢 官方公告
+  - name: "announcements"
+    label: "📢 官方公告"
+    label_singular: "公告"
+    folder: "content/announcements"
+    create: true
+    slug: "{{year}}-{{month}}-{{slug}}"
+    extension: json
+    format: json
+    fields:
+      - { label: "标题", name: "title", widget: "string" }
+      - { label: "日期", name: "date", widget: "datetime", format: "YYYY年M月D日" }
+      - { label: "正文", name: "body", widget: "text" }
+      - { label: "链接", name: "link", widget: "string", required: false, hint: "可选，点击后的跳转地址" }
+
+  # 🎉 同人活动
+  - name: "events"
+    label: "🎉 同人活动"
+    label_singular: "活动"
+    folder: "content/events"
+    create: true
+    slug: "{{year}}-{{month}}-{{slug}}"
+    extension: json
+    format: json
+    fields:
+      - { label: "图标", name: "icon", widget: "string", hint: "如 🎉 🏆 📖 🎨" }
+      - { label: "日期", name: "date", widget: "string" }
+      - { label: "标题", name: "title", widget: "string" }
+      - { label: "描述", name: "desc", widget: "text" }
+
+  # 📖 书灵志故事
+  - name: "story"
+    label: "📖 书灵志 · VN 故事"
+    label_singular: "故事行"
+    folder: "content/story"
+    create: true
+    identifier_field: "title"
+    extension: json
+    format: json
+    fields:
+      - { label: "说话者", name: "speaker", widget: "string", hint: "璃幽 / 旁白 / 写书人" }
+      - { label: "台词", name: "text", widget: "text" }
+      - { label: "排序", name: "order", widget: "number", value_type: "int", min: 0 }
+
+  # 🏪 页面通用设置
+  - name: "settings"
+    label: "⚙️ 网站设置"
+    files:
+      - label: "首页公告"
+        name: "site-announcement"
+        file: "content/settings/announcement.json"
+        extension: json
+        format: json
+        fields:
+          - { label: "是否显示", name: "visible", widget: "boolean", default: true }
+          - { label: "公告内容", name: "text", widget: "text" }
+          - { label: "日期", name: "date", widget: "string" }
+          - { label: "链接", name: "link", widget: "string", required: false }

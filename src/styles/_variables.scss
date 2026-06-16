@@ -1,0 +1,20 @@
+// 璃幽宇宙 — 非颜色的全局 SCSS 变量
+// 颜色定义已统一到 src/styles/main.css（CSS 自定义属性）中，
+// tailwind.config.js 通过 var() 引用同一来源，不再重复定义。
+
+// === 间距体系 ===
+$space-xs: 4px;
+$space-sm: 8px;
+$space-md: 16px;
+$space-lg: 24px;
+$space-xl: 32px;
+$space-2xl: 48px;
+$space-3xl: 64px;
+$space-4xl: 96px;
+
+// === 其他 ===
+$content-max-width: 1200px;
+$card-radius: 16px;
+$component-radius: 12px;
+$input-radius: 10px;
+$transition-ease: cubic-bezier(0.4, 0, 0.2, 1);
