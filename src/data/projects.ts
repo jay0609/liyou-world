@@ -452,6 +452,11 @@ export const projects: Project[] = [
       { label: 'git 提交', value: '24 次' },
       { label: '版本', value: 'v0.6' },
     ],
+    screenshots: [
+      { image: '/images/projects/liyou-forge/01-session.jpg', caption: '会话界面：左侧会话列表 + 中间对话 + 右侧「浏览」面板（显示当前 PROJECT 与 CONTEXT）' },
+      { image: '/images/projects/liyou-forge/02-file-panel.jpg', caption: '右侧「文件」面板：直接在应用里浏览项目目录（docs / frontend / src-tauri / tools）' },
+      { image: '/images/projects/liyou-forge/03-params.jpg', caption: '右侧「参数」面板：当前 Provider 与模型 + 对话历史统计' },
+    ],
   },
 
   {
