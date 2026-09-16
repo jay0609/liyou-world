@@ -319,32 +319,5 @@ export const projects: Project[] = [
       { label: '建筑', value: '21 种' },
       { label: '开发阶段', value: 'P1–P6' },
     ],
-    screenshots: [
-      {
-        image: '/images/projects/slg-game/01-map-full.jpg',
-        caption: '完整地图：46 城 + 资源节点 + 野怪营地，顶栏是资源/人口/治安/粮草/回合，右下「结束回合」',
-        date: '2026-07-28',
-      },
-      {
-        image: '/images/projects/slg-game/02-map-mid.jpg',
-        caption: '中期：城池换成像素 sprite，紫色方块是野怪营地（角标 L1–L7 是等级）',
-        date: '2026-07-27',
-      },
-      {
-        image: '/images/projects/slg-game/03-terrain.jpg',
-        caption: '地形层：8 种地形 × 4 变体，Perlin 噪声做色偏，避免大片重复',
-        date: '2026-07-26',
-      },
-      {
-        image: '/images/projects/slg-game/04-early.jpg',
-        caption: '早期版本：点主城的浮动菜单（状态 / 经济 / 军事 / 建筑）',
-        date: '2026-07-26',
-      },
-      {
-        image: '/images/projects/slg-game/05-refactor.jpg',
-        caption: '推倒重构后：三层架构跑通，画面暂时退回方块 —— 换来 44 个测试',
-        date: '2026-07-28',
-      },
-    ],
   },
 ]

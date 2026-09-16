@@ -3,5 +3,6 @@ export const fileTreeSlugs: string[] = [
   "cs16-soszombie",
   "liyou-mirage",
   "minecraft-numen",
+  "slg-three-kingdoms",
   "soszombie"
 ]
