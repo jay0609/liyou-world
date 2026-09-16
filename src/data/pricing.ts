@@ -241,12 +241,21 @@ export const pricing: Pricing = {
       ]
     },
     {
-      "name": "小游戏 · Steam",
+      "name": "小游戏 · 休闲",
       "icon": "🕹️",
       "unit": "小时",
+      "note": "不限于以下，任意游戏都可以问",
       "tiers": [
         {
-          "label": "任意游戏",
+          "label": "我的世界",
+          "price": 60
+        },
+        {
+          "label": "LOL 大乱斗",
+          "price": 60
+        },
+        {
+          "label": "其他任意游戏",
           "price": 60
         }
       ]

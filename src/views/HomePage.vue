@@ -21,7 +21,7 @@
         <div class="text-center mb-2xl">
           <h2 class="text-heading-xl text-liyou-text-primary font-heading mb-md">陪玩</h2>
           <p class="text-body-md text-liyou-text-secondary max-w-2xl mx-auto">
-            会打，也会聊。报点清楚，不催单，不推销——不在意你打得菜还是强，只在意这一局愉不愉快。
+            会打，也会聊。报点清楚，不催单，不推销——不在意你打得菜还是强，只在意这一局你开不开心。
           </p>
         </div>
         <PricingTable />
