@@ -9,33 +9,33 @@
       "files": [
         {
           "path": "src-tauri/src/bootstrap.rs",
-          "title": "! liyouForge 框架启动引导模块",
-          "desc": "! ! 负责：日志初始化、应用数据目录、加密密钥、核心服务初始化 ! 与 `lib.rs` 解耦：`lib.rs` 只管 module 声明 + Tauri builder"
+          "title": "liyouForge 框架启动引导模块",
+          "desc": "负责：日志初始化、应用数据目录、加密密钥、核心服务初始化 与 `lib.rs` 解耦：`lib.rs` 只管 module 声明 + Tauri builder"
         },
         {
           "path": "src-tauri/src/commands/batch2.rs",
-          "title": "! Spec #5+#6+#7 — Tauri 命令（Safety + MemoryAgent + ImplicitPrompt）",
+          "title": "Spec #5+#6+#7 — Tauri 命令（Safety + MemoryAgent + ImplicitPrompt）",
           "desc": ""
         },
         {
           "path": "src-tauri/src/commands/chat.rs",
-          "title": "! 聊天相关命令",
-          "desc": "! @updated: 2026-04-10 Phase 2/3"
+          "title": "聊天相关命令",
+          "desc": "@updated: 2026-04-10 Phase 2/3"
         },
         {
           "path": "src-tauri/src/commands/cloud_api.rs",
-          "title": "! 云端 API 调用命令",
-          "desc": "! ! 统一封装豆包 Coding Plan 和千问 API 调用 ! API 密钥通过 Tauri State 管理，不暴露到前端 ! ! @updated: 2026-04-10"
+          "title": "云端 API 调用命令",
+          "desc": "统一封装豆包 Coding Plan 和千问 API 调用 API 密钥通过 Tauri State 管理，不暴露到前端 @updated: 2026-04-10"
         },
         {
           "path": "src-tauri/src/commands/cloud_stream.rs",
-          "title": "! 云端 API 流式调用命令",
-          "desc": "! ! 纯 HTTP 透传代理。不做模型名 fallback，不做 API Key 猜测。 ! 所有参数由前端统一控制，唯一数据源是 providers.ts。 ! ! v3: 支持 OpenAI function calling — tools 参数透传 + 流式 tool_calls 累积。"
+          "title": "云端 API 流式调用命令",
+          "desc": "纯 HTTP 透传代理。不做模型名 fallback，不做 API Key 猜测。 所有参数由前端统一控制，唯一数据源是 providers.ts。 v3: 支持 OpenAI function calling — tools 参数透传 + 流式 tool_calls 累积。"
         },
         {
           "path": "src-tauri/src/commands/digestion.rs",
-          "title": "! Spec #4 — 消化引擎 Tauri 命令",
-          "desc": "! ! 对外暴露 `run_digestion` 命令，供前端触发消化流程。 ! Phase 1.1: 真实 LLM 调用替代 Phase 2a 伪输出。 ! ! Spec #9 v1.2 — 增量元审查命令 `run_meta_review_increment`"
+          "title": "Spec #4 — 消化引擎 Tauri 命令",
+          "desc": "对外暴露 `run_digestion` 命令，供前端触发消化流程。 Phase 1.1: 真实 LLM 调用替代 Phase 2a 伪输出。 Spec #9 v1.2 — 增量元审查命令 `run_meta_review_increment`"
         },
         {
           "path": "src-tauri/src/commands/error_memory.rs",
@@ -44,8 +44,8 @@
         },
         {
           "path": "src-tauri/src/commands/execution.rs",
-          "title": "! Phase 0 — 执行引擎 IPC 命令",
-          "desc": "! ! Spec #8 v1.2 §3.1-3.7: !   - check_git_dirty      (§3.1) !   - generate_diff_preview (§3.2) !   - pause_execution      (§3.4) !   - resume_execution     (§3.4) !   - cancel_execution     (§3.5) !   - skip_current_step    (§3.6) !   - execution_heartbeat  (§3.7)"
+          "title": "Phase 0 — 执行引擎 IPC 命令",
+          "desc": "Spec #8 v1.2 §3.1-3.7: - check_git_dirty      (§3.1) - generate_diff_preview (§3.2) - pause_execution      (§3.4) - resume_execution     (§3.4) - cancel_execution     (§3.5) - skip_current_step    (§3.6) - execution_heartbeat  (§3.7)"
         },
         {
           "path": "src-tauri/src/commands/memory_core.rs",
@@ -59,8 +59,8 @@
         },
         {
           "path": "src-tauri/src/commands/memory.rs",
-          "title": "! 记忆管理命令 - 7层记忆系统 IPC 接口",
-          "desc": "! ! 所有记忆操作统一通过这些命令与后端交互 ! 前端不存储任何记忆数据"
+          "title": "记忆管理命令 - 7层记忆系统 IPC 接口",
+          "desc": "所有记忆操作统一通过这些命令与后端交互 前端不存储任何记忆数据"
         },
         {
           "path": "src-tauri/src/commands/project_context.rs",
@@ -69,13 +69,13 @@
         },
         {
           "path": "src-tauri/src/commands/reset.rs",
-          "title": "! 数据重置命令 - 一键恢复出厂状态",
-          "desc": "! ! 清空聊天记录、7层记忆、缓存数据 ! 保留：人设模板、API Key 配置、应用结构 ! ! @created: 2026-04-13 ! @version: 1.0"
+          "title": "数据重置命令 - 一键恢复出厂状态",
+          "desc": "清空聊天记录、7层记忆、缓存数据 保留：人设模板、API Key 配置、应用结构 @created: 2026-04-13 @version: 1.0"
         },
         {
           "path": "src-tauri/src/commands/subagent.rs",
-          "title": "! Phase 2 — 多 Agent 调度架构",
-          "desc": "! ! Fable 5 风格: SubSpecRouter → 临时 Agent → 融合层 ! ! 核心命令: !   - route_subspecs     (§2.1) 规则引擎按路径前缀分组 blueprint changes !   - execute_subspec    (§2.2) 临时 Agent 执行单个 SubSpec（垂直 Prompt + 会话隔离） !   - fuse_subspecs      (§2.3) 融合层: 冲突检测 + 补全 + 统一输出"
+          "title": "Phase 2 — 多 Agent 调度架构",
+          "desc": "Fable 5 风格: SubSpecRouter → 临时 Agent → 融合层 核心命令: - route_subspecs     (§2.1) 规则引擎按路径前缀分组 blueprint changes - execute_subspec    (§2.2) 临时 Agent 执行单个 SubSpec（垂直 Prompt + 会话隔离） - fuse_subspecs      (§2.3) 融合层: 冲突检测 + 补全 + 统一输出"
         },
         {
           "path": "src-tauri/src/commands/tools.rs",
@@ -99,7 +99,7 @@
         },
         {
           "path": "src-tauri/src/lib.rs",
-          "title": "! liyouForge 璃幽铁砧 · 开放 Agent 框架后端库",
+          "title": "liyouForge 璃幽铁砧 · 开放 Agent 框架后端库",
           "desc": ""
         },
         {
@@ -114,12 +114,12 @@
         },
         {
           "path": "src-tauri/src/security/aes_cipher.rs",
-          "title": "! AES-256-GCM加密模块，提供数据加密解密功能",
+          "title": "AES-256-GCM加密模块，提供数据加密解密功能",
           "desc": ""
         },
         {
           "path": "src-tauri/src/security/keychain.rs",
-          "title": "! 密钥链安全存储模块",
+          "title": "密钥链安全存储模块",
           "desc": ""
         },
         {
@@ -129,33 +129,33 @@
         },
         {
           "path": "src-tauri/src/services/chat_tests.rs",
-          "title": "! chat.rs 核心单元测试",
-          "desc": "! ! 覆盖：ChatService 会话管理 / 消息加密存储 / 查询 / 删除 ! ! @created: 2026-05-17 — P0 测试补充"
+          "title": "chat.rs 核心单元测试",
+          "desc": "覆盖：ChatService 会话管理 / 消息加密存储 / 查询 / 删除 @created: 2026-05-17 — P0 测试补充"
         },
         {
           "path": "src-tauri/src/services/chat.rs",
-          "title": "! 聊天服务模块，处理聊天记录的存储、查询、管理",
+          "title": "聊天服务模块，处理聊天记录的存储、查询、管理",
           "desc": ""
         },
         {
           "path": "src-tauri/src/services/digestion.rs",
-          "title": "! Spec #4 — 消化引擎总控",
-          "desc": "! ! 负责: 条件激活 → Round 1 并行 → Round 2 交叉审查 → 冲突检测 → 降级 → 段组装 ! ! Phase 2a (MVP): 规则引擎伪输出 + Safety 否决权 + 降级评估 + 信心评分 + 段组装契约 ! Phase 2b (预留): LLM 语义冲突检测 + tokio::join! 并行调用 ! ! v1.2 — 对齐 Spec #4 v1.2: !   - 段组装契约（P0-P5 五段 → Spec #7） !   - Token 预算检查（>70% → 跳过 Round 2） !   - Round 2 摘要化（传 PerspectiveCard 摘要，非完整 content） !   - 降级基于 Round 2 / Round 1 有效输出 !   - run_perspective_with_timeout（15s + 1 retry） !   - run_digestion 主循环 + DigestionRequest !   - DigestionUIMessage 事件流（去重 key） !   - DigestionProgress 前端状态快照"
+          "title": "Spec #4 — 消化引擎总控",
+          "desc": "负责: 条件激活 → Round 1 并行 → Round 2 交叉审查 → 冲突检测 → 降级 → 段组装 Phase 2a (MVP): 规则引擎伪输出 + Safety 否决权 + 降级评估 + 信心评分 + 段组装契约 Phase 2b (预留): LLM 语义冲突检测 + tokio::join! 并行调用 v1.2 — 对齐 Spec #4 v1.2: - 段组装契约（P0-P5 五段 → Spec #7） - Token 预算检查（>70% → 跳过 Round 2） - Round 2 摘要化（传 PerspectiveCard 摘要，非完整 content） - 降级基于 Round 2 / Round 1 有效输出 - run_perspective_with_timeout（15s + 1 retry） - run_digestion 主循环 + DigestionRequest - DigestionUIMessage 事件流（去重 key） - DigestionProgress 前端状态快照"
         },
         {
           "path": "src-tauri/src/services/execution.rs",
-          "title": "! Spec #8 — 执行引擎 + 四维越界检测 + 执行后摘要追加",
-          "desc": "! ! 用户确认蓝图（status='approved'）后，按蓝图步骤执行操作。 ! 每步前进行四维越界检查 + 工具调用层工作区验证。 ! 失败自动修复（≤2次/步），完成后进行改动幅度对比 + 追加执行摘要。 ! ! v1.1 — 对齐 Spec #8 v1.1: !   - 四维越界检测（文件路径 / 操作类型 / 步骤数 / 改动幅度） !   - 工具调用层工作区验证（canonicalize + 父目录回退） !   - execute 不可逆操作检查（复用 Spec #5 irreversible_actions） !   - 每步 2 次自动修复 + auto-fix 越界检测 !   - 全局执行锁 + 蓝图哈希校验 + git 快照 !   - 改动幅度对比（文件数/行数/函数数）+ 执行后摘要 !   - 结构化 BoundaryDetails（5 种变体）"
+          "title": "Spec #8 — 执行引擎 + 四维越界检测 + 执行后摘要追加",
+          "desc": "用户确认蓝图（status='approved'）后，按蓝图步骤执行操作。 每步前进行四维越界检查 + 工具调用层工作区验证。 失败自动修复（≤2次/步），完成后进行改动幅度对比 + 追加执行摘要。 v1.1 — 对齐 Spec #8 v1.1: - 四维越界检测（文件路径 / 操作类型 / 步骤数 / 改动幅度） - 工具调用层工作区验证（canonicalize + 父目录回退） - execute 不可逆操作检查（复用 Spec #5 irreversible_actions） - 每步 2 次自动修复 + auto-fix 越界检测 - 全局执行锁 + 蓝图哈希校验 + git 快照 - 改动幅度对比（文件数/行数/函数数）+ 执行后摘要 - 结构化 BoundaryDetails（5 种变体）"
         },
         {
           "path": "src-tauri/src/services/implicit_prompt.rs",
-          "title": "! Spec #7 — 隐式 Prompt 引擎（优先级排序 + 裁剪）",
-          "desc": "! ! 接收 Spec #4 组装好的 segments，按 P0-P4 排序、token 计数、裁剪。 ! 输出最终隐式 Prompt 文本（≤2048 token 硬限制 × 0.85 安全余量）。 ! ! v1.1 — 对齐 Spec #7 v1.1: !   - HashMap 增量合并（新段覆盖同优先级旧段） !   - truncate_front 前向裁剪 + 字符级回退 !   - enforce_safety_priority 安全约束冲突检测 !   - 64 token 最低阈值（低于则跳过该段） !   - get_budget 独立辅助函数 !   - 空段跳过 + P0 不被裁剪 ! ! Phase 2a: 字符估算版（Phase 2b 升级 deepseek-tokenizer-rs）"
+          "title": "Spec #7 — 隐式 Prompt 引擎（优先级排序 + 裁剪）",
+          "desc": "接收 Spec #4 组装好的 segments，按 P0-P4 排序、token 计数、裁剪。 输出最终隐式 Prompt 文本（≤2048 token 硬限制 × 0.85 安全余量）。 v1.1 — 对齐 Spec #7 v1.1: - HashMap 增量合并（新段覆盖同优先级旧段） - truncate_front 前向裁剪 + 字符级回退 - enforce_safety_priority 安全约束冲突检测 - 64 token 最低阈值（低于则跳过该段） - get_budget 独立辅助函数 - 空段跳过 + P0 不被裁剪 Phase 2a: 字符估算版（Phase 2b 升级 deepseek-tokenizer-rs）"
         },
         {
           "path": "src-tauri/src/services/llm_tests.rs",
-          "title": "! llm.rs 核心单元测试",
-          "desc": "! ! 覆盖：LLMConfig 构建 / LLMService 创建 / 配置查询 ! ! 注：chat_with_config 依赖真实网络，不在此测试；建议用 wiremock 做集成测试。"
+          "title": "llm.rs 核心单元测试",
+          "desc": "覆盖：LLMConfig 构建 / LLMService 创建 / 配置查询 注：chat_with_config 依赖真实网络，不在此测试；建议用 wiremock 做集成测试。"
         },
         {
           "path": "src-tauri/src/services/llm.rs",
@@ -164,38 +164,38 @@
         },
         {
           "path": "src-tauri/src/services/memory_agent.rs",
-          "title": "! Spec #6 — Memory Agent（FTS 检索 + LLM 提醒语）",
-          "desc": "! ! 第一层: FTS5 全文搜索 — 零 LLM Token !   关键词提取 → 2-gram 精化 → FTS 查询构建 → 伪命中生成（Phase 2a） ! 第二层: LLM 生成提醒 — 仅在有命中时激活（Phase 2b） ! ! v1.2 — 对齐 Spec #6 v1.2: !   - 中文 2-gram 精化 + CN_STOP_CHARS 过滤 !   - contentless FTS + id 关联 (Phase 2b) !   - 相对阈值过滤 + min_hit_count !   - 列级 FTS 查询格式 (trigger_task: OR error_description: OR solution:) !   - format_hits / parse_memory_reminders / generate_memory_final_output !   - P2 段 [P2 · 历史教训] 格式 + bullet 提醒语 !   - search_error_memory 接口（Phase 2a 伪命中 / Phase 2b SQLite）"
+          "title": "Spec #6 — Memory Agent（FTS 检索 + LLM 提醒语）",
+          "desc": "第一层: FTS5 全文搜索 — 零 LLM Token 关键词提取 → 2-gram 精化 → FTS 查询构建 → 伪命中生成（Phase 2a） 第二层: LLM 生成提醒 — 仅在有命中时激活（Phase 2b） v1.2 — 对齐 Spec #6 v1.2: - 中文 2-gram 精化 + CN_STOP_CHARS 过滤 - contentless FTS + id 关联 (Phase 2b) - 相对阈值过滤 + min_hit_count - 列级 FTS 查询格式 (trigger_task: OR error_description: OR solution:) - format_hits / parse_memory_reminders / generate_memory_final_output - P2 段 [P2 · 历史教训] 格式 + bullet 提醒语 - search_error_memory 接口（Phase 2a 伪命中 / Phase 2b SQLite）"
         },
         {
           "path": "src-tauri/src/services/memory_learning.rs",
-          "title": "! Spec #10 — 记忆与学习层 + 蓝图版本控制",
-          "desc": "! ! 四个子系统: !   1. 错误记忆 (FTS5 自动注入) !   2. 蓝图对比 (FTS5 检索 + 按 rank 排序) !   3. 审查模式库 (keywords 匹配) !   4. 蓝图版本控制 (blueprints/*.md 文件系统) ! ! 项目隔离: 按 workspace_path 隔离 ! 通用模式: is_universal=1 + 3 项目 + 90 天内 ! ! v1.1 — 对齐 Spec #10 v1.1: !   - SQL 注入防护（参数化查询） !   - FTS5 蓝图检索 + 触发器 !   - 中文文件名保留 + ID 前缀防冲突 + 冲突计数器 !   - 审查模式 keywords JSON 匹配 !   - Markdown 转义 (md_escape) !   - check_upgrade_to_universal (3 项目 + 90 天)"
+          "title": "Spec #10 — 记忆与学习层 + 蓝图版本控制",
+          "desc": "四个子系统: 1. 错误记忆 (FTS5 自动注入) 2. 蓝图对比 (FTS5 检索 + 按 rank 排序) 3. 审查模式库 (keywords 匹配) 4. 蓝图版本控制 (blueprints/*.md 文件系统) 项目隔离: 按 workspace_path 隔离 通用模式: is_universal=1 + 3 项目 + 90 天内 v1.1 — 对齐 Spec #10 v1.1: - SQL 注入防护（参数化查询） - FTS5 蓝图检索 + 触发器 - 中文文件名保留 + ID 前缀防冲突 + 冲突计数器 - 审查模式 keywords JSON 匹配 - Markdown 转义 (md_escape) - check_upgrade_to_universal (3 项目 + 90 天)"
         },
         {
           "path": "src-tauri/src/services/memory_tests.rs",
-          "title": "! memory.rs 核心单元测试",
-          "desc": "! ! 覆盖：MemoryLayer 枚举 / MemoryStatus / MemoryService CRUD / 生命周期 / 衰减 ! ! @created: 2026-05-17 — P0 测试补充"
+          "title": "memory.rs 核心单元测试",
+          "desc": "覆盖：MemoryLayer 枚举 / MemoryStatus / MemoryService CRUD / 生命周期 / 衰减 @created: 2026-05-17 — P0 测试补充"
         },
         {
           "path": "src-tauri/src/services/memory.rs",
-          "title": "! 璃幽 7 层记忆系统 v3.0",
-          "desc": "! ! 情感陪伴向重构 — 参考 mem0 / memU / Memory Palace 设计 ! ! 层级重命名（保留 7 层，skill 不动）： !   short_term → moments → bond → persona → skill → your_world → world_lore ! ! 新增： !   - 加载分层 L0-L3（热/温/凉/冷） !   - 时序知识图谱 fact_triples !   - 7 天自动归档 closet summary !   - memory_from_row! 宏消除重复 ! ! @author: 璃幽 🌸 ! @updated: 2026-05-15 ! @version: 3.0"
+          "title": "璃幽 7 层记忆系统 v3.0",
+          "desc": "情感陪伴向重构 — 参考 mem0 / memU / Memory Palace 设计 层级重命名（保留 7 层，skill 不动）： short_term → moments → bond → persona → skill → your_world → world_lore 新增： - 加载分层 L0-L3（热/温/凉/冷） - 时序知识图谱 fact_triples - 7 天自动归档 closet summary - memory_from_row! 宏消除重复 @author: 璃幽 🌸 @updated: 2026-05-15 @version: 3.0"
         },
         {
           "path": "src-tauri/src/services/meta_reviewer.rs",
-          "title": "! Spec #9 — 元审查器（三层规则校验）",
-          "desc": "! ! 蓝图生成器产出 Blueprint 后，自动执行三层规则校验（零 Token）。 ! 1. 结构完整性 + 截断检测 ! 2. 路径存在性（isNewFile 优先 + Windows 大小写不敏感） ! 3. 风险覆盖率（双向匹配：文件名↔风险描述） ! ! 综合判决: Pass / Warning / Fail + shouldRetry 建议 ! ! v1.1 — 对齐 Spec #9 v1.1: !   - check_truncation 完整实现（省略号 + 标签不闭合 + 标签成对） !   - isNewFile 结构化判断 + 关键词回退 !   - 双向风险匹配（文件名别名 ↔ 风险描述互相包含） !   - 扩展重试条件（4 种 Fail 场景） !   - Windows 大小写不敏感文件检查"
+          "title": "Spec #9 — 元审查器（三层规则校验）",
+          "desc": "蓝图生成器产出 Blueprint 后，自动执行三层规则校验（零 Token）。 1. 结构完整性 + 截断检测 2. 路径存在性（isNewFile 优先 + Windows 大小写不敏感） 3. 风险覆盖率（双向匹配：文件名↔风险描述） 综合判决: Pass / Warning / Fail + shouldRetry 建议 v1.1 — 对齐 Spec #9 v1.1: - check_truncation 完整实现（省略号 + 标签不闭合 + 标签成对） - isNewFile 结构化判断 + 关键词回退 - 双向风险匹配（文件名别名 ↔ 风险描述互相包含） - 扩展重试条件（4 种 Fail 场景） - Windows 大小写不敏感文件检查"
         },
         {
           "path": "src-tauri/src/services/mod.rs",
-          "title": "! liyouForge 服务模块统一导出",
-          "desc": "! 注意：主要模块声明在 lib.rs 的 inline `pub mod services { ... }` 中 ! 本文件仅用于提供额外的 re-export 和文档"
+          "title": "liyouForge 服务模块统一导出",
+          "desc": "注意：主要模块声明在 lib.rs 的 inline `pub mod services { ... }` 中 本文件仅用于提供额外的 re-export 和文档"
         },
         {
           "path": "src-tauri/src/services/safety.rs",
-          "title": "! Spec #5 — Safety Agent（两层设计）",
-          "desc": "! ! 第一层: 规则引擎 — 总是运行，零 Token !   三个检查: 核心文件触碰 / 危险操作（关键词+模糊+高危正则） / 工作区越界 ! 第二层: LLM 深度分析 — 仅在规则发现风险时激活（Phase 2b） ! ! v1.2 — 对齐 Spec #5 v1.2: !   - glob 模式匹配 core_patterns !   - canonicalize + 父目录回退 防路径遍历绕过 !   - dangerous_patterns 高危正则检查 !   - dangerous_fuzzy_patterns 覆盖 changes 描述 !   - SeverityClass 两档分类 (Critical/High) !   - P0 段合并同类风险 + P0_MAX_ITEMS=20 !   - ProjectSafetyConfig 可扩展性"
+          "title": "Spec #5 — Safety Agent（两层设计）",
+          "desc": "第一层: 规则引擎 — 总是运行，零 Token 三个检查: 核心文件触碰 / 危险操作（关键词+模糊+高危正则） / 工作区越界 第二层: LLM 深度分析 — 仅在规则发现风险时激活（Phase 2b） v1.2 — 对齐 Spec #5 v1.2: - glob 模式匹配 core_patterns - canonicalize + 父目录回退 防路径遍历绕过 - dangerous_patterns 高危正则检查 - dangerous_fuzzy_patterns 覆盖 changes 描述 - SeverityClass 两档分类 (Critical/High) - P0 段合并同类风险 + P0_MAX_ITEMS=20 - ProjectSafetyConfig 可扩展性"
         },
         {
           "path": "src-tauri/src/utils/logger.rs",
