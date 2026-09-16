@@ -162,42 +162,43 @@ export const projects: Project[] = [
     category: 'AI 应用',
     status: '先行版',
     concept:
-      '一款桌面 AI 创作伴侣，把角色陪伴与创作生产力放在同一个本地应用里：对话、小说工作台、OC 创作、世界观设定，数据 100% 存在本地。',
+      '一个桌面 AI 伴侣：璃幽。它能聊天、陪创作（小说 / 世界观 / 灵感），但真正的核心是记忆——它记得你叫什么、喜欢什么、上次那个角色后来怎么样了。数据 100% 在本地，模型可以跑本地的 Ollama，也可以接云端。',
     philosophy:
-      '让 AI 不只是冷冰冰的工具，而是一个有性格、愿意倾听的伙伴；创作是手段，陪伴才是目的。',
+      '陪伴这件事，难点不在模型多聪明，在它记不记得住。所以这个项目最厚的一层是记忆：分七层、每条给权重、不常用的自己衰减掉，想记的东西先挂起等你审核——不是让 AI 偷偷记你的一切。另外一条是本地优先：聊天记录、记忆、密钥都不出机器。',
     highlights: [
-      'Tauri v2 打包，安装包仅数 MB，内存占用远低于 Electron',
-      'Rust 后端分层：commands / services / repository / security',
-      '多模型切换 + 本地存储加密',
-      '配套世界观站点与交互式「次元星图」',
+      '七层记忆：L0 灵魂（SOUL.md）· L1 主人模型（USER.md）· L2 羁绊瞬间 · L3 世界知识 · L4 情节日志 · L5 语义事实（MEMORY.md）· L6 技能 + 遗忘归档',
+      '记忆会衰减也会强化：importance / reinforce / decay + 事实三元组，不常用的自己退场',
+      '记忆审核：AI 想记的东西先进 pending 挂起，你逐条批了才算数',
+      '数字分身：让它学一个人的说话方式（前端最大的一块，50 KB 单文件）',
+      '一键切换本地 Ollama 与云端模型；本地数据 AES 加密，密钥走系统钥匙串',
+      'SKILL.md 技能系统：人格 / 学习 / 开发三篇，按需加载，不塞进常驻提示词',
+      'Tauri v2 打包，安装包几 MB，内存占用远低于 Electron',
+      'Rust 层带 44.9 KB 测试（记忆 / 聊天 / LLM 三块）',
+      '游戏化：灵光值、40+ 成就（7 类 + 稀有度）、会闹的小情绪',
+      '这套记忆系统后来被移植进了 Numen（给 Minecraft AI 同伴用）',
     ],
-    tech: ['Tauri v2', 'Rust', 'Vue 3', 'TypeScript', 'SQLite', 'Pinia'],
+    tech: ['Tauri v2', 'Rust', 'Vue 3', 'TypeScript', 'SQLite', 'Pinia', 'Element Plus', 'Ollama'],
     progress: {
-      done: '先行版已发布，支持聊天、创作工坊与本地存储。',
-      next: '完善亲密度 / 等级 / 成就系统，接入语音与更多模型。',
+      done: 'v0.7.0。Rust 后端 41 个文件 303 KB、前端 104 个文件；聊天、记忆、小说、世界观、灵感、数字分身、语音、设置全部接通。',
+      next: '把记忆注入的预算调度再收紧，继续补世界知识的检索。',
     },
     architecture: [
-      { layer: 'commands', role: 'Tauri IPC 命令层——前端唯一的调用入口' },
-      { layer: 'services', role: '业务逻辑' },
-      { layer: 'repository', role: '数据访问（SQLite）' },
-      { layer: 'security', role: '密钥与加密' },
-      { layer: 'error', role: '统一错误类型，跨层传递' },
+      { layer: 'L0 灵魂', role: 'SOUL.md —— 璃幽的人格、语气、行为边界（隐私神圣 / 不替他做决定 / 外部操作必须确认）' },
+      { layer: 'L1 主人模型', role: 'USER.md —— 称呼、兴趣、关系定位，由首次引导生成，之后在对话中逐步学习' },
+      { layer: 'L2–L5 记忆', role: '羁绊瞬间 · 世界知识 · 情节日志 · 语义事实；带权重与衰减，想记的先挂起等审核' },
+      { layer: 'Rust 后端', role: 'commands（IPC 命令层）→ services（业务）→ repository（SQLite）→ security（AES + 钥匙串）→ error（统一错误）' },
+      { layer: 'Vue 前端', role: 'views / components / composables / stores / skills；所有 IPC 走统一的 ipcInvoke()' },
     ],
-    fileTree: `璃幽灵境/
-├── src/                          ← Vue 3 前端
-├── src-tauri/
-│   └── src/
-│       ├── commands/             ← Tauri IPC 命令层
-│       ├── services/             ← 业务逻辑
-│       ├── repository/           ← 数据访问
-│       ├── security/             ← 密钥 / 加密
-│       ├── error/                ← 统一错误
-│       ├── utils/
-│       ├── bootstrap.rs          ← 启动组装
-│       ├── lib.rs
-│       └── main.rs
-└── Docs/`,
+    scale: [
+      { label: 'Rust 后端', value: '41 文件' },
+      { label: 'Rust 代码', value: '303 KB' },
+      { label: '前端文件', value: '104 个' },
+      { label: '记忆层', value: '7 层' },
+      { label: '后端测试', value: '44.9 KB' },
+      { label: '版本', value: 'v0.7.0' },
+    ],
     links: [
+      { label: 'GitHub', url: 'https://github.com/jay0609/liyou-mirage' },
       { label: '世界观 · 书灵志', url: '/projects/liyou-mirage/lore' },
       { label: '次元星图', url: '/projects/liyou-mirage/world-map' },
     ],
