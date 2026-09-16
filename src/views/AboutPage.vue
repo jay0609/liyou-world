@@ -80,20 +80,6 @@
         </div>
       </section>
 
-      <!-- 履历 -->
-      <section class="mb-4xl">
-        <h2 class="about-h2">经历</h2>
-        <div class="resume">
-          <div v-for="item in profile.career" :key="item.title" class="resume-item">
-            <span class="resume-period">{{ item.period }}</span>
-            <div class="resume-body">
-              <h3 class="resume-title">{{ item.title }}</h3>
-              <p class="resume-desc">{{ item.desc }}</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
       <!-- CTA -->
       <section class="about-cta">
         <router-link to="/#play" class="btn-primary no-underline">查看价目表</router-link>
@@ -280,38 +266,6 @@ import { profile } from '../data/profile'
   margin: 10px 0 6px;
 }
 .doing-desc {
-  margin: 0;
-  font-size: 0.8125rem;
-  line-height: 1.7;
-  color: var(--liyou-text-secondary);
-}
-
-/* ── 履历 ── */
-.resume {
-  display: flex;
-  flex-direction: column;
-}
-.resume-item {
-  display: grid;
-  grid-template-columns: 76px 1fr;
-  gap: 16px;
-  padding: 14px 0;
-  border-bottom: 1px solid rgba(139, 154, 171, 0.12);
-}
-.resume-item:last-child { border-bottom: none; }
-.resume-period {
-  font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
-  font-size: 0.8125rem;
-  color: var(--liyou-pink);
-  padding-top: 2px;
-}
-.resume-title {
-  font-size: 0.9375rem;
-  font-weight: 600;
-  color: var(--liyou-text-primary);
-  margin: 0 0 4px;
-}
-.resume-desc {
   margin: 0;
   font-size: 0.8125rem;
   line-height: 1.7;
