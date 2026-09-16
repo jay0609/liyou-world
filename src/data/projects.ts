@@ -8,7 +8,15 @@
  * 文件树为扫描真实项目目录生成。
  */
 
-export type ProjectStatus = '构思中' | '规划中' | '开发中' | '先行版' | '已发布'
+export type ProjectStatus =
+  | '构思中'
+  | '规划中'
+  | '开发中'
+  | '完善中'
+  | '先行版'
+  | '已发布'
+  | '已完成'
+  | '弃坑中'
 export type ProjectCategory = '游戏' | 'AI 应用' | '游戏工具/插件' | '独立产品'
 
 export interface ArchitectureLayer {
