@@ -273,30 +273,6 @@ export const projects: Project[] = [
   },
 
   {
-    slug: 'slg-game',
-    name: 'SLG 战略原型',
-    tagline: '建村令题材的策略游戏原型 · Unity',
-    icon: '🏰',
-    category: '游戏',
-    status: '开发中',
-    period: { start: '2026-08-12', end: '2026-08-13' },
-    concept:
-      '以「从一块建村令开始」为起点的发展类策略游戏原型，用来验证资源循环与建造节奏。',
-    philosophy: '先用最小可玩的原型把核心循环跑通，再堆内容。',
-    highlights: ['243 个 C# 脚本的原型规模', '完整的世界观与建筑设定文档'],
-    tech: ['Unity', 'C#'],
-    progress: {
-      done: '核心循环原型可跑。',
-      next: '整理模块结构，补玩法。',
-    },
-    fileTree: `从一块建村令开始/
-├── Assets/
-│   ├── Scripts/        ← 243 个 C# 脚本
-│   └── Scenes/
-└── Docs/`,
-  },
-
-  {
     slug: 'slg-three-kingdoms',
     name: '三国式 SLG 单机',
     tagline: '46 城 · 行军制 · 结束回合 —— 三国志 11 式的单机策略',
