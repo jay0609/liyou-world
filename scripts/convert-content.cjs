@@ -435,9 +435,6 @@ export interface ProjectMilestones {
 function main() {
   console.log('\n🔧 Decap CMS → 璃幽宇宙 内容转换\n')
   ensureDir(DATA)
-
-  convertAnnouncement()
-  convertEvents()
   convertStory()
   convertJournal()
   convertPricing()
