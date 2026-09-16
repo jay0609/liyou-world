@@ -7,11 +7,19 @@ export interface ProjectFile {
   desc: string
 }
 
-export interface ProjectFiles {
-  /** 对应 projects.ts 里的 slug */
-  slug: string
+/** 一个代码库 / 一套源码的分组 */
+export interface FileSection {
+  id: string
+  /** 分组标题，如 "AMXX 插件（自研 · Pawn）" */
+  title: string
   /** 显示用的根目录名 */
   root: string
   total: number
   files: ProjectFile[]
+}
+
+export interface ProjectFiles {
+  /** 对应 projects.ts 里的 slug */
+  slug: string
+  sections: FileSection[]
 }

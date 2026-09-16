@@ -6,88 +6,167 @@ import type { ProjectFiles } from './types'
 
 const data: ProjectFiles = {
   "slug": "cs16-soszombie",
-  "root": "Zombie-Plague-Mod-5.0.8a",
-  "total": 16,
-  "files": [
+  "sections": [
     {
-      "path": "addons/amxmodx/scripting/include/zq_sos_combat.inc",
-      "title": "SOSZOMBIE 战斗插件接口",
-      "desc": "ZQ_SOS_Combat 注册的状态查询 native，供母体/种类/商店等插件使用。"
+      "id": "amxx",
+      "title": "AMXX 插件（自研 · Pawn）",
+      "root": "Zombie-Plague-Mod-5.0.8a",
+      "total": 16,
+      "files": [
+        {
+          "path": "addons/amxmodx/scripting/include/zq_sos_combat.inc",
+          "title": "SOSZOMBIE 战斗插件接口",
+          "desc": "ZQ_SOS_Combat 注册的状态查询 native，供母体/种类/商店等插件使用。"
+        },
+        {
+          "path": "addons/amxmodx/scripting/include/zq_sos_core.inc",
+          "title": "SOSZOMBIE 升级系统核心接口",
+          "desc": "Core / Menu / Combat 三个插件共用的枚举与 native 声明。  状态（经验/等级/技能点/技能等级）全部由 ZQ_SOS_Core 管理，  Menu 与 Combat 通过下面的 native 访问。"
+        },
+        {
+          "path": "addons/amxmodx/scripting/include/zq_sos_items.inc",
+          "title": "SOS 道具商店接口",
+          "desc": "zp50_items_sos 注册的状态查询 native，供击退等模块判断。"
+        },
+        {
+          "path": "addons/amxmodx/scripting/zp_shop.sma",
+          "title": "道具商店（SOSZOMBIE 重建版）",
+          "desc": "依据 docs/04-道具.md 重建。  按 M 键打开商店；货币为弹药袋。  人类 23 件 + 僵尸 13 件（共享道具两边都有）。"
+        },
+        {
+          "path": "addons/amxmodx/scripting/zp_sos_bot_addon.sma",
+          "title": "BOT 附加插件（SOSZOMBIE 重建版）",
+          "desc": "让机器人会玩 SOS 升级系统：   经验完全与人类一致 —— 只通过\"打伤害 1:1\"获得（Combat 发放，   对 bot 同样生效），不额外发经验、不兑换弹药袋；   本插件只负责：把攒下的技能点随机投入技能。"
+        },
+        {
+          "path": "addons/amxmodx/scripting/zp50/zp50_class_soszombie.sma",
+          "title": "SOSZOMBIE 21 种僵尸（ZP 5.0 子插件）",
+          "desc": "通过 ZP 5.0 的 zombie class API 注册 21 种僵尸 + 各自能力。  普通丧尸注册为第一个类（默认类，id=0）。  不触碰 ZP 核心；能力用 forward/PreThink/Ham/Task 实现。"
+        },
+        {
+          "path": "addons/amxmodx/scripting/zp50/zp50_items_sos.sma",
+          "title": "SOSZOMBIE 道具商店（ZP 5.0 Extra Items）",
+          "desc": "把 SOSZOMBIE 的道具注册进 ZP 5.0 的 \"Buy Extra Items\" 菜单，  货币 = 弹药袋（由 zp50_items_ammopacks 自动扣费）。  不再使用旧的自绘 M 菜单。"
+        },
+        {
+          "path": "addons/amxmodx/scripting/ZQ_SOS_Combat.sma",
+          "title": "SOSZOMBIE 战斗被动效果",
+          "desc": "只负责战斗相关的被动（伤害/吸血/减伤/反伤/撕裂/冰冻/燃烧/光环/  暴击/击退/射速/换弹/弹夹/手雷），全部通过 zq_sos_core 的 native  读取技能等级与经验。"
+        },
+        {
+          "path": "addons/amxmodx/scripting/ZQ_SOS_Core.sma",
+          "title": "SOSZOMBIE 升级系统核心（PlayGaming）",
+          "desc": "只负责：技能数据、经验/等级/技能点/技能等级状态、加点逻辑、  被动应用、存档序列化，并对外暴露 native 接口。  菜单见 ZQ_SOS_Menu，战斗被动见 ZQ_SOS_Combat。"
+        },
+        {
+          "path": "addons/amxmodx/scripting/zq_sos_countdown.sma",
+          "title": "开局 10 秒倒计时音效",
+          "desc": "每回合开始播 10 → 1（sos/countdown/10..1.wav）。  可用 cvar zq_sos_countdown 关闭。"
+        },
+        {
+          "path": "addons/amxmodx/scripting/ZQ_SOS_Level.sma",
+          "title": "升级/技能系统（SOSZOMBIE 重建版 v2）",
+          "desc": "依据 docs/02-人类技能.md、docs/03-僵尸技能.md 重建。  提供：17 共享技能槽位 + 人类新增 6 技能 + 僵尸新增 9 被动。  按 P 键打开升级菜单；技能点 = 等级（人类/僵尸独立池，来自 zp_core）。"
+        },
+        {
+          "path": "addons/amxmodx/scripting/ZQ_SOS_Menu.sma",
+          "title": "SOSZOMBIE 升级系统菜单 + 存档 + HUD",
+          "desc": "只负责 UI 与持久化，全部通过 zq_sos_core 的 native 读写状态。  状态由 ZQ_SOS_Core 管理，战斗被动由 ZQ_SOS_Combat 处理。"
+        },
+        {
+          "path": "addons/amxmodx/scripting/ZQ_SOS_Mother.sma",
+          "title": "母体丧尸 / 独苗自愈 / 最后人类",
+          "desc": "感染模式(Infection)：   1) 首尸 = 母体（回合内唯一，死后不再产生）：      红色范围光环（仿复仇者 TE_DLIGHT）+ 跳蹲超级跳 + 血量保持种类基础值      （不再 ×2）+ 生命值技能 300/级。   2) 独苗自愈只在\"独苗\"时生效：场上只剩 1 只丧尸（无论是否母体）每秒 +300；      母体感染出更多丧尸后自愈停止（超跳/红光身份仍保留）。   3) 残局规则：只剩最后 1 名人类时，独苗(最后僵尸)的这 300/s 自愈取消      （商店自愈/自愈僵尸种类等其它回血不受影响）。   4) 最后人类（只剩 1 名人类）→ AK47/M4A1/M249 + 血 +150×僵尸数。   5) 复活拦截：感染/多重感染中最后一名人类在场时禁止一切复活。  G-病毒模式(Swarm)：仅套用\"最后人类\"（本服人类后备弹药无限，不另给弹）。  通用：燃烧/重伤（燃烧弹·重伤 / 燃烧子弹）期间独苗自愈减半。"
+        },
+        {
+          "path": "addons/amxmodx/scripting/zq_sos_nademodes.sma",
+          "title": "SOS 手雷模式（自写版 v2）",
+          "desc": "持 HE/闪光/烟雾 手雷按右键循环切换模式：   0 普通 / 1 临近(停稳后实时感应) / 2 触发(碰触即爆)   3 激光拌雷(碰触黏住 → 1 秒后沿附着面的垂直方向射激光) / 4 速度检测 / 5 遥控(E)  爆炸仍由引擎 + 现有 ZP/SOS 手雷模块负责；本插件只控制  \"何时允许爆炸\"（接管引信 + 0.1s 控制器 + 碰撞判定）。  敌我判定用 ZP 僵尸/人类阵营（激光只炸敌人，忽略自己人）。  作用对象：真人玩家（机器人默认关闭，cvar 可开）。"
+        },
+        {
+          "path": "addons/amxmodx/scripting/ZQ_SOS_Weapon.sma",
+          "title": "武器属性插件（弹夹/射速/换弹）",
+          "desc": "与 ZQ_SOS_Combat 分离，便于维护；参数全部开放 cvar。  实现：PlayerPreThink 每帧对\"当前武器实体\"操作。  规则：   - 弹夹 SK_MAG   ：只在【换弹完成/刚拿起武器】(上一帧弹夹<基础 且 现为满基础，                     或换了武器实体) 时放大为 基础×(1+每级比例)。绝不在战斗中                     弹夹掉到基础值(如 60→30)时再次补弹。   - 射速 SK_FIRERATE：本回合内\"弹夹下降过\"(确实开过枪)的锁定里，                     把射击剩余间隔收紧到 基础间隔/(1+每级比例)。   - 换弹 SK_RELOAD ：长锁定(未开过枪的锁定)一次性把剩余锁定/空闲计时 ÷(1+每级比例)。"
+        },
+        {
+          "path": "addons/amxmodx/scripting/zq_sos_zombie_charge.sma",
+          "title": "僵尸冲刺技能（冷却制，自动）",
+          "desc": "用途：玩家站在箱子/高台上时，僵尸用\"猛扑\"代替寻路——直接朝目标        扑过去，解决\"寻路到不了、上下高度不平等\"的问题。  只有僵尸（含丧尸种类）有这个技能：    - bot 僵尸：自动触发，无需操作（默认要求目标至少高出 40u）    - 真人僵尸：按 R（换弹键）手动触发，不要求高度差  触发条件：不同阵营 / 范围 400u 内 / 有视线 / 在地面 / 冷却完毕  落点由速度冲量决定：水平 900 + 垂直按 sv_gravity 800 反推所需速度，  因此能扑上明显高于自己的位置（默认上限 220u）。"
+        }
+      ]
     },
     {
-      "path": "addons/amxmodx/scripting/include/zq_sos_core.inc",
-      "title": "SOSZOMBIE 升级系统核心接口",
-      "desc": "Core / Menu / Combat 三个插件共用的枚举与 native 声明。  状态（经验/等级/技能点/技能等级）全部由 ZQ_SOS_Core 管理，  Menu 与 Combat 通过下面的 native 访问。"
-    },
-    {
-      "path": "addons/amxmodx/scripting/include/zq_sos_items.inc",
-      "title": "SOS 道具商店接口",
-      "desc": "zp50_items_sos 注册的状态查询 native，供击退等模块判断。"
-    },
-    {
-      "path": "addons/amxmodx/scripting/zp_shop.sma",
-      "title": "道具商店（SOSZOMBIE 重建版）",
-      "desc": "依据 docs/04-道具.md 重建。  按 M 键打开商店；货币为弹药袋。  人类 23 件 + 僵尸 13 件（共享道具两边都有）。"
-    },
-    {
-      "path": "addons/amxmodx/scripting/zp_sos_bot_addon.sma",
-      "title": "BOT 附加插件（SOSZOMBIE 重建版）",
-      "desc": "让机器人会玩 SOS 升级系统：   经验完全与人类一致 —— 只通过\"打伤害 1:1\"获得（Combat 发放，   对 bot 同样生效），不额外发经验、不兑换弹药袋；   本插件只负责：把攒下的技能点随机投入技能。"
-    },
-    {
-      "path": "addons/amxmodx/scripting/zp50/zp50_class_soszombie.sma",
-      "title": "SOSZOMBIE 21 种僵尸（ZP 5.0 子插件）",
-      "desc": "通过 ZP 5.0 的 zombie class API 注册 21 种僵尸 + 各自能力。  普通丧尸注册为第一个类（默认类，id=0）。  不触碰 ZP 核心；能力用 forward/PreThink/Ham/Task 实现。"
-    },
-    {
-      "path": "addons/amxmodx/scripting/zp50/zp50_items_sos.sma",
-      "title": "SOSZOMBIE 道具商店（ZP 5.0 Extra Items）",
-      "desc": "把 SOSZOMBIE 的道具注册进 ZP 5.0 的 \"Buy Extra Items\" 菜单，  货币 = 弹药袋（由 zp50_items_ammopacks 自动扣费）。  不再使用旧的自绘 M 菜单。"
-    },
-    {
-      "path": "addons/amxmodx/scripting/ZQ_SOS_Combat.sma",
-      "title": "SOSZOMBIE 战斗被动效果",
-      "desc": "只负责战斗相关的被动（伤害/吸血/减伤/反伤/撕裂/冰冻/燃烧/光环/  暴击/击退/射速/换弹/弹夹/手雷），全部通过 zq_sos_core 的 native  读取技能等级与经验。"
-    },
-    {
-      "path": "addons/amxmodx/scripting/ZQ_SOS_Core.sma",
-      "title": "SOSZOMBIE 升级系统核心（PlayGaming）",
-      "desc": "只负责：技能数据、经验/等级/技能点/技能等级状态、加点逻辑、  被动应用、存档序列化，并对外暴露 native 接口。  菜单见 ZQ_SOS_Menu，战斗被动见 ZQ_SOS_Combat。"
-    },
-    {
-      "path": "addons/amxmodx/scripting/zq_sos_countdown.sma",
-      "title": "开局 10 秒倒计时音效",
-      "desc": "每回合开始播 10 → 1（sos/countdown/10..1.wav）。  可用 cvar zq_sos_countdown 关闭。"
-    },
-    {
-      "path": "addons/amxmodx/scripting/ZQ_SOS_Level.sma",
-      "title": "升级/技能系统（SOSZOMBIE 重建版 v2）",
-      "desc": "依据 docs/02-人类技能.md、docs/03-僵尸技能.md 重建。  提供：17 共享技能槽位 + 人类新增 6 技能 + 僵尸新增 9 被动。  按 P 键打开升级菜单；技能点 = 等级（人类/僵尸独立池，来自 zp_core）。"
-    },
-    {
-      "path": "addons/amxmodx/scripting/ZQ_SOS_Menu.sma",
-      "title": "SOSZOMBIE 升级系统菜单 + 存档 + HUD",
-      "desc": "只负责 UI 与持久化，全部通过 zq_sos_core 的 native 读写状态。  状态由 ZQ_SOS_Core 管理，战斗被动由 ZQ_SOS_Combat 处理。"
-    },
-    {
-      "path": "addons/amxmodx/scripting/ZQ_SOS_Mother.sma",
-      "title": "母体丧尸 / 独苗自愈 / 最后人类",
-      "desc": "感染模式(Infection)：   1) 首尸 = 母体（回合内唯一，死后不再产生）：      红色范围光环（仿复仇者 TE_DLIGHT）+ 跳蹲超级跳 + 血量保持种类基础值      （不再 ×2）+ 生命值技能 300/级。   2) 独苗自愈只在\"独苗\"时生效：场上只剩 1 只丧尸（无论是否母体）每秒 +300；      母体感染出更多丧尸后自愈停止（超跳/红光身份仍保留）。   3) 残局规则：只剩最后 1 名人类时，独苗(最后僵尸)的这 300/s 自愈取消      （商店自愈/自愈僵尸种类等其它回血不受影响）。   4) 最后人类（只剩 1 名人类）→ AK47/M4A1/M249 + 血 +150×僵尸数。   5) 复活拦截：感染/多重感染中最后一名人类在场时禁止一切复活。  G-病毒模式(Swarm)：仅套用\"最后人类\"（本服人类后备弹药无限，不另给弹）。  通用：燃烧/重伤（燃烧弹·重伤 / 燃烧子弹）期间独苗自愈减半。"
-    },
-    {
-      "path": "addons/amxmodx/scripting/zq_sos_nademodes.sma",
-      "title": "SOS 手雷模式（自写版 v2）",
-      "desc": "持 HE/闪光/烟雾 手雷按右键循环切换模式：   0 普通 / 1 临近(停稳后实时感应) / 2 触发(碰触即爆)   3 激光拌雷(碰触黏住 → 1 秒后沿附着面的垂直方向射激光) / 4 速度检测 / 5 遥控(E)  爆炸仍由引擎 + 现有 ZP/SOS 手雷模块负责；本插件只控制  \"何时允许爆炸\"（接管引信 + 0.1s 控制器 + 碰撞判定）。  敌我判定用 ZP 僵尸/人类阵营（激光只炸敌人，忽略自己人）。  作用对象：真人玩家（机器人默认关闭，cvar 可开）。"
-    },
-    {
-      "path": "addons/amxmodx/scripting/ZQ_SOS_Weapon.sma",
-      "title": "武器属性插件（弹夹/射速/换弹）",
-      "desc": "与 ZQ_SOS_Combat 分离，便于维护；参数全部开放 cvar。  实现：PlayerPreThink 每帧对\"当前武器实体\"操作。  规则：   - 弹夹 SK_MAG   ：只在【换弹完成/刚拿起武器】(上一帧弹夹<基础 且 现为满基础，                     或换了武器实体) 时放大为 基础×(1+每级比例)。绝不在战斗中                     弹夹掉到基础值(如 60→30)时再次补弹。   - 射速 SK_FIRERATE：本回合内\"弹夹下降过\"(确实开过枪)的锁定里，                     把射击剩余间隔收紧到 基础间隔/(1+每级比例)。   - 换弹 SK_RELOAD ：长锁定(未开过枪的锁定)一次性把剩余锁定/空闲计时 ÷(1+每级比例)。"
-    },
-    {
-      "path": "addons/amxmodx/scripting/zq_sos_zombie_charge.sma",
-      "title": "僵尸冲刺技能（冷却制，自动）",
-      "desc": "用途：玩家站在箱子/高台上时，僵尸用\"猛扑\"代替寻路——直接朝目标        扑过去，解决\"寻路到不了、上下高度不平等\"的问题。  只有僵尸（含丧尸种类）有这个技能：    - bot 僵尸：自动触发，无需操作（默认要求目标至少高出 40u）    - 真人僵尸：按 R（换弹键）手动触发，不要求高度差  触发条件：不同阵营 / 范围 400u 内 / 有视线 / 在地面 / 冷却完毕  落点由速度冲量决定：水平 900 + 垂直按 sv_gravity 800 反推所需速度，  因此能扑上明显高于自己的位置（默认上限 220u）。"
+      "id": "yapb",
+      "title": "YaPB 机器人改写（C++ · 基于 4.4.957）",
+      "root": "yapb",
+      "total": 13,
+      "files": [
+        {
+          "path": "yapb/CMakeLists.txt",
+          "title": "构建配置（版本号 / 编译选项）",
+          "desc": "相对上游 YaPB 4.4.957：新增 29 行，删除 4 行。"
+        },
+        {
+          "path": "yapb/inc/graph.h",
+          "title": "路点节点与连边的数据结构扩展",
+          "desc": "相对上游 YaPB 4.4.957：新增 70 行，删除 1 行。"
+        },
+        {
+          "path": "yapb/inc/version.h.in",
+          "title": "版本号模板",
+          "desc": "相对上游 YaPB 4.4.957：新增 1 行，删除 1 行。"
+        },
+        {
+          "path": "yapb/inc/yapb.h",
+          "title": "全局声明与新 cvar 声明",
+          "desc": "相对上游 YaPB 4.4.957：新增 37 行，删除 0 行。"
+        },
+        {
+          "path": "yapb/src/analyze.cpp",
+          "title": "路点分析器：节点密度与可达性",
+          "desc": "相对上游 YaPB 4.4.957：新增 34 行，删除 2 行。"
+        },
+        {
+          "path": "yapb/src/botlib.cpp",
+          "title": "引擎接口层：新增原生调用（追踪 / 移动 / 实体）",
+          "desc": "相对上游 YaPB 4.4.957：新增 142 行，删除 9 行。"
+        },
+        {
+          "path": "yapb/src/combat.cpp",
+          "title": "战斗：开火与手雷相关调整",
+          "desc": "相对上游 YaPB 4.4.957：新增 24 行，删除 1 行。"
+        },
+        {
+          "path": "yapb/src/graph.cpp",
+          "title": "路点图核心：新增「从玩家路径学习」与路点分析",
+          "desc": "相对上游 YaPB 4.4.957：新增 810 行，删除 1 行。"
+        },
+        {
+          "path": "yapb/src/linkage.cpp",
+          "title": "链接与导出",
+          "desc": "相对上游 YaPB 4.4.957：新增 9 行，删除 0 行。"
+        },
+        {
+          "path": "yapb/src/manager.cpp",
+          "title": "机器人管理器",
+          "desc": "相对上游 YaPB 4.4.957：新增 10 行，删除 1 行。"
+        },
+        {
+          "path": "yapb/src/navigate.cpp",
+          "title": "导航：净空检查、拥堵惩罚、跳点学习",
+          "desc": "相对上游 YaPB 4.4.957：新增 362 行，删除 1 行。"
+        },
+        {
+          "path": "yapb/src/planner.cpp",
+          "title": "路径规划：A* / Floyd 参数",
+          "desc": "相对上游 YaPB 4.4.957：新增 17 行，删除 2 行。"
+        },
+        {
+          "path": "yapb/src/tasks.cpp",
+          "title": "任务系统：阵地重定位、猎杀任务",
+          "desc": "相对上游 YaPB 4.4.957：新增 106 行，删除 11 行。"
+        }
+      ]
     }
   ]
 }

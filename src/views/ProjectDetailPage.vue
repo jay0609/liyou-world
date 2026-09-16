@@ -81,8 +81,16 @@
             </div>
           </div>
 
-          <!-- 有逐文件数据 → 可展开的完整文件树；否则退回静态树 -->
-          <FileTree v-if="fileData" :data="fileData" />
+          <!-- 有逐文件数据 → 可展开的完整文件树（可能有多套代码库）；否则退回静态树 -->
+          <template v-if="fileData">
+            <div v-for="sec in fileData.sections" :key="sec.id" class="file-section">
+              <h3 v-if="fileData.sections.length > 1" class="file-section-title">
+                {{ sec.title }}
+                <span class="file-section-count">{{ sec.total }} 个文件</span>
+              </h3>
+              <FileTree :data="sec" />
+            </div>
+          </template>
 
           <div v-else-if="project.fileTree" class="filetree-wrap">
             <div class="filetree-bar">
@@ -95,9 +103,11 @@
           </div>
         </section>
 
-        <!-- 开发里程碑（数据来自 git tag） -->
+        <!-- 开发里程碑 / 迭代历程（数据来自 git tag 或实验构建） -->
         <section v-if="milestoneData" class="mb-4xl">
-          <h2 class="text-heading-lg text-liyou-text-primary font-heading mb-lg">🧭 开发里程碑</h2>
+          <h2 class="text-heading-lg text-liyou-text-primary font-heading mb-lg">
+            🧭 {{ milestoneData.title || '开发里程碑' }}
+          </h2>
           <MilestoneTimeline :data="milestoneData" />
         </section>
 
@@ -268,6 +278,27 @@ watchEffect(() => {
   overflow: hidden;
   border: 1px solid rgba(139, 154, 171, 0.2);
   background: rgba(8, 11, 15, 0.85);
+}
+
+/* 一个项目有多套代码库时的分组标题 */
+.file-section + .file-section { margin-top: 30px; }
+.file-section-title {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin: 0 0 12px;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--liyou-text-primary);
+}
+.file-section-count {
+  font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+  font-size: 0.6875rem;
+  font-weight: 400;
+  padding: 1px 8px;
+  border-radius: 999px;
+  color: var(--liyou-text-muted);
+  background: rgba(139, 154, 171, 0.14);
 }
 .filetree-bar {
   display: flex;

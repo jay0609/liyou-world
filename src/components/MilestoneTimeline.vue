@@ -26,6 +26,9 @@
             <span v-if="m.tests" class="ms-tests" :title="`该里程碑的自动化测试数量：${m.tests} 项`">
               {{ m.tests }} 项测试
             </span>
+            <span v-else-if="m.size" class="ms-tests" :title="`构建产物大小：${m.size} 字节`">
+              {{ Math.round(m.size / 1024) }} KB
+            </span>
           </div>
           <p class="ms-desc">{{ m.desc }}</p>
         </div>
@@ -33,7 +36,7 @@
     </ol>
 
     <p class="ms-foot">
-      数据来自项目的 git tag —— 每个里程碑验收通过后才打，不是事后补的。
+      {{ data.source || '数据来自项目的 git tag —— 每个里程碑验收通过后才打，不是事后补的。' }}
     </p>
   </div>
 </template>

@@ -292,18 +292,33 @@ function convertFiles() {
   for (const { file, data } of projects) {
     const slug = data.slug || path.basename(file, '.json')
     slugs.push(slug)
+    // 兼容两种形状：单个 files 数组，或 sections 分组（一个项目多套代码库）
+    const sections = Array.isArray(data.sections)
+      ? data.sections
+      : [
+          {
+            id: 'main',
+            title: data.root || '项目文件',
+            root: data.root || '',
+            total: (data.files || []).length,
+            files: data.files || [],
+          },
+        ]
+    const normalized = { slug, sections }
     const ts = `/**
  * 由 scripts/convert-content.cjs 自动生成
  * 编辑请改 content/files/${file}
  */
 import type { ProjectFiles } from './types'
 
-const data: ProjectFiles = ${JSON.stringify(data, null, 2)}
+const data: ProjectFiles = ${JSON.stringify(normalized, null, 2)}
 
 export default data
 `
     fs.writeFileSync(path.join(outDir, `${slug}.ts`), ts, 'utf-8')
-    console.log(`  ✅ files/${slug}.ts（${data.total} 个文件）`)
+    console.log(
+      `  ✅ files/${slug}.ts（${sections.map((s) => `${s.title} ${s.total}`).join(' + ')}）`
+    )
   }
 
   // 类型定义（单独一个文件，避免被 glob 当成项目数据）
@@ -318,13 +333,21 @@ export default data
   desc: string
 }
 
-export interface ProjectFiles {
-  /** 对应 projects.ts 里的 slug */
-  slug: string
+/** 一个代码库 / 一套源码的分组 */
+export interface FileSection {
+  id: string
+  /** 分组标题，如 "AMXX 插件（自研 · Pawn）" */
+  title: string
   /** 显示用的根目录名 */
   root: string
   total: number
   files: ProjectFile[]
+}
+
+export interface ProjectFiles {
+  /** 对应 projects.ts 里的 slug */
+  slug: string
+  sections: FileSection[]
 }
 `,
     'utf-8'
@@ -381,20 +404,26 @@ export default data
   fs.writeFileSync(
     path.join(outDir, 'types.ts'),
     `export interface Milestone {
-  /** tag 名，如 "M1" / "M13-B-武器库补齐" */
+  /** tag 名，如 "M1" / "p12 冲锋猛扑" */
   tag: string
-  /** 打 tag 日期 YYYY-MM-DD */
+  /** 日期 YYYY-MM-DD */
   date: string
-  /** tag 说明（取自 git tag message） */
+  /** 说明 */
   desc: string
-  /** 该里程碑的测试数量（从说明里解析，没有则为 null） */
+  /** 该节点对应的测试数量（没有则为 null） */
   tests: number | null
+  /** 构建产物字节数（用于显示体积增长，可选） */
+  size?: number
 }
 
 export interface ProjectMilestones {
   slug: string
   totalTags: number
   totalCommits: number
+  /** 区块标题（默认「开发里程碑」） */
+  title?: string
+  /** 数据来源说明（显示在时间线底部） */
+  source?: string
   items: Milestone[]
 }
 `,

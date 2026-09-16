@@ -27,9 +27,9 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import FileTreeNode from './FileTreeNode.vue'
-import type { ProjectFiles } from '../data/files/types'
+import type { FileSection } from '../data/files/types'
 
-const props = defineProps<{ data: ProjectFiles }>()
+const props = defineProps<{ data: FileSection }>()
 
 interface TreeNode {
   name: string
