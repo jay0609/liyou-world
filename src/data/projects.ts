@@ -32,6 +32,19 @@ export interface Project {
    * 避免让人误以为是完全从零写的。
    */
   upstream?: string
+  /**
+   * 开发时间（用于时间线排版）。
+   * 取值方式：有 git 用 git 首末提交，没有就用源码文件的修改时间范围。
+   * 两者都可能是估算值 —— 别写成精确日期。
+   */
+  period?: {
+    /** 起始 YYYY-MM-DD */
+    start: string
+    /** 结束 YYYY-MM-DD；缺省表示仍在进行 */
+    end?: string
+    /** 备注，比如「与 xxx 同期」 */
+    note?: string
+  }
   /** 概念：它是什么、解决什么问题 */
   concept: string
   /** 理念：为什么做 */
@@ -61,6 +74,7 @@ export const projects: Project[] = [
     icon: '🧟',
     category: '游戏',
     status: '开发中',
+    period: { start: '2026-09-11', end: '2026-09-14', note: 'SOS 第三代 · 与 CS1.6 版同期收尾' },
     concept:
       '把 CS1.6 时代的「SOS 僵尸感染」玩法，用现代 3D 引擎从零重做。8 个 AI 人类 + 1 个真人玩家，反向 ZP 感染回合制——每一局都是人和僵尸的拉锯。',
     philosophy:
@@ -119,6 +133,7 @@ export const projects: Project[] = [
     icon: '🧟',
     category: '游戏工具/插件',
     status: '已发布',
+    period: { start: '2026-09-08', end: '2026-09-11', note: 'SOS 第二代 · 紧接 CS2 版' },
     upstream: '服务端插件全部自研；机器人部分基于开源项目 YaPB 4.4.957 改写（13 文件 +1651 行）',
     concept:
       'CS1.6 的 SOSZOMBIE 是星河网络基于 Zombie Plague 4.3 魔改的僵尸服。这个项目把它复刻到 ZP 5.0.8a 基座上——ZP 只当框架，SOS 的玩法全部自己重写。除了服务端插件，还改写了 YaPB 机器人，让 BOT 真的会玩这套玩法。',
@@ -163,6 +178,7 @@ export const projects: Project[] = [
     icon: '🌸',
     category: 'AI 应用',
     status: '先行版',
+    period: { start: '2026-03-20', end: '2026-08-23', note: '与 Nook / LiyouForge 同一天起跑（同一套脚手架）' },
     concept:
       '一个桌面 AI 伴侣：璃幽。它能聊天、陪创作（小说 / 世界观 / 灵感），但真正的核心是记忆——它记得你叫什么、喜欢什么、上次那个角色后来怎么样了。数据 100% 在本地，模型可以跑本地的 Ollama，也可以接云端。',
     philosophy:
@@ -213,6 +229,7 @@ export const projects: Project[] = [
     icon: '🧠',
     category: 'AI 应用',
     status: '开发中',
+    period: { start: '2026-08-18', end: '2026-09-01' },
     upstream: '基于 dwinovo 的开源项目 Numen（LGPL-3.0）做的扩展，不是从零写的项目',
     concept:
       'Numen 是 dwinovo 做的开源项目：把大模型塞进 Minecraft——让一个服务端假玩家（ServerPlayer）当身体，近三十个工具当手和眼，你说「挖一组铁回来」，它真的下矿、寻路、挥镐，回来还问你要不要熔了。我的工作是给它补上缺的那一块：记忆。再把工具从近三十个扩到五十多个。',
@@ -261,6 +278,7 @@ export const projects: Project[] = [
     icon: '🏰',
     category: '游戏',
     status: '开发中',
+    period: { start: '2026-08-12', end: '2026-08-13' },
     concept:
       '以「从一块建村令开始」为起点的发展类策略游戏原型，用来验证资源循环与建造节奏。',
     philosophy: '先用最小可玩的原型把核心循环跑通，再堆内容。',
@@ -284,6 +302,7 @@ export const projects: Project[] = [
     icon: '🏯',
     category: '游戏',
     status: '开发中',
+    period: { start: '2026-07-24', end: '2026-07-28', note: '紧跟 SOS CS2 版' },
     concept:
       '一张 100×100 的地图，46 座城，从一座城开始打到统一。玩法照三国志 11 来：点主城弹出浮动菜单（出征 / 招募 / 升级 / 情报），出征是行军制而不是瞬移，行动完点「结束回合」交给 AI。跑在腾讯团结引擎上。',
     philosophy:
@@ -328,6 +347,7 @@ export const projects: Project[] = [
     icon: '🧟',
     category: '游戏工具/插件',
     status: '开发中',
+    period: { start: '2026-07-19', end: '2026-07-23', note: 'SOS 第一代 · 7 月连做三个项目的第一枪' },
     concept:
       '同一个 SOS 军团的第三代：最早是 CS1.6 的 AMXX 插件，后来移植到 Zombie Plague 5.0.8a，这一代用 C# 重写跑在 CS2 上（CounterStrikeSharp 框架）。8 种模式、13 种僵尸职业、21 件道具、16 项人类技能，内容全部放 JSON 里，改数值不用重新编译。',
     philosophy:
