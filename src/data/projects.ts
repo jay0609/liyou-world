@@ -8,7 +8,7 @@
  * 文件树为扫描真实项目目录生成。
  */
 
-export type ProjectStatus = '规划中' | '开发中' | '先行版' | '已发布'
+export type ProjectStatus = '构思中' | '规划中' | '开发中' | '先行版' | '已发布'
 export type ProjectCategory = '游戏' | 'AI 应用' | '游戏工具/插件' | '独立产品'
 
 export interface ArchitectureLayer {
@@ -384,6 +384,126 @@ export const projects: Project[] = [
       { label: '道具', value: '21 件' },
       { label: '配置项', value: '74 项' },
       { label: '版本', value: 'v4.0.0' },
+    ],
+  },
+
+  {
+    slug: 'verge-of-the-firmament',
+    name: 'Verge of the Firmament',
+    tagline: 'tick 制 RTS 单机 · 参考《权力的游戏：凛冬将至》',
+    icon: '🐉',
+    category: '游戏',
+    status: '开发中',
+    period: { start: '2026-07-28', end: '2026-08-17', note: '紧跟 gamebate 的回合制版本，这次改成实时 tick' },
+    concept:
+      '一个实时制（tick）的单机策略游戏，参考腾讯的《权力的游戏：凛冬将至》。和上一个三国式 SLG 最大的区别是：**不要「结束回合」**——实时决策、AI 持续行动、1x/2x/4x 变速、空格暂停。',
+    philosophy:
+      '这个项目确立了三条自我约束：① 功能链路优先于 UI 美工，系统能跑 > 视觉好看（因为前一个项目陷进过 2.5D 城池面板的美工陷阱）② 每次代码改动后必须穷举反思：改了什么 → 为什么 → 会引发什么 → 缺什么 ③ 存档读档这种"以后再说"的功能，如果数据结构不支持就先别硬做——诚实延后，而不是做个半成品。',
+    highlights: [
+      '程序集四层单向依赖：Tests → View → Logic → Data；Data 零依赖，Logic 只依赖 Data',
+      '实时 tick 制而非回合制：持续 AI 决策 + 1x / 2x / 4x 变速 + 空格暂停',
+      '完整的文件树设计文档（got-slg-architecture.md，31 KB）：逐个文件标 [NEW] / [CHG] / [KEEP] / [弃]',
+      '科技树独立设计（got-tech-tree.md）',
+      '356 个 C# 文件',
+      '主动放弃半成品：存档系统因 CityModel.Buildings(Dictionary) 不被 JsonUtility 支持，整体延后而不是硬写',
+    ],
+    tech: ['团结引擎', 'C#', 'Unity 2022.3'],
+    progress: {
+      done: '架构与文件树设计完成，356 个 C# 文件落地；实时 tick、指令总线、科技树已通。',
+      next: '打通功能链路（优先于视觉），再系统性设计序列化方案以支持存档。',
+    },
+    architecture: [
+      { layer: 'Data', role: '零依赖 —— 模型与配置，谁都不依赖' },
+      { layer: 'Logic', role: '只依赖 Data —— 规则与系统' },
+      { layer: 'View', role: '依赖 Data + Logic —— 表现层' },
+      { layer: 'Tests', role: '依赖全部 —— 唯一可以依赖所有层的程序集' },
+      { layer: '设计的自我约束', role: '功能链路 > UI 美工；改动必反思；不支持的先延后，不做半成品' },
+    ],
+    scale: [
+      { label: 'C# 文件', value: '356 个' },
+      { label: '设计文档', value: '31 KB' },
+      { label: '开发跨度', value: '3 周' },
+      { label: '时间模型', value: '实时 tick' },
+    ],
+  },
+
+  {
+    slug: 'liyou-forge',
+    name: 'liyouForge · 璃幽铁砧',
+    tagline: '把璃幽灵境抽成框架 —— 锻造 Agent 的底座',
+    icon: '⚒️',
+    category: 'AI 应用',
+    status: '开发中',
+    period: { start: '2026-05-19', end: '2026-06-25', note: '从璃幽灵境（LiyouDesk）同一条线抽出的框架版' },
+    upstream: '与璃幽灵境同源 —— 从同一套代码里把「可复用部分」抽出来做成框架',
+    concept:
+      '璃幽灵境是一个应用；liyouForge 是把它的底座抽出来：LLM 路由、记忆系统、安全工具、加密存储。定位是「锻造 Agent 的铁砧」——提供基础设施，让写 Agent 的人只管 Agent 逻辑。',
+    philosophy:
+      '同一个东西写到第二遍时，会看清哪些是"这个应用特有的"、哪些是"任何 Agent 都要的"。liyouForge 就是那次分离的产物。三条原则：100% 本地存储、模块化可拆分、安全不可妥协。',
+    highlights: [
+      '从璃幽灵境抽出可复用底座：LLM 路由 / 记忆系统 / 安全工具 / 加密存储',
+      '核心原则：100% 本地存储 · 模块化可拆分 · 安全不可妥协',
+      '42 个 Rust 文件 + 46 个 Vue 文件，Tauri v2 前后端分层的框架形态',
+      '完整代码模块图（24.9 KB）与架构文档',
+      'git 24 次提交，最后一次是 v0.6 UI 重设计（含 mirage 主题）',
+      '和璃幽灵境共用同一套存储约定（liyou_ 前缀、liyou_memory.db）',
+    ],
+    tech: ['Tauri v2', 'Rust', 'Vue 3', 'TypeScript', 'SQLite'],
+    progress: {
+      done: 'v0.6。框架骨架、LLM 路由、记忆、安全、加密存储完成；24 次提交。',
+      next: '把框架与应用彻底解耦，形成可独立使用的底座。',
+    },
+    architecture: [
+      { layer: '基础设施', role: 'LLM 路由（多服务商）· 记忆系统 · 加密存储' },
+      { layer: '安全', role: '本地优先、密钥不出机器' },
+      { layer: '前端', role: '46 个 Vue 文件 —— 设置 / Agent 配置 / 对话，仿 LobeChat 的布局体系' },
+      { layer: '后端', role: '42 个 Rust 文件 —— commands / services / memory / security' },
+    ],
+    scale: [
+      { label: 'Rust 文件', value: '42 个' },
+      { label: 'Vue 文件', value: '46 个' },
+      { label: 'git 提交', value: '24 次' },
+      { label: '版本', value: 'v0.6' },
+    ],
+  },
+
+  {
+    slug: 'reins-of-power',
+    name: '权御',
+    tagline: '主公 + NPC 内阁 + LLM Agent · 政治策略构想',
+    icon: '👑',
+    category: '游戏',
+    status: '构思中',
+    period: { start: '2026-06-10', end: '2026-06-10', note: '单日完成设计稿，仅基础设施层（P0）' },
+    concept:
+      '路线 3：玩家是主公，NPC 内阁辅佐。你拍板（宣战 / 结盟 / 建造 / 任免），他们带着各自的性格去执行。每个 NPC 有一个 Agent 当"魂"——有性格、有记忆、有自己的建言风格。',
+    philosophy:
+      'Agent 不是持续运行的进程，是事件驱动的：朝会建言 → 玩家拍板 → 放权执行 → 偶发冲动 → 反应事件。这样既省算力，也更像真实的幕僚——他们平时不在你眼前晃，但一直在。',
+    highlights: [
+      '玩家 = 主公（战略决策），Agent = NPC 的魂（性格 + 记忆 + 建言 + 执行风格）',
+      '内阁分职：军师 / 将军 / 财务 / 密探，各有独立 Agent',
+      '事件驱动而非常驻：朝会建言 → 拍板 → 放权 → 冲动 → 反应',
+      '完整阶段表 P0–P15：基础设施 → 领域状态 → 建筑 → Agent → 朝会 → 战斗 → 46 建筑 → 放权与冲动 → 事件 → 世界 → 内阁政治 → LLM 接入 → UI → 存档 → 测试',
+      '设计文档齐全：项目知识图（16 KB）+ INTERFACES + PROGRESS',
+      '语言选择刻意：Python 做原型 → Godot/GDScript 做正式版',
+    ],
+    tech: ['Python（原型）', 'LLM Agent'],
+    progress: {
+      done: 'P0 基础设施完成（Tick 循环 / 日志 / 时钟 / 配置）；101 个 Python 文件；接口与阶段表已定义。',
+      next: 'P1 领域状态 → P2 建筑系统 → P3 Agent 核心（personality / agent / memory）',
+    },
+    architecture: [
+      { layer: 'P0 基础设施', role: 'Tick 循环 · 日志 · 时钟 · 配置 —— 已完成' },
+      { layer: '领域层', role: 'domain_state + state_coordinator（P1）' },
+      { layer: 'Agent 层', role: 'personality + agent + memory（P3）—— 每个 NPC 一个"魂"' },
+      { layer: '朝会层', role: '军师 / 将军 / 财务 / 密探，各有建言与执行风格（P4–P5）' },
+      { layer: '内阁政治', role: '冲突 / 派系 / 破坏（P11）—— 不只是执行，还会互相斗' },
+    ],
+    scale: [
+      { label: 'Python 文件', value: '101 个' },
+      { label: '设计文档', value: '24 KB' },
+      { label: '阶段', value: 'P0–P15' },
+      { label: '已完成', value: 'P0' },
     ],
   },
 ]

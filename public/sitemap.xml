@@ -61,6 +61,21 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://liyou.world/projects/verge-of-the-firmament</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://liyou.world/projects/liyou-forge</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://liyou.world/projects/reins-of-power</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://liyou.world/projects/liyou-mirage/lore</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
