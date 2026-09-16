@@ -174,13 +174,13 @@ export const projects: Project[] = [
   {
     slug: 'liyou-mirage',
     name: '璃幽灵境',
-    tagline: '桌面 AI 创作伴侣 · Tauri + Rust + Vue',
+    tagline: '桌面 AI 创作伴侣 · LiyouDesk → LiyouMirage → Nook 同一条线',
     icon: '🌸',
     category: 'AI 应用',
     status: '先行版',
-    period: { start: '2026-03-20', end: '2026-08-23', note: '与 Nook / LiyouForge 同一天起跑（同一套脚手架）' },
+    period: { start: '2026-03-20', end: '2026-08-23', note: '前身 LiyouDesk（3.20 从零自主开发，1 天做出 MVP），后改名 Nook' },
     concept:
-      '一个桌面 AI 伴侣：璃幽。它能聊天、陪创作（小说 / 世界观 / 灵感），但真正的核心是记忆——它记得你叫什么、喜欢什么、上次那个角色后来怎么样了。数据 100% 在本地，模型可以跑本地的 Ollama，也可以接云端。',
+      '一个桌面 AI 伴侣：璃幽。它能聊天、陪创作（小说 / 世界观 / 灵感），但真正的核心是记忆——它记得你叫什么、喜欢什么、上次那个角色后来怎么样了。数据 100% 在本地，模型可以跑本地的 Ollama，也可以接云端。这条线从 2026-03-20 的 LiyouDesk 开始，改名为 LiyouMirage，后来又改名为 Nook；框架部分被抽成了 liyouForge。',
     philosophy:
       '陪伴这件事，难点不在模型多聪明，在它记不记得住。所以这个项目最厚的一层是记忆：分七层、每条给权重、不常用的自己衰减掉，想记的东西先挂起等你审核——不是让 AI 偷偷记你的一切。另外一条是本地优先：聊天记录、记忆、密钥都不出机器。',
     highlights: [
@@ -194,6 +194,7 @@ export const projects: Project[] = [
       'Rust 层带 44.9 KB 测试（记忆 / 聊天 / LLM 三块）',
       '游戏化：灵光值、40+ 成就（7 类 + 稀有度）、会闹的小情绪',
       '这套记忆系统后来被移植进了 Numen（给 Minecraft AI 同伴用）',
+      '同一条线走过三个阶段：LiyouDesk（3.20 从零自主开发，1 天做出 MVP）→ LiyouMirage → Nook',
     ],
     tech: ['Tauri v2', 'Rust', 'Vue 3', 'TypeScript', 'SQLite', 'Pinia', 'Element Plus', 'Ollama'],
     progress: {
