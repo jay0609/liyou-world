@@ -2,6 +2,7 @@ import { createApp } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
 import { createPinia } from 'pinia'
 import { createHead } from '@vueuse/head'
+import { inject as injectAnalytics } from '@vercel/analytics'
 import App from './App.vue'
 import './styles/main.css'
 
@@ -39,7 +40,7 @@ const NotFoundPage = () => import('./views/NotFoundPage.vue')
 const router = createRouter({
   history: createWebHistory(),
   routes: [
-    { path: '/', name: 'home', component: HomePage, meta: { title: '林子杰 · 子弈 | FPS 陪玩 × 独立开发者', description: 'CS2 完美魔王 S · 5E S+ · 非优先 TOP1。陪玩按局计费，也做独立游戏开发。' } },
+    { path: '/', name: 'home', component: HomePage, meta: { title: 'CS2NPC \u00b7 \u5b50\u5f08 | CS2 \u966a\u73a9 \u00b7 \u6211\u7684\u4e16\u754c \u00b7 \u5927\u4e71\u6597', description: 'CS2 \u5b8c\u7f8e\u9b54\u738b S\uff08rating 1.32\uff09\u00b7 5E S+ \u966a\u73a9\uff0c\u4e5f\u63a5\u4e09\u89d2\u6d32\u884c\u52a8\u3001\u6211\u7684\u4e16\u754c\u3001LOL \u5927\u4e71\u6597\u3002\u6309\u5c40\u8ba1\u8d39\uff0c\u6bcf\u5929 08:00-23:00 \u5728\u7ebf\u3002' } },
     { path: '/projects/liyou-mirage/lore', name: 'liyou-lore', component: BookSpiritPage, meta: { title: '璃幽·书灵志', description: '璃幽的身份、性格与《万物书》的世界观。' } },
     { path: '/projects/liyou-mirage/world-map', name: 'liyou-world-map', component: WorldMapPage, meta: { title: '次元星图', description: '交互式璃幽宇宙世界观展览——点击星图节点，探索每一个角落。' } },
     { path: '/about', name: 'about', component: AboutPage, meta: { title: '关于我', description: '林子杰（子弈）——FPS 陪玩 × 独立开发者。基本资料、兴趣爱好、现在在做什么。' } },
@@ -74,11 +75,11 @@ router.onError((error, to) => {
 
 // 动态 title + meta description (SEO)
 router.afterEach((to) => {
-  document.title = (to.meta.title as string) || '林子杰 · 子弈 | FPS 陪玩 × 独立开发者'
+  document.title = (to.meta.title as string) || 'CS2NPC \u00b7 \u5b50\u5f08 | CS2 \u966a\u73a9 \u00b7 \u6211\u7684\u4e16\u754c \u00b7 \u5927\u4e71\u6597'
   // 更新 <meta name="description">
   const descEl = document.querySelector('meta[name="description"]')
   if (descEl) {
-    descEl.setAttribute('content', (to.meta.description as string) || '林子杰（子弈）——FPS 游戏陪玩 × 独立开发者。CS2 完美 / 5E · 三角洲行动，按局计费。')
+    descEl.setAttribute('content', (to.meta.description as string) || 'CS2 \u5b8c\u7f8e\u9b54\u738b S\uff08rating 1.32\uff09\u00b7 5E S+ \u966a\u73a9\uff0c\u4e5f\u63a5\u4e09\u89d2\u6d32\u884c\u52a8\u3001\u6211\u7684\u4e16\u754c\u3001LOL \u5927\u4e71\u6597\u3002\u6309\u5c40\u8ba1\u8d39\uff0c\u6bcf\u5929 08:00-23:00 \u5728\u7ebf\u3002')
   }
 })
 
@@ -88,3 +89,16 @@ app.use(createPinia())
 app.use(head)
 app.use(router)
 app.mount('#app')
+
+/**
+ * 访问统计（Vercel Analytics）
+ * 只在生产环境启用；本地开发不上报。
+ * 失败时静默 —— 统计挂了不能影响站点。
+ */
+if (import.meta.env.PROD) {
+  try {
+    injectAnalytics()
+  } catch {
+    /* \u7edf\u8ba1\u4e0d\u53ef\u7528\u65f6\u4e0d\u505a\u4efb\u4f55\u4e8b */
+  }
+}
