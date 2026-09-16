@@ -27,6 +27,11 @@ export interface Project {
   icon: string
   category: ProjectCategory
   status: ProjectStatus
+  /**
+   * 上游来源说明。非原创项目必须写 —— 说明基于谁的项目做了什么，
+   * 避免让人误以为是完全从零写的。
+   */
+  upstream?: string
   /** 概念：它是什么、解决什么问题 */
   concept: string
   /** 理念：为什么做 */
@@ -112,6 +117,7 @@ export const projects: Project[] = [
     icon: '🧟',
     category: '游戏工具/插件',
     status: '已发布',
+    upstream: '服务端插件全部自研；机器人部分基于开源项目 YaPB 4.4.957 改写（13 文件 +1651 行）',
     concept:
       'CS1.6 的 SOSZOMBIE 是星河网络基于 Zombie Plague 4.3 魔改的僵尸服。这个项目把它复刻到 ZP 5.0.8a 基座上——ZP 只当框架，SOS 的玩法全部自己重写。除了服务端插件，还改写了 YaPB 机器人，让 BOT 真的会玩这套玩法。',
     philosophy:
@@ -199,30 +205,50 @@ export const projects: Project[] = [
 
   {
     slug: 'minecraft-numen',
-    name: 'Minecraft Numen',
-    tagline: 'Minecraft 服务端改版 · Java / Fabric',
-    icon: '⛏️',
-    category: '游戏',
+    name: 'Numen 扩展',
+    tagline: '给开源的 Minecraft AI 同伴框架加记忆层与 31 个工具',
+    icon: '🧠',
+    category: 'AI 应用',
     status: '开发中',
+    upstream: '基于 dwinovo 的开源项目 Numen（LGPL-3.0）做的扩展，不是从零写的项目',
     concept:
-      '基于 Minecraft 服务端做的改版工程，拆成 API、fork、构建三块，跑在自己的服务器上。',
-    philosophy: '把「魔改」当成正经工程做——分模块、可回退、配置与代码分离。',
+      'Numen 是 dwinovo 做的开源项目：把大模型塞进 Minecraft——让一个服务端假玩家（ServerPlayer）当身体，近三十个工具当手和眼，你说「挖一组铁回来」，它真的下矿、寻路、挥镐，回来还问你要不要熔了。我的工作是给它补上缺的那一块：记忆。再把工具从近三十个扩到五十多个。',
+    philosophy:
+      '上游把「身体、眼睛、双手」做得很完整，但同伴每次开聊都像第一次见你——不记得你是谁、上次干到哪、这个世界长什么样。所以方向不是塞更多上下文，而是分七层、给每层定额度、让不常用的自己衰减掉：2K 常驻 + 按任务临时拉，超了先蒸馏，再久就归档。',
     highlights: [
-      '拆成 numen-api / numen-fork / numen-maven 三块',
-      '配置与日志外置，不动核心代码即可调整',
+      '七层记忆架构：L0 灵魂 · L1 主人模型 · L2 羁绊瞬间 · L3 世界知识 · L4 情节日志 · L5 语义事实 · L6 技能 + 遗忘归档',
+      '权重可算、会衰减：score = importance + reinforce + ln(1 + access) − decay，不常用的记忆自己退场',
+      '注入预算 2K token 硬顶（persona 400 / owner 400 / bond 300 / 局势 300 / 弹性 600），不靠堆上下文',
+      '语义蒸馏：把对话压成事实三元组写进 L5，原始日志归档',
+      'Autonomy 自主性：不等指令也会自己安排事情；Diary 日记：同伴写自己的经历，只有主人能看',
+      '新增 24 个工具 + 7 个任务：后勤（家 / 仓库 / 整理存储）· 生存（吃饭 / 治疗 / 武装）· 制造（逐格合成 / 熔炼）· 移动（跳跃 / 空中放置 / 堵水）· 勘测（区域扫描 / 场地勘察 / 蓝图导出）· 联网搜索 · 写日记',
+      'ToolGroup / ToolSelector：工具从近三十个涨到五十多个后，按任务只挑相关的给模型，避免提示词爆炸',
+      '给记忆系统补了 5 个测试：Distiller / MemoryScorer / MemoryStore / WorldKnowledge / Autonomy',
     ],
-    tech: ['Java', 'Fabric', 'Maven'],
+    tech: ['Java 17', 'Fabric', 'Forge', 'NeoForge', 'Gson', 'JUnit'],
     progress: {
-      done: '主体结构已搭好，服务端可运行。',
-      next: '继续补充玩法模块。',
+      done: '两个仓库合计 58 个新增文件 + 57 个改动文件（numen-fork +875/−256，numen-api +474/−46），含七层记忆、自主性、日记与 24 个新工具，带 5 个测试。',
+      next: '把记忆层接进 agent loop 的每轮注入，继续补齐世界知识的 12 个域。',
     },
-    fileTree: `numen/
-├── numen-api/          ← API 模块
-├── numen-fork/         ← 服务端 fork
-├── numen-maven/        ← Maven 构建
-├── config/             ← 配置（外置）
-├── logs/
-└── tools/`,
+    architecture: [
+      { layer: '上游 · 身体', role: '服务端假玩家（ServerPlayer）—— 每个动作都走原生玩家代码路径，天然和红石 / 怪物 AI / 容器同一套规则' },
+      { layer: '上游 · 眼睛与双手', role: '感知 API（扫方块 / 实体 / 配方，不开 GUI 透视机器内部）+ 行动 API（移动 / 挖掘 / 放置 / 战斗 / 容器）' },
+      { layer: '新增 · 记忆层', role: 'L1 主人模型 · L2 羁绊瞬间 · L3 世界知识（12 域）· L5 语义事实 + 遗忘归档；2K 常驻 token 预算' },
+      { layer: '新增 · 自主性', role: 'Autonomy —— 不等指令也会自己安排事情；Diary 记录它自己的经历' },
+      { layer: '新增 · 工具扩展', role: '24 个新工具 + 7 个新任务；ToolGroup / ToolSelector 按任务筛选，控制提示词体积' },
+    ],
+    scale: [
+      { label: '新增文件', value: '58 个' },
+      { label: '改动文件', value: '57 个' },
+      { label: '新增代码', value: '+1349 行' },
+      { label: '新工具', value: '24 个' },
+      { label: '记忆层', value: '7 层' },
+      { label: '测试', value: '5 个' },
+    ],
+    links: [
+      { label: '上游 · minecraft-numen', url: 'https://github.com/Dwinovo/minecraft-numen' },
+      { label: '上游 · numen-api', url: 'https://github.com/Dwinovo/numen-api' },
+    ],
   },
 
   {

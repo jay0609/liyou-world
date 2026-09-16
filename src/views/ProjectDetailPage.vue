@@ -30,6 +30,9 @@
           <div class="text-5xl mb-md">{{ project.icon }}</div>
           <GradientText size="xl">{{ project.name }}</GradientText>
           <p class="text-body-lg text-liyou-text-secondary mt-md">{{ project.tagline }}</p>
+          <p v-if="project.upstream" class="proj-upstream">
+            <span class="proj-upstream-mark">↳</span>{{ project.upstream }}
+          </p>
         </div>
 
         <!-- 规模数据 -->
@@ -271,6 +274,21 @@ watchEffect(() => {
   line-height: 1.6;
   color: var(--liyou-text-secondary);
 }
+
+/* 上游来源说明（非原创项目必须标明） */
+.proj-upstream {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 7px;
+  margin: 12px auto 0;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 0.8125rem;
+  color: var(--liyou-text-muted);
+  background: rgba(139, 154, 171, 0.1);
+  border: 1px solid rgba(139, 154, 171, 0.22);
+}
+.proj-upstream-mark { color: var(--liyou-pink); }
 
 /* 文件树 */
 .filetree-wrap {
