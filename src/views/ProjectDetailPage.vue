@@ -40,16 +40,20 @@
           </div>
         </section>
 
-        <!-- 概念 + 理念（核心） -->
+        <!-- 概念 + 理念（标题在方框外，与「核心亮点」统一） -->
         <section class="grid grid-cols-1 md:grid-cols-2 gap-xl mb-4xl">
-          <SpotlightCard>
-            <h2 class="text-heading-lg text-liyou-text-primary font-heading mb-md">💡 概念</h2>
-            <p class="text-body-md text-liyou-text-secondary leading-relaxed">{{ project.concept }}</p>
-          </SpotlightCard>
-          <SpotlightCard>
-            <h2 class="text-heading-lg text-liyou-text-primary font-heading mb-md">🌱 理念</h2>
-            <p class="text-body-md text-liyou-text-secondary leading-relaxed">{{ project.philosophy }}</p>
-          </SpotlightCard>
+          <div class="flex flex-col">
+            <h2 class="text-heading-lg text-liyou-text-primary font-heading mb-lg">💡 概念</h2>
+            <SpotlightCard customClass="flex-1">
+              <p class="text-body-md text-liyou-text-secondary leading-relaxed">{{ project.concept }}</p>
+            </SpotlightCard>
+          </div>
+          <div class="flex flex-col">
+            <h2 class="text-heading-lg text-liyou-text-primary font-heading mb-lg">🌱 理念</h2>
+            <SpotlightCard customClass="flex-1">
+              <p class="text-body-md text-liyou-text-secondary leading-relaxed">{{ project.philosophy }}</p>
+            </SpotlightCard>
+          </div>
         </section>
 
         <!-- 亮点 -->
@@ -77,7 +81,10 @@
             </div>
           </div>
 
-          <div v-if="project.fileTree" class="filetree-wrap">
+          <!-- 有逐文件数据 → 可展开的完整文件树；否则退回静态树 -->
+          <FileTree v-if="fileData" :data="fileData" />
+
+          <div v-else-if="project.fileTree" class="filetree-wrap">
             <div class="filetree-bar">
               <span class="ftdot ftdot-r"></span>
               <span class="ftdot ftdot-y"></span>
@@ -88,31 +95,35 @@
           </div>
         </section>
 
-        <!-- 技术栈 + 进展 -->
+        <!-- 技术栈 + 进展（标题同样在方框外） -->
         <section class="grid grid-cols-1 md:grid-cols-2 gap-xl mb-4xl">
-          <GlassCard>
-            <h2 class="text-heading-lg text-liyou-text-primary font-heading mb-md">🛠️ 技术栈</h2>
-            <div class="flex flex-wrap gap-xs">
-              <span
-                v-for="t in project.tech"
-                :key="t"
-                class="text-body-sm px-md py-xs rounded-full bg-liyou-light-purple/15 text-liyou-light-purple"
-              >{{ t }}</span>
-            </div>
-          </GlassCard>
-          <GlassCard>
-            <h2 class="text-heading-lg text-liyou-text-primary font-heading mb-md">📈 进展</h2>
-            <div class="space-y-md">
-              <div>
-                <p class="text-caption text-liyou-text-muted mb-xs">已完成</p>
-                <p class="text-body-sm text-liyou-text-secondary">{{ project.progress.done }}</p>
+          <div class="flex flex-col">
+            <h2 class="text-heading-lg text-liyou-text-primary font-heading mb-lg">🛠️ 技术栈</h2>
+            <GlassCard customClass="flex-1">
+              <div class="flex flex-wrap gap-xs">
+                <span
+                  v-for="t in project.tech"
+                  :key="t"
+                  class="text-body-sm px-md py-xs rounded-full bg-liyou-light-purple/15 text-liyou-light-purple"
+                >{{ t }}</span>
               </div>
-              <div>
-                <p class="text-caption text-liyou-text-muted mb-xs">下一步</p>
-                <p class="text-body-sm text-liyou-text-secondary">{{ project.progress.next }}</p>
+            </GlassCard>
+          </div>
+          <div class="flex flex-col">
+            <h2 class="text-heading-lg text-liyou-text-primary font-heading mb-lg">📈 进展</h2>
+            <GlassCard customClass="flex-1">
+              <div class="space-y-md">
+                <div>
+                  <p class="text-caption text-liyou-text-muted mb-xs">已完成</p>
+                  <p class="text-body-sm text-liyou-text-secondary">{{ project.progress.done }}</p>
+                </div>
+                <div>
+                  <p class="text-caption text-liyou-text-muted mb-xs">下一步</p>
+                  <p class="text-body-sm text-liyou-text-secondary">{{ project.progress.next }}</p>
+                </div>
               </div>
-            </div>
-          </GlassCard>
+            </GlassCard>
+          </div>
         </section>
 
         <!-- 链接 CTA -->
@@ -136,19 +147,33 @@
 </template>
 
 <script setup lang="ts">
-import { computed, watchEffect } from 'vue'
+import { computed, ref, watchEffect } from 'vue'
 import { useRoute } from 'vue-router'
 import { projects } from '../data/projects'
+import type { ProjectFiles } from '../data/files/types'
 import GradientText from '../components/GradientText.vue'
 import SpotlightCard from '../components/SpotlightCard.vue'
 import GlassCard from '../components/GlassCard.vue'
 import ProjectCard from '../components/ProjectCard.vue'
+import FileTree from '../components/FileTree.vue'
 import { SITE } from '../constants'
 
 const route = useRoute()
 const slug = computed(() => String(route.params.slug || ''))
 const project = computed(() => projects.find((p) => p.slug === slug.value))
 const otherProjects = computed(() => projects.filter((p) => p.slug !== slug.value))
+
+/**
+ * 逐文件架构树：每个项目一个模块，按需加载。
+ * 不能把所有项目合成一个文件 —— 那样访问任何一个项目页都会下载全部文件树。
+ */
+const fileModules = import.meta.glob<{ default: ProjectFiles }>('../data/files/*.ts')
+const fileData = ref<ProjectFiles | null>(null)
+
+watchEffect(async () => {
+  const loader = fileModules[`../data/files/${slug.value}.ts`]
+  fileData.value = loader ? (await loader()).default : null
+})
 
 function isInternal(url: string) {
   return url.startsWith('/')

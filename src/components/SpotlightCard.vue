@@ -71,6 +71,8 @@ onUnmounted(() => {
 
 <style scoped>
 .spotlight-card {
+  /* ⚠️ .glass-card 本身没有内边距 —— 不加这行文字会贴着边框 */
+  padding: 28px 30px;
   transition: border-color 0.3s ease;
 }
 .spotlight-card:hover {
@@ -85,5 +87,9 @@ onUnmounted(() => {
   pointer-events: none;
   z-index: 0;
   transition: opacity 0.3s ease;
+}
+
+@media (max-width: 640px) {
+  .spotlight-card { padding: 20px 18px; }
 }
 </style>

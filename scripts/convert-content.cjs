@@ -260,6 +260,86 @@ export const stats: StatsGallery = ${JSON.stringify(data, null, 2)}`
   )
 }
 
+// ─── 7. 项目文件树 (每个项目一个模块，按需加载) ───
+//
+// 不要把所有项目打成一个大文件：那样访问任何一个项目页都会加载全部文件树。
+// 改成每个项目一个 .ts，由 ProjectDetailPage 用 import.meta.glob 按需拉取。
+function convertFiles() {
+  console.log('🌲 转换项目文件树...')
+  const srcDir = path.join(CONTENT, 'files')
+  const outDir = path.join(DATA, 'files')
+
+  // 清掉旧的（避免删了项目还留着模块）
+  if (fs.existsSync(outDir)) fs.rmSync(outDir, { recursive: true, force: true })
+  fs.mkdirSync(outDir, { recursive: true })
+
+  if (!fs.existsSync(srcDir)) {
+    console.log('  ⚠️  无 files 目录')
+    return
+  }
+
+  const projects = fs.readdirSync(srcDir)
+    .filter((f) => f.endsWith('.json'))
+    .map((f) => ({ file: f, data: readJSON(path.join(srcDir, f)) }))
+    .filter((x) => x.data)
+
+  if (projects.length === 0) {
+    console.log('  ⚠️  无文件树数据')
+    return
+  }
+
+  const slugs = []
+  for (const { file, data } of projects) {
+    const slug = data.slug || path.basename(file, '.json')
+    slugs.push(slug)
+    const ts = `/**
+ * 由 scripts/convert-content.cjs 自动生成
+ * 编辑请改 content/files/${file}
+ */
+import type { ProjectFiles } from './types'
+
+const data: ProjectFiles = ${JSON.stringify(data, null, 2)}
+
+export default data
+`
+    fs.writeFileSync(path.join(outDir, `${slug}.ts`), ts, 'utf-8')
+    console.log(`  ✅ files/${slug}.ts（${data.total} 个文件）`)
+  }
+
+  // 类型定义（单独一个文件，避免被 glob 当成项目数据）
+  fs.writeFileSync(
+    path.join(outDir, 'types.ts'),
+    `export interface ProjectFile {
+  /** 相对项目根的路径，如 "01_Core/Common/InputCommand.cs" */
+  path: string
+  /** 一句话说明（取自源码头注释） */
+  title: string
+  /** 详细说明（取自源码头注释） */
+  desc: string
+}
+
+export interface ProjectFiles {
+  /** 对应 projects.ts 里的 slug */
+  slug: string
+  /** 显示用的根目录名 */
+  root: string
+  total: number
+  files: ProjectFile[]
+}
+`,
+    'utf-8'
+  )
+
+  // 有文件树的项目 slug 清单（给列表页/导航用，不含数据本体）
+  fs.writeFileSync(
+    path.join(outDir, 'manifest.ts'),
+    `/** 有完整文件树的项目 slug（自动生成） */
+export const fileTreeSlugs: string[] = ${JSON.stringify(slugs.sort(), null, 2)}
+`,
+    'utf-8'
+  )
+}
+
 // ─── 主流程 ───
 function main() {
   console.log('\n🔧 Decap CMS → 璃幽宇宙 内容转换\n')
@@ -271,6 +351,7 @@ function main() {
   convertJournal()
   convertPricing()
   convertStats()
+  convertFiles()
 
   console.log('\n✅ 转换完成！\n')
 }
