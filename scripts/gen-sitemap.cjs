@@ -2,13 +2,13 @@
  * 生成 sitemap.xml
  *
  * 在 build 前运行，从路由表和项目数据里取页面，避免手写漏页。
- * 域名：SITE_URL（默认 https://liyou.world）
+ * 域名：SITE_URL（默认 https://cs2npc.cn）
  */
 const fs = require('fs')
 const path = require('path')
 
 const ROOT = path.resolve(__dirname, '..')
-const SITE_URL = (process.env.SITE_URL || 'https://liyou.world').replace(/\/$/, '')
+const SITE_URL = (process.env.SITE_URL || 'https://cs2npc.cn').replace(/\/$/, '')
 const OUT = path.join(ROOT, 'public', 'sitemap.xml')
 
 // 静态页面：[路径, changefreq, priority]

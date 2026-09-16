@@ -1,82 +1,82 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://liyou.world/</loc>
+    <loc>https://cs2npc.cn/</loc>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://liyou.world/about</loc>
+    <loc>https://cs2npc.cn/about</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://liyou.world/guide</loc>
+    <loc>https://cs2npc.cn/guide</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://liyou.world/projects</loc>
+    <loc>https://cs2npc.cn/projects</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://liyou.world/journal</loc>
+    <loc>https://cs2npc.cn/journal</loc>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://liyou.world/projects/soszombie</loc>
+    <loc>https://cs2npc.cn/projects/soszombie</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://liyou.world/projects/cs16-soszombie</loc>
+    <loc>https://cs2npc.cn/projects/cs16-soszombie</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://liyou.world/projects/liyou-mirage</loc>
+    <loc>https://cs2npc.cn/projects/liyou-mirage</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://liyou.world/projects/minecraft-numen</loc>
+    <loc>https://cs2npc.cn/projects/minecraft-numen</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://liyou.world/projects/slg-three-kingdoms</loc>
+    <loc>https://cs2npc.cn/projects/slg-three-kingdoms</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://liyou.world/projects/sos-zombie-cs2</loc>
+    <loc>https://cs2npc.cn/projects/sos-zombie-cs2</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://liyou.world/projects/verge-of-the-firmament</loc>
+    <loc>https://cs2npc.cn/projects/verge-of-the-firmament</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://liyou.world/projects/liyou-forge</loc>
+    <loc>https://cs2npc.cn/projects/liyou-forge</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://liyou.world/projects/reins-of-power</loc>
+    <loc>https://cs2npc.cn/projects/reins-of-power</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://liyou.world/projects/liyou-mirage/lore</loc>
+    <loc>https://cs2npc.cn/projects/liyou-mirage/lore</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://liyou.world/projects/liyou-mirage/world-map</loc>
+    <loc>https://cs2npc.cn/projects/liyou-mirage/world-map</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>

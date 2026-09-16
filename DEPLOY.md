@@ -57,10 +57,10 @@ git push -u origin main
 # 2. 去 vercel.com 导入这个仓库，框架会自动识别成 Vite
 #    构建命令：npm run build    输出目录：dist
 
-# 3. 绑定域名 liyou.world（如果域名还没解析，先在域名商那里加 A/CNAME 记录）
+# 3. 绑定域名 cs2npc.cn（如果域名还没解析，先在域名商那里加 A/CNAME 记录）
 ```
 
-**注意**：`vercel.json` 里的域名相关配置是 `liyou.world`。**如果以后换域名，要改 3 个地方**：
+**注意**：`vercel.json` 里的域名相关配置是 `cs2npc.cn`。**如果以后换域名，要改 3 个地方**：
 `index.html` 的 canonical / og:url、`public/robots.txt` 的 Sitemap、`scripts/gen-sitemap.cjs` 的 `SITE_URL`。
 
 ---
@@ -92,7 +92,7 @@ git push -u origin main
 | **项目截图** | SOSZombie / CS1.6 服的画面还空着，项目页现在只有文字和文件树 |
 | **动态只有 1 条** | streak 还是 🔥1，连续记几天才有说服力 |
 | **首页和 `/about` 有重复** | 基本资料、兴趣爱好两边都有（可以后续精简） |
-| **域名 `liyou.world` 和内容对不上** | 你暂不换。**但分享出去时，域名会是别人判断可信度的第一眼** |
+| **域名 `cs2npc.cn` 和内容对不上** | 你暂不换。**但分享出去时，域名会是别人判断可信度的第一眼** |
 | 图片可进一步转 WebP | 现在 JPEG 已经够用（1.81 MB），WebP 能再省 ~30% |
 
 ---

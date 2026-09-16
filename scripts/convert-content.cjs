@@ -22,7 +22,7 @@ function readJSON(filePath) {
 }
 
 function writeDataFile(filename, content) {
-  const ts = `/**\n * 由 scripts/convert-content.cjs 自动生成\n * 编辑请用 Decap CMS：liyou.world/admin\n */\n\n${content}\n`
+  const ts = `/**\n * 由 scripts/convert-content.cjs 自动生成\n * 编辑请用 Decap CMS：cs2npc.cn/admin\n */\n\n${content}\n`
   fs.writeFileSync(path.join(DATA, filename), ts, 'utf-8')
   console.log(`  ✅ ${filename}`)
 }

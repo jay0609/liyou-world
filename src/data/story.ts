@@ -1,6 +1,6 @@
 /**
  * 由 scripts/convert-content.cjs 自动生成
- * 编辑请用 Decap CMS：liyou.world/admin
+ * 编辑请用 Decap CMS：cs2npc.cn/admin
  */
 
 export interface StoryLine {

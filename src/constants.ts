@@ -6,8 +6,8 @@ export const SITE = {
   name: '子弈',
   nameEn: 'ZiYi',
   fullName: '林子杰',
-  domain: 'liyou.world',
-  email: 'contact@liyou.world',
+  domain: 'cs2npc.cn',
+  email: 'contact@cs2npc.cn',
   role: 'FPS 陪玩 × 独立开发者',
 } as const
 
