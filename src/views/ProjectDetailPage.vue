@@ -298,6 +298,20 @@ watchEffect(() => {
 }
 .proj-upstream-mark { color: var(--liyou-pink); }
 
+/* 状态说明：弃坑的写清为什么停，完成的写清做到什么程度 */
+.proj-status-note {
+  max-width: 640px;
+  margin: 12px auto 0;
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-size: 0.8125rem;
+  line-height: 1.75;
+  color: var(--liyou-text-muted);
+  background: rgba(19, 25, 32, 0.6);
+  border-left: 3px solid rgba(139, 154, 171, 0.3);
+  text-align: left;
+}
+
 /* 文件树 */
 .filetree-wrap {
   border-radius: 12px;
