@@ -106,51 +106,42 @@ export const projects: Project[] = [
   },
 
   {
-    slug: 'csgo-soszombie',
+    slug: 'cs16-soszombie',
     name: 'CS1.6 SOS 僵尸服',
-    tagline: '把星河 SOSZOMBIE 移植到 ZP 5.0.8a · AMXX 插件',
-    icon: '🎯',
+    tagline: '把星河 SOSZOMBIE 复刻到 ZP 5.0.8a · AMXX 插件',
+    icon: '🧟',
     category: '游戏工具/插件',
     status: '已发布',
     concept:
-      'CS1.6 的 SOSZOMBIE 是星河网络基于 Zombie Plague 4.3 改的僵尸服。这个项目把它移植到 ZP 5.0.8a 基座上，并重写了整套升级/技能系统，跑在自己的实时服上。',
+      'CS1.6 的 SOSZOMBIE 是星河网络基于 Zombie Plague 4.3 魔改的僵尸服。这个项目把它复刻到 ZP 5.0.8a 基座上——ZP 只当框架，SOS 的玩法全部自己重写，跑在自己的实时服上。',
     philosophy:
-      '单人维护一个服的插件，最怕的是「一个文件 1600 行」。所以核心思路是拆模块 + 用 native 通信：状态只有一份，其他模块通过接口访问。',
+      '单人维护一个服，最怕的是「一个文件两千行」。所以状态只有一份：技能 / 经验 / 等级 / 技能点全在 Core，菜单和战斗模块通过 native 读写，谁都不许自己存一份。另一个原则是不碰 ZP 核心——用官方 class / items API 注册自己的内容，ZP 升级也不会把我的东西冲掉。',
     highlights: [
-      '把 1636 行的单文件拆成 Core / Menu / Combat 三层模块',
-      '状态集中在 Core，Menu 与 Combat 通过 native 访问',
-      '技能体系：经验 / 等级 / 技能点 / 四分类加点 / 存档',
-      '母体僵尸机制、手雷模式、武器系统、倒计时独立成模块',
+      '21 种僵尸 + 全套主动技能，走 ZP 的 class API 注册，零改动核心',
+      '状态集中在 ZQ_SOS_Core，Menu / Combat / Weapon 全部通过 native 访问',
+      '手雷 6 种引信模式：普通 / 临近 / 触发 / 激光拌雷 / 速度检测 / 遥控，接管引信 + 0.1s 控制器',
+      '母体机制：红光范围光环 + 超级跳；独苗自愈 300/s；最后一名人类 ×10 血',
+      'BOT 也会玩：伤害 1:1 攒经验（和真人同一条公式），自动把技能点投进随机技能',
+      '自研 zp50_zp43_compat 兼容层，让老插件能跑在 ZP 5.0 上',
     ],
-    tech: ['Pawn', 'AMX Mod X 1.8.1', 'Zombie Plague 5.0.8a'],
+    tech: ['Pawn', 'AMX Mod X 1.8.1', 'Zombie Plague 5.0.8a', 'Metamod', 'YaPB'],
     progress: {
-      done: '全部模块已编译部署到实时服，加载无报错；母体僵尸与燃烧/冰冻手雷已实测。',
-      next: '继续对齐真人僵尸与 AI 僵尸的行为逻辑。',
+      done: '13 个自研插件全部编译并上线，plugins.ini 实际加载 78 个插件无报错；母体、手雷 6 模式、僵尸冲刺已实机验证。',
+      next: '推进 ZQ_SOS_Level v2 重建版（把技能系统收敛），继续打磨真人僵尸与 BOT 僵尸的行为一致性。',
     },
     architecture: [
-      { layer: 'Core', role: '技能数据 + 经验/等级/技能点数组 + 加点逻辑 + 全部 native' },
-      { layer: 'Menu', role: '菜单 / 存档(Trie) / HUD / 按键绑定' },
-      { layer: 'Combat', role: '战斗被动：伤害、吸血、减伤、反伤、冰冻、燃烧、暴击…' },
-      { layer: 'addon', role: 'BOT 自动升级，通过 Core 的 native 接入，无需改动' },
+      { layer: 'ZP 5.0 基座', role: 'zp50_core + 官方模块（约 59 个），提供 class / items / gamemode API' },
+      { layer: '内容注册层', role: 'zp50_class_soszombie（21 种僵尸）+ zp50_items_sos（道具），不改 ZP 核心' },
+      { layer: '状态层', role: 'ZQ_SOS_Core —— 技能数据 / 经验 / 等级 / 技能点 / 存档序列化，唯一状态源 + native' },
+      { layer: '表现层', role: 'Menu（菜单 / Trie 存档 / HUD）· Combat（战斗被动）· Weapon（弹夹射速换弹）· Mother（母体）' },
+      { layer: '辅助', role: 'nademodes（手雷引信）· bot_addon（BOT 加点）· countdown（开局音效）' },
     ],
-    fileTree: `addons/amxmodx/scripting/
-├── include/
-│   ├── zq_sos_core.inc          6.0 KB   ← 共用枚举 + native 声明
-│   ├── zq_sos_combat.inc        0.9 KB
-│   └── zq_sos_items.inc         0.5 KB
-├── ZQ_SOS_Level.sma            51.7 KB   ← 最大模块
-├── ZQ_SOS_Combat.sma           29.2 KB   ← 战斗被动
-├── zq_sos_nademodes.sma        29.2 KB   ← 手雷模式
-├── ZQ_SOS_Core.sma             27.5 KB   ← 状态唯一来源
-├── ZQ_SOS_Menu.sma             18.8 KB   ← 菜单 / 存档 / HUD
-├── ZQ_SOS_Weapon.sma           15.0 KB
-├── ZQ_SOS_Mother.sma           11.7 KB   ← 母体僵尸
-├── zq_sos_zombie_charge.sma     6.2 KB
-└── zq_sos_countdown.sma         1.2 KB`,
     scale: [
-      { label: '插件模块', value: '9 个' },
-      { label: 'Pawn 源码', value: '约 200 KB' },
+      { label: '自研插件', value: '13 个' },
+      { label: 'Pawn 源码', value: '279.7 KB' },
       { label: '最大单文件', value: '51.7 KB' },
+      { label: '僵尸种类', value: '21 种' },
+      { label: '运行时插件', value: '78 个' },
     ],
   },
 
