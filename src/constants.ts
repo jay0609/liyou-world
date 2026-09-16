@@ -7,7 +7,7 @@ export const SITE = {
   nameEn: 'ZiYi',
   fullName: '林子杰',
   domain: 'cs2npc.cn',
-  email: 'contact@cs2npc.cn',
+  email: '1147747928@qq.com',
   role: 'FPS 陪玩 × 独立开发者',
 } as const
 
