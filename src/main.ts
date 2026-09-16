@@ -75,6 +75,13 @@ router.onError((error, to) => {
 
 // 动态 title + meta description (SEO)
 router.afterEach((to) => {
+  // 百度统计：SPA 路由切换也要上报（否则只统计首次加载）
+  if (typeof window !== 'undefined') {
+    const w = window as unknown as { _hmt?: unknown[] }
+    w._hmt = w._hmt || []
+    w._hmt.push(['_trackPageview', to.fullPath])
+  }
+
   document.title = (to.meta.title as string) || 'CS2NPC \u00b7 \u5b50\u5f08 | CS2 \u966a\u73a9 \u00b7 \u6211\u7684\u4e16\u754c \u00b7 \u5927\u4e71\u6597'
   // 更新 <meta name="description">
   const descEl = document.querySelector('meta[name="description"]')
