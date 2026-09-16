@@ -179,6 +179,16 @@ export const projects: Project[] = [
       { label: '实验构建', value: '14 轮' },
       { label: '僵尸种类', value: '21 种' },
     ],
+    screenshots: [
+      { image: '/images/projects/cs16-soszombie/01-gameplay.jpg', caption: '实机：红色母体带着尸群围攻人类（左下角是弹药袋 10006 与类型「经典人类」）' },
+      { image: '/images/projects/cs16-soszombie/02-zombie-class.jpg', caption: '选僵尸类型（1/3）：普通 / 伪装 / 蝙蝠（空中飞行）/ 兔跳 / 隐身 / 超级跳 / 多段跳' },
+      { image: '/images/projects/cs16-soszombie/03-human-gene.jpg', caption: '人类升级 · 基因强化：生命强化 / 复合护甲 / 疾行脉冲 / 机动减负 / 光学迷彩 / 应急细胞再生' },
+      { image: '/images/projects/cs16-soszombie/04-human-alien.jpg', caption: '人类升级 · 异化能力：照明补给 / 冰冻补给 / 燃烧补给 / 喷射二连跳 / 战术超跳 / 冰晶弹头 / 烈焰弹头' },
+      { image: '/images/projects/cs16-soszombie/05-human-weapon.jpg', caption: '人类升级 · 武器改装：强化弹药 / 扩容弹匣 / 速射改造 / 战术换弹 / 动能弹头 / 后座抑制 / 弱点打击' },
+      { image: '/images/projects/cs16-soszombie/06-human-mutation.jpg', caption: '人类升级 · 突变特性：战斗吸血 / 防弹涂层 / 反伤护甲（画面外提示「simlater 成为母体丧尸」）' },
+      { image: '/images/projects/cs16-soszombie/07-zombie-mutation.jpg', caption: '僵尸升级 · 突变特性：生命汲取 / 角质硬化 / 荆棘尸刺 / 嗜血狂暴 / 濒死应激 / 低温适应 / 高温适应 / 瘟疫辐射' },
+      { image: '/images/projects/cs16-soszombie/08-zombie-gene.jpg', caption: '僵尸升级 · 基因强化：血肉增生 / 强韧外壳 / 肌腱爆发 / 骨骼轻质化 / 变色龙肤 / 快速再生' },
+    ],
   },
 
   {
