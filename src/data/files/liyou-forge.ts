@@ -1,0 +1,644 @@
+/**
+ * 由 scripts/convert-content.cjs 自动生成
+ * 编辑请改 content/files/liyou-forge.json
+ */
+import type { ProjectFiles } from './types'
+
+const data: ProjectFiles = {
+  "slug": "liyou-forge",
+  "sections": [
+    {
+      "id": "rust",
+      "title": "Rust \\u540e\\u7aef\\uff08src-tauri\\uff09",
+      "root": "src-tauri/src",
+      "total": 40,
+      "files": [
+        {
+          "path": "src-tauri/src/bootstrap.rs",
+          "title": "! liyouForge 框架启动引导模块",
+          "desc": "! ! 负责：日志初始化、应用数据目录、加密密钥、核心服务初始化 ! 与 `lib.rs` 解耦：`lib.rs` 只管 module 声明 + Tauri builder"
+        },
+        {
+          "path": "src-tauri/src/commands/batch2.rs",
+          "title": "! Spec #5+#6+#7 — Tauri 命令（Safety + MemoryAgent + ImplicitPrompt）",
+          "desc": ""
+        },
+        {
+          "path": "src-tauri/src/commands/chat.rs",
+          "title": "! 聊天相关命令",
+          "desc": "! @updated: 2026-04-10 Phase 2/3"
+        },
+        {
+          "path": "src-tauri/src/commands/cloud_api.rs",
+          "title": "! 云端 API 调用命令",
+          "desc": "! ! 统一封装豆包 Coding Plan 和千问 API 调用 ! API 密钥通过 Tauri State 管理，不暴露到前端 ! ! @updated: 2026-04-10"
+        },
+        {
+          "path": "src-tauri/src/commands/cloud_stream.rs",
+          "title": "! 云端 API 流式调用命令",
+          "desc": "! ! 纯 HTTP 透传代理。不做模型名 fallback，不做 API Key 猜测。 ! 所有参数由前端统一控制，唯一数据源是 providers.ts。 ! ! v3: 支持 OpenAI function calling — tools 参数透传 + 流式 tool_calls 累积。"
+        },
+        {
+          "path": "src-tauri/src/commands/digestion.rs",
+          "title": "! Spec #4 — 消化引擎 Tauri 命令",
+          "desc": "! ! 对外暴露 `run_digestion` 命令，供前端触发消化流程。 ! Phase 1.1: 真实 LLM 调用替代 Phase 2a 伪输出。 ! ! Spec #9 v1.2 — 增量元审查命令 `run_meta_review_increment`"
+        },
+        {
+          "path": "src-tauri/src/commands/error_memory.rs",
+          "title": "",
+          "desc": ""
+        },
+        {
+          "path": "src-tauri/src/commands/execution.rs",
+          "title": "! Phase 0 — 执行引擎 IPC 命令",
+          "desc": "! ! Spec #8 v1.2 §3.1-3.7: !   - check_git_dirty      (§3.1) !   - generate_diff_preview (§3.2) !   - pause_execution      (§3.4) !   - resume_execution     (§3.4) !   - cancel_execution     (§3.5) !   - skip_current_step    (§3.6) !   - execution_heartbeat  (§3.7)"
+        },
+        {
+          "path": "src-tauri/src/commands/memory_core.rs",
+          "title": "",
+          "desc": ""
+        },
+        {
+          "path": "src-tauri/src/commands/memory_file.rs",
+          "title": "",
+          "desc": ""
+        },
+        {
+          "path": "src-tauri/src/commands/memory.rs",
+          "title": "! 记忆管理命令 - 7层记忆系统 IPC 接口",
+          "desc": "! ! 所有记忆操作统一通过这些命令与后端交互 ! 前端不存储任何记忆数据"
+        },
+        {
+          "path": "src-tauri/src/commands/project_context.rs",
+          "title": "",
+          "desc": ""
+        },
+        {
+          "path": "src-tauri/src/commands/reset.rs",
+          "title": "! 数据重置命令 - 一键恢复出厂状态",
+          "desc": "! ! 清空聊天记录、7层记忆、缓存数据 ! 保留：人设模板、API Key 配置、应用结构 ! ! @created: 2026-04-13 ! @version: 1.0"
+        },
+        {
+          "path": "src-tauri/src/commands/subagent.rs",
+          "title": "! Phase 2 — 多 Agent 调度架构",
+          "desc": "! ! Fable 5 风格: SubSpecRouter → 临时 Agent → 融合层 ! ! 核心命令: !   - route_subspecs     (§2.1) 规则引擎按路径前缀分组 blueprint changes !   - execute_subspec    (§2.2) 临时 Agent 执行单个 SubSpec（垂直 Prompt + 会话隔离） !   - fuse_subspecs      (§2.3) 融合层: 冲突检测 + 补全 + 统一输出"
+        },
+        {
+          "path": "src-tauri/src/commands/tools.rs",
+          "title": "",
+          "desc": ""
+        },
+        {
+          "path": "src-tauri/src/db/migrations.rs",
+          "title": "璃幽桌面版 - 数据库自动迁移脚本",
+          "desc": "首次启动时自动创建所有必要的表"
+        },
+        {
+          "path": "src-tauri/src/error/mod.rs",
+          "title": "",
+          "desc": ""
+        },
+        {
+          "path": "src-tauri/src/error/types.rs",
+          "title": "",
+          "desc": ""
+        },
+        {
+          "path": "src-tauri/src/lib.rs",
+          "title": "! liyouForge 璃幽铁砧 · 开放 Agent 框架后端库",
+          "desc": ""
+        },
+        {
+          "path": "src-tauri/src/logger/mod.rs",
+          "title": "",
+          "desc": ""
+        },
+        {
+          "path": "src-tauri/src/main.rs",
+          "title": "liyouForge 璃幽铁砧 · 开放 Agent 框架主入口",
+          "desc": ""
+        },
+        {
+          "path": "src-tauri/src/security/aes_cipher.rs",
+          "title": "! AES-256-GCM加密模块，提供数据加密解密功能",
+          "desc": ""
+        },
+        {
+          "path": "src-tauri/src/security/keychain.rs",
+          "title": "! 密钥链安全存储模块",
+          "desc": ""
+        },
+        {
+          "path": "src-tauri/src/security/mod.rs",
+          "title": "",
+          "desc": ""
+        },
+        {
+          "path": "src-tauri/src/services/chat_tests.rs",
+          "title": "! chat.rs 核心单元测试",
+          "desc": "! ! 覆盖：ChatService 会话管理 / 消息加密存储 / 查询 / 删除 ! ! @created: 2026-05-17 — P0 测试补充"
+        },
+        {
+          "path": "src-tauri/src/services/chat.rs",
+          "title": "! 聊天服务模块，处理聊天记录的存储、查询、管理",
+          "desc": ""
+        },
+        {
+          "path": "src-tauri/src/services/digestion.rs",
+          "title": "! Spec #4 — 消化引擎总控",
+          "desc": "! ! 负责: 条件激活 → Round 1 并行 → Round 2 交叉审查 → 冲突检测 → 降级 → 段组装 ! ! Phase 2a (MVP): 规则引擎伪输出 + Safety 否决权 + 降级评估 + 信心评分 + 段组装契约 ! Phase 2b (预留): LLM 语义冲突检测 + tokio::join! 并行调用 ! ! v1.2 — 对齐 Spec #4 v1.2: !   - 段组装契约（P0-P5 五段 → Spec #7） !   - Token 预算检查（>70% → 跳过 Round 2） !   - Round 2 摘要化（传 PerspectiveCard 摘要，非完整 content） !   - 降级基于 Round 2 / Round 1 有效输出 !   - run_perspective_with_timeout（15s + 1 retry） !   - run_digestion 主循环 + DigestionRequest !   - DigestionUIMessage 事件流（去重 key） !   - DigestionProgress 前端状态快照"
+        },
+        {
+          "path": "src-tauri/src/services/execution.rs",
+          "title": "! Spec #8 — 执行引擎 + 四维越界检测 + 执行后摘要追加",
+          "desc": "! ! 用户确认蓝图（status='approved'）后，按蓝图步骤执行操作。 ! 每步前进行四维越界检查 + 工具调用层工作区验证。 ! 失败自动修复（≤2次/步），完成后进行改动幅度对比 + 追加执行摘要。 ! ! v1.1 — 对齐 Spec #8 v1.1: !   - 四维越界检测（文件路径 / 操作类型 / 步骤数 / 改动幅度） !   - 工具调用层工作区验证（canonicalize + 父目录回退） !   - execute 不可逆操作检查（复用 Spec #5 irreversible_actions） !   - 每步 2 次自动修复 + auto-fix 越界检测 !   - 全局执行锁 + 蓝图哈希校验 + git 快照 !   - 改动幅度对比（文件数/行数/函数数）+ 执行后摘要 !   - 结构化 BoundaryDetails（5 种变体）"
+        },
+        {
+          "path": "src-tauri/src/services/implicit_prompt.rs",
+          "title": "! Spec #7 — 隐式 Prompt 引擎（优先级排序 + 裁剪）",
+          "desc": "! ! 接收 Spec #4 组装好的 segments，按 P0-P4 排序、token 计数、裁剪。 ! 输出最终隐式 Prompt 文本（≤2048 token 硬限制 × 0.85 安全余量）。 ! ! v1.1 — 对齐 Spec #7 v1.1: !   - HashMap 增量合并（新段覆盖同优先级旧段） !   - truncate_front 前向裁剪 + 字符级回退 !   - enforce_safety_priority 安全约束冲突检测 !   - 64 token 最低阈值（低于则跳过该段） !   - get_budget 独立辅助函数 !   - 空段跳过 + P0 不被裁剪 ! ! Phase 2a: 字符估算版（Phase 2b 升级 deepseek-tokenizer-rs）"
+        },
+        {
+          "path": "src-tauri/src/services/llm_tests.rs",
+          "title": "! llm.rs 核心单元测试",
+          "desc": "! ! 覆盖：LLMConfig 构建 / LLMService 创建 / 配置查询 ! ! 注：chat_with_config 依赖真实网络，不在此测试；建议用 wiremock 做集成测试。"
+        },
+        {
+          "path": "src-tauri/src/services/llm.rs",
+          "title": "DeepSeek LLM 服务 — liyouForge 默认后端",
+          "desc": "精简版：仅保留 DeepSeek OpenAI 兼容格式"
+        },
+        {
+          "path": "src-tauri/src/services/memory_agent.rs",
+          "title": "! Spec #6 — Memory Agent（FTS 检索 + LLM 提醒语）",
+          "desc": "! ! 第一层: FTS5 全文搜索 — 零 LLM Token !   关键词提取 → 2-gram 精化 → FTS 查询构建 → 伪命中生成（Phase 2a） ! 第二层: LLM 生成提醒 — 仅在有命中时激活（Phase 2b） ! ! v1.2 — 对齐 Spec #6 v1.2: !   - 中文 2-gram 精化 + CN_STOP_CHARS 过滤 !   - contentless FTS + id 关联 (Phase 2b) !   - 相对阈值过滤 + min_hit_count !   - 列级 FTS 查询格式 (trigger_task: OR error_description: OR solution:) !   - format_hits / parse_memory_reminders / generate_memory_final_output !   - P2 段 [P2 · 历史教训] 格式 + bullet 提醒语 !   - search_error_memory 接口（Phase 2a 伪命中 / Phase 2b SQLite）"
+        },
+        {
+          "path": "src-tauri/src/services/memory_learning.rs",
+          "title": "! Spec #10 — 记忆与学习层 + 蓝图版本控制",
+          "desc": "! ! 四个子系统: !   1. 错误记忆 (FTS5 自动注入) !   2. 蓝图对比 (FTS5 检索 + 按 rank 排序) !   3. 审查模式库 (keywords 匹配) !   4. 蓝图版本控制 (blueprints/*.md 文件系统) ! ! 项目隔离: 按 workspace_path 隔离 ! 通用模式: is_universal=1 + 3 项目 + 90 天内 ! ! v1.1 — 对齐 Spec #10 v1.1: !   - SQL 注入防护（参数化查询） !   - FTS5 蓝图检索 + 触发器 !   - 中文文件名保留 + ID 前缀防冲突 + 冲突计数器 !   - 审查模式 keywords JSON 匹配 !   - Markdown 转义 (md_escape) !   - check_upgrade_to_universal (3 项目 + 90 天)"
+        },
+        {
+          "path": "src-tauri/src/services/memory_tests.rs",
+          "title": "! memory.rs 核心单元测试",
+          "desc": "! ! 覆盖：MemoryLayer 枚举 / MemoryStatus / MemoryService CRUD / 生命周期 / 衰减 ! ! @created: 2026-05-17 — P0 测试补充"
+        },
+        {
+          "path": "src-tauri/src/services/memory.rs",
+          "title": "! 璃幽 7 层记忆系统 v3.0",
+          "desc": "! ! 情感陪伴向重构 — 参考 mem0 / memU / Memory Palace 设计 ! ! 层级重命名（保留 7 层，skill 不动）： !   short_term → moments → bond → persona → skill → your_world → world_lore ! ! 新增： !   - 加载分层 L0-L3（热/温/凉/冷） !   - 时序知识图谱 fact_triples !   - 7 天自动归档 closet summary !   - memory_from_row! 宏消除重复 ! ! @author: 璃幽 🌸 ! @updated: 2026-05-15 ! @version: 3.0"
+        },
+        {
+          "path": "src-tauri/src/services/meta_reviewer.rs",
+          "title": "! Spec #9 — 元审查器（三层规则校验）",
+          "desc": "! ! 蓝图生成器产出 Blueprint 后，自动执行三层规则校验（零 Token）。 ! 1. 结构完整性 + 截断检测 ! 2. 路径存在性（isNewFile 优先 + Windows 大小写不敏感） ! 3. 风险覆盖率（双向匹配：文件名↔风险描述） ! ! 综合判决: Pass / Warning / Fail + shouldRetry 建议 ! ! v1.1 — 对齐 Spec #9 v1.1: !   - check_truncation 完整实现（省略号 + 标签不闭合 + 标签成对） !   - isNewFile 结构化判断 + 关键词回退 !   - 双向风险匹配（文件名别名 ↔ 风险描述互相包含） !   - 扩展重试条件（4 种 Fail 场景） !   - Windows 大小写不敏感文件检查"
+        },
+        {
+          "path": "src-tauri/src/services/mod.rs",
+          "title": "! liyouForge 服务模块统一导出",
+          "desc": "! 注意：主要模块声明在 lib.rs 的 inline `pub mod services { ... }` 中 ! 本文件仅用于提供额外的 re-export 和文档"
+        },
+        {
+          "path": "src-tauri/src/services/safety.rs",
+          "title": "! Spec #5 — Safety Agent（两层设计）",
+          "desc": "! ! 第一层: 规则引擎 — 总是运行，零 Token !   三个检查: 核心文件触碰 / 危险操作（关键词+模糊+高危正则） / 工作区越界 ! 第二层: LLM 深度分析 — 仅在规则发现风险时激活（Phase 2b） ! ! v1.2 — 对齐 Spec #5 v1.2: !   - glob 模式匹配 core_patterns !   - canonicalize + 父目录回退 防路径遍历绕过 !   - dangerous_patterns 高危正则检查 !   - dangerous_fuzzy_patterns 覆盖 changes 描述 !   - SeverityClass 两档分类 (Critical/High) !   - P0 段合并同类风险 + P0_MAX_ITEMS=20 !   - ProjectSafetyConfig 可扩展性"
+        },
+        {
+          "path": "src-tauri/src/utils/logger.rs",
+          "title": "",
+          "desc": ""
+        },
+        {
+          "path": "src-tauri/src/utils/mod.rs",
+          "title": "",
+          "desc": ""
+        }
+      ]
+    },
+    {
+      "id": "vue",
+      "title": "Vue \\u524d\\u7aef\\uff08frontend\\uff09",
+      "root": "frontend/src",
+      "total": 83,
+      "files": [
+        {
+          "path": "frontend/src/_archived_v3/_DEL_types.ts",
+          "title": "",
+          "desc": ""
+        },
+        {
+          "path": "frontend/src/_archived_v3/blueprint-parser.ts",
+          "title": "Spec #3 — 蓝图解析器",
+          "desc": "负责: - 解析 DeepSeek 输出的 6 个 XML-like 标签 - 将 <changes> 解析为结构化改动清单数组 - 组装成标准蓝图 JSON 结构 - 处理缺失/格式异常标签 修订: v1.1 — split 解析 + +30/-5 行数格式 + 双评估 + 占位符清洗 /"
+        },
+        {
+          "path": "frontend/src/_archived_v3/blueprint.ts",
+          "title": "Spec #3 — 蓝图生成器 类型定义",
+          "desc": "对应 BLUEPRINT_v2: §七（前半部分） Phase: 1 /"
+        },
+        {
+          "path": "frontend/src/_archived_v3/BlueprintArea.vue",
+          "title": "rc5 §10 蓝图交互区 — 步骤列表 + 风险 + 审查 + 操作 + Diff 预览",
+          "desc": ""
+        },
+        {
+          "path": "frontend/src/_archived_v3/CommandPalette.vue",
+          "title": "",
+          "desc": ""
+        },
+        {
+          "path": "frontend/src/_archived_v3/digestion.ts",
+          "title": "Spec #4 — 消化引擎总控 前端类型定义",
+          "desc": "前端只需关注消化进度和结果，不直接操作视角。 对应后端: services/digestion.rs + commands/digestion.rs /"
+        },
+        {
+          "path": "frontend/src/_archived_v3/DigestionProgressPanel.vue",
+          "title": "rc5 §9 消化引擎面板 — 显示视角进度，支持下钻细节",
+          "desc": ""
+        },
+        {
+          "path": "frontend/src/_archived_v3/ipc-pipeline.ts",
+          "title": "LiyouForge IPC 管道类型定义 — 前后端契约",
+          "desc": "对应后端 Rust 命令的 TypeScript 类型，确保前后端类型安全。 命令: run_digestion → generate_blueprint → route_subspecs → execute_subspec → fuse_subspecs → execute_blueprint → save_execution_learning @updated 2026-06-11 — Phase 0-2.5 全量覆盖 /"
+        },
+        {
+          "path": "frontend/src/_archived_v3/KnowledgeGraphCard.vue",
+          "title": "rc5 §8 知识图预览卡 — 可折叠，展示 KNOWLEDGE.md + 核心技术栈",
+          "desc": ""
+        },
+        {
+          "path": "frontend/src/_archived_v3/PipelineCard.vue",
+          "title": "PipelineCard.vue — shadcn-vue 重写，使用 Card + 可折叠内容",
+          "desc": ""
+        },
+        {
+          "path": "frontend/src/_archived_v3/PipelineProgressPanel.vue",
+          "title": "PipelineProgressPanel.vue — 全流程管道进度可视化",
+          "desc": ""
+        },
+        {
+          "path": "frontend/src/_archived_v3/ShortcutHelpModal.vue",
+          "title": "rc5 §18 快捷键帮助弹窗 — 按 ? 唤起",
+          "desc": ""
+        },
+        {
+          "path": "frontend/src/_archived_v3/spec-parser.ts",
+          "title": "Spec 解析器 — 从 LLM 输出中解析模块化 Spec",
+          "desc": "格式：<specs> ... <spec module=\"名称\"> ... </spec> ... </specs> /"
+        },
+        {
+          "path": "frontend/src/_archived_v3/SpecCard-workbench.vue",
+          "title": "",
+          "desc": ""
+        },
+        {
+          "path": "frontend/src/_archived_v3/SpecCard.vue",
+          "title": "",
+          "desc": ""
+        },
+        {
+          "path": "frontend/src/_archived_v3/StatusBar.vue",
+          "title": "",
+          "desc": ""
+        },
+        {
+          "path": "frontend/src/_archived_v3/tag-guide.ts",
+          "title": "Spec #2 — 标签格式引导 + DeepSeek 深度思考层 类型定义",
+          "desc": "对应 BLUEPRINT_v2: §六 Phase: 1 /"
+        },
+        {
+          "path": "frontend/src/_archived_v3/useModeRouter.ts",
+          "title": "Spec #1 — useModeRouter composable",
+          "desc": "负责: 复杂度判断 + 模式路由建议 + 执行约束生成 不负责: 执行消化、生成蓝图、执行代码（下游模块的事） 修订: v1.3 — 几何权重 + ExecutionConstraint + 已知限制 KNOWN_LIMITATIONS (v1.3): 1. inferFiles() 仅用4组正则，无法理解自然语言隐式文件引用（如\"改一下配置\"），会低估文件数 2. 复杂度判断仅基于单条指令，不参考对话历史或项目当前状态 3. heuristicA/B 覆盖常见场景但非穷举，特殊领域需扩展 4. 几何权重 (4/3/2/1/0.5) 基于经验设定，未经定量调优 5. 纯规则引擎、零 LLM 调用——设计选择（零延迟/零 token），但无法理解微妙语义 6. CORE_FILE_PATTERNS 针对 Rust+Tauri+Vue 栈，非本栈项目需在 KNOWLEDGE.md 中覆盖 /"
+        },
+        {
+          "path": "frontend/src/_archived_v3/usePipeline.ts",
+          "title": "usePipeline — LiyouForge 全流程管道编排器",
+          "desc": "将后端全链路闭合的 15+ IPC 命令串联成一个用户可见的完整管道： 用户指令 → Phase 1: runDigestion（四视角消化 + 交叉审查） → Phase 2: generateBlueprint（LLM 生成结构化蓝图） → Phase 3: 用户审核门（批准/修改/拒绝） → Phase 4: routeSubspecs（按路径前缀分组） → Phase 5: executeSubspecs（并行临时 Agent + 可选自省） → Phase 6: fuseSubspecs（冲突检测 + 融合） → Phase 7: executeBlueprint（逐步执行 + 越界暂停） → Phase 8: verify（cargo check + vue-tsc） → Phase 9: saveExecutionLearning（执行→学习闭环） 特性： - 每阶段独立错误处理，失败可降级 - 用户审核门：蓝图展示 → 等待确认 → 继续 - 并行子 Agent 执行（Promise.all） - 自动错误记忆注入（Phase 1 使用历史错误避免重复） - 进度事件驱动 UI @created 2026-06-12 /"
+        },
+        {
+          "path": "frontend/src/_archived_v3/WorkbenchLayout.vue",
+          "title": "",
+          "desc": ""
+        },
+        {
+          "path": "frontend/src/App.vue",
+          "title": "",
+          "desc": ""
+        },
+        {
+          "path": "frontend/src/components/ErrorBoundary.vue",
+          "title": "",
+          "desc": ""
+        },
+        {
+          "path": "frontend/src/components/ErrorModal.vue",
+          "title": "",
+          "desc": ""
+        },
+        {
+          "path": "frontend/src/components/layout/AppSidebar.vue",
+          "title": "",
+          "desc": ""
+        },
+        {
+          "path": "frontend/src/components/layout/ChatPanel.vue",
+          "title": "",
+          "desc": ""
+        },
+        {
+          "path": "frontend/src/components/layout/DetailPanel.vue",
+          "title": "",
+          "desc": ""
+        },
+        {
+          "path": "frontend/src/components/ui/Badge.vue",
+          "title": "",
+          "desc": ""
+        },
+        {
+          "path": "frontend/src/components/ui/Button.vue",
+          "title": "",
+          "desc": ""
+        },
+        {
+          "path": "frontend/src/components/ui/Card.vue",
+          "title": "",
+          "desc": ""
+        },
+        {
+          "path": "frontend/src/components/ui/Dialog.vue",
+          "title": "",
+          "desc": ""
+        },
+        {
+          "path": "frontend/src/components/ui/DropdownMenu.vue",
+          "title": "",
+          "desc": ""
+        },
+        {
+          "path": "frontend/src/components/ui/Input.vue",
+          "title": "",
+          "desc": ""
+        },
+        {
+          "path": "frontend/src/components/ui/Select.vue",
+          "title": "",
+          "desc": ""
+        },
+        {
+          "path": "frontend/src/components/ui/Separator.vue",
+          "title": "",
+          "desc": ""
+        },
+        {
+          "path": "frontend/src/components/ui/Tabs.vue",
+          "title": "",
+          "desc": ""
+        },
+        {
+          "path": "frontend/src/components/ui/TabsContent.vue",
+          "title": "",
+          "desc": ""
+        },
+        {
+          "path": "frontend/src/components/ui/TabsList.vue",
+          "title": "",
+          "desc": ""
+        },
+        {
+          "path": "frontend/src/components/ui/TabsTrigger.vue",
+          "title": "",
+          "desc": ""
+        },
+        {
+          "path": "frontend/src/components/ui/Tooltip.vue",
+          "title": "",
+          "desc": ""
+        },
+        {
+          "path": "frontend/src/components/workbench/CenterPanel.vue",
+          "title": "",
+          "desc": ""
+        },
+        {
+          "path": "frontend/src/components/workbench/LeftSidebar.vue",
+          "title": "",
+          "desc": ""
+        },
+        {
+          "path": "frontend/src/components/workbench/RightSidebar.vue",
+          "title": "",
+          "desc": ""
+        },
+        {
+          "path": "frontend/src/components/workbench/TabCommandOutput.vue",
+          "title": "",
+          "desc": ""
+        },
+        {
+          "path": "frontend/src/components/workbench/TabErrorMemory.vue",
+          "title": "",
+          "desc": ""
+        },
+        {
+          "path": "frontend/src/components/workbench/ToastStack.vue",
+          "title": "",
+          "desc": ""
+        },
+        {
+          "path": "frontend/src/components/workbench/WorkbenchHeader.vue",
+          "title": "",
+          "desc": ""
+        },
+        {
+          "path": "frontend/src/composables/useErrorBus.ts",
+          "title": "全局错误总线 — 统一收集和展示错误",
+          "desc": "解决静默吞错问题：所有 catch 块都应调用 errorBus.report() 自动记录到审计日志，严重错误触发 toast 通知 /"
+        },
+        {
+          "path": "frontend/src/composables/useToast.ts",
+          "title": "最小化 Toast 通知 composable",
+          "desc": "对接 workbench ToastStack 组件 /"
+        },
+        {
+          "path": "frontend/src/composables/useWorkbenchChat.ts",
+          "title": "LiyouForge Chat Engine v0.6 — 极简核心",
+          "desc": "只做三件事：发消息 → 收流式回复 → 渲染 工具执行 (Agent Loop) 作为可选增强。 Skill（蓝图/审查/Spec/消化）不再硬编码——通过 System Prompt + 后解析注入。 /"
+        },
+        {
+          "path": "frontend/src/composables/useWorkbenchDiff.ts",
+          "title": "工作台 Diff 引擎",
+          "desc": "实现 LCS (Longest Common Subsequence) 行级 diff 生成 unified diff 格式的增删行 /"
+        },
+        {
+          "path": "frontend/src/composables/useWorkbenchFS.ts",
+          "title": "工作台文件系统操作",
+          "desc": "对接 Tauri fs plugin + 后端 read_file/write_file 命令 /"
+        },
+        {
+          "path": "frontend/src/composables/useWorkbenchShell.ts",
+          "title": "工作台 Shell 执行",
+          "desc": "对接后端 workbench_exec 命令 /"
+        },
+        {
+          "path": "frontend/src/composables/useWorkbenchShortcuts.ts",
+          "title": "liyouForge Agent Workbench — 全局键盘快捷键",
+          "desc": "企业级 IDE 标准快捷键映射 /"
+        },
+        {
+          "path": "frontend/src/composables/useWorkbenchTheme.ts",
+          "title": "工作台主题管理",
+          "desc": "/"
+        },
+        {
+          "path": "frontend/src/config/app.ts",
+          "title": "liyouForge 统一配置中心",
+          "desc": "所有默认值、路径、常量集中管理。 运行时通过 localStorage 覆盖，无覆盖时使用此处默认值。 /"
+        },
+        {
+          "path": "frontend/src/config/providers.ts",
+          "title": "DeepSeek 提供商配置 — liyouForge 默认 LLM 后端",
+          "desc": ""
+        },
+        {
+          "path": "frontend/src/lib/utils.ts",
+          "title": "",
+          "desc": ""
+        },
+        {
+          "path": "frontend/src/main.ts",
+          "title": "",
+          "desc": ""
+        },
+        {
+          "path": "frontend/src/router/index.ts",
+          "title": "",
+          "desc": ""
+        },
+        {
+          "path": "frontend/src/stores/message.ts",
+          "title": "rc5 §17 · messageStore — Pinia 聊天消息存储",
+          "desc": "支持 ContentBlock[] 多块消息模型 /"
+        },
+        {
+          "path": "frontend/src/stores/undo.ts",
+          "title": "liyouForge — 全局撤销 Store (rc5 §5)",
+          "desc": "追踪用户可撤销的操作（消息编辑、蓝图修改等），支持 Ctrl+Z / Ctrl+Shift+Z。 /"
+        },
+        {
+          "path": "frontend/src/stores/workbench.ts",
+          "title": "liyouForge Agent Workbench — 统一状态管理 (v2.1)",
+          "desc": "所有工作台组件通过此 Store 共享状态。 v2.1: 移除 LiyouMirage v0.6 残留 (Approval/MCP/Patch)，消息系统迁至 messageStore。 /"
+        },
+        {
+          "path": "frontend/src/types/chat-v3.ts",
+          "title": "rc5 §9 · ChatMessageV3 + ContentBlock 类型定义",
+          "desc": "对标 LobeChat AssistantGroup 多块消息模型 /"
+        },
+        {
+          "path": "frontend/src/types/chat.ts",
+          "title": "聊天相关类型定义",
+          "desc": ""
+        },
+        {
+          "path": "frontend/src/types/mode-router.ts",
+          "title": "Spec #1 — 三模式入口 + 模式路由器 类型定义",
+          "desc": "对应 BLUEPRINT_v2: §二、§三 Phase: 1 /"
+        },
+        {
+          "path": "frontend/src/types/spec.ts",
+          "title": "Spec #3-ext — 模块化 Spec 类型定义",
+          "desc": "深度模式下，蓝图审核通过后，将蓝图拆分为独立模块， 为每个模块生成详细 Spec，逐模块审核通过后执行。 /"
+        },
+        {
+          "path": "frontend/src/utils/bpParser.test.ts",
+          "title": "bpParser 单元测试 — Markdown ↔ 结构化任务双向转换",
+          "desc": "/"
+        },
+        {
+          "path": "frontend/src/utils/bpParser.ts",
+          "title": "蓝图解析器 — Markdown ↔ 结构化任务 双向转换",
+          "desc": "支持的 Markdown 格式： ## 🔴 待办 - [ ] 任务名称 - [ ] 任务名称 (备注定界) ## 🟡 进行中 - [~] 任务名称 ## 🟢 已完成 - [x] 任务名称 /"
+        },
+        {
+          "path": "frontend/src/utils/cloud-stream.ts",
+          "title": "云端 API 流式调用工具",
+          "desc": "统一处理豆包 / DeepSeek / 千问 等所有 OpenAI 兼容 API 通过 Tauri IPC 调用后端 call_cloud_stream 命令 v3: 支持 OpenAI function calling — tools 参数 + tool_calls 解析 /"
+        },
+        {
+          "path": "frontend/src/utils/ipc/index.ts",
+          "title": "* 统一 IPC 调用封装",
+          "desc": ""
+        },
+        {
+          "path": "frontend/src/utils/markdown-render.ts",
+          "title": "Markdown 渲染工具",
+          "desc": "使用 MarkdownIt + DOMPurify，提供安全的 Markdown→HTML 渲染。 包含代码块增强（复制按钮、语言标签）和长消息截断。 /"
+        },
+        {
+          "path": "frontend/src/utils/safeStorage.ts",
+          "title": "安全的 localStorage 封装",
+          "desc": "解决隐私模式、存储满、反序列化失败等边界情况 所有调用都不抛异常，失败时静默降级 /"
+        },
+        {
+          "path": "frontend/src/utils/tool-definitions.ts",
+          "title": "liyouForge — 工具 JSON Schema 定义（OpenAI Function Calling 格式）",
+          "desc": "所有 Agent 可调用的工具都在这里统一定义。 LLM 通过 tools 参数获取这些定义，返回精确的 tool_calls JSON。 /"
+        },
+        {
+          "path": "frontend/src/views/agent-config/TabApiConfig.vue",
+          "title": "",
+          "desc": ""
+        },
+        {
+          "path": "frontend/src/views/agent-config/TabBlueprint.vue",
+          "title": "",
+          "desc": ""
+        },
+        {
+          "path": "frontend/src/views/agent-config/TabKnowledge.vue",
+          "title": "",
+          "desc": ""
+        },
+        {
+          "path": "frontend/src/views/agent-config/TabSystemPrompt.vue",
+          "title": "",
+          "desc": ""
+        },
+        {
+          "path": "frontend/src/views/AgentConfig.vue",
+          "title": "",
+          "desc": ""
+        },
+        {
+          "path": "frontend/src/views/MemoryManagement.vue",
+          "title": "",
+          "desc": ""
+        },
+        {
+          "path": "frontend/src/views/Settings/index.vue",
+          "title": "",
+          "desc": ""
+        },
+        {
+          "path": "frontend/src/views/Settings/SettingsModal.vue",
+          "title": "SettingsModal.vue — 使用 shadcn-vue 组件重写",
+          "desc": ""
+        },
+        {
+          "path": "frontend/src/views/workbench/AgentWorkbench.vue",
+          "title": "",
+          "desc": ""
+        },
+        {
+          "path": "frontend/src/vite-env.d.ts",
+          "title": "",
+          "desc": ""
+        }
+      ]
+    }
+  ]
+}
+
+export default data
