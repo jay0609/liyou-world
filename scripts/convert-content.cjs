@@ -340,6 +340,68 @@ export const fileTreeSlugs: string[] = ${JSON.stringify(slugs.sort(), null, 2)}
   )
 }
 
+// ─── 8. 项目里程碑 (每个项目一个模块，按需加载) ───
+function convertMilestones() {
+  console.log('🧭 转换项目里程碑...')
+  const srcDir = path.join(CONTENT, 'milestones')
+  const outDir = path.join(DATA, 'milestones')
+
+  if (fs.existsSync(outDir)) fs.rmSync(outDir, { recursive: true, force: true })
+  fs.mkdirSync(outDir, { recursive: true })
+
+  if (!fs.existsSync(srcDir)) {
+    console.log('  ⚠️  无 milestones 目录')
+    return
+  }
+
+  const items = fs.readdirSync(srcDir).filter((f) => f.endsWith('.json'))
+  if (items.length === 0) {
+    console.log('  ⚠️  无里程碑数据')
+    return
+  }
+
+  for (const file of items) {
+    const data = readJSON(path.join(srcDir, file))
+    if (!data) continue
+    const slug = data.slug || path.basename(file, '.json')
+    const ts = `/**
+ * 由 scripts/convert-content.cjs 自动生成
+ * 数据来自 git tag，编辑请改 content/milestones/${file}
+ */
+import type { ProjectMilestones } from './types'
+
+const data: ProjectMilestones = ${JSON.stringify(data, null, 2)}
+
+export default data
+`
+    fs.writeFileSync(path.join(outDir, `${slug}.ts`), ts, 'utf-8')
+    console.log(`  ✅ milestones/${slug}.ts（${data.items.length} 个里程碑）`)
+  }
+
+  fs.writeFileSync(
+    path.join(outDir, 'types.ts'),
+    `export interface Milestone {
+  /** tag 名，如 "M1" / "M13-B-武器库补齐" */
+  tag: string
+  /** 打 tag 日期 YYYY-MM-DD */
+  date: string
+  /** tag 说明（取自 git tag message） */
+  desc: string
+  /** 该里程碑的测试数量（从说明里解析，没有则为 null） */
+  tests: number | null
+}
+
+export interface ProjectMilestones {
+  slug: string
+  totalTags: number
+  totalCommits: number
+  items: Milestone[]
+}
+`,
+    'utf-8'
+  )
+}
+
 // ─── 主流程 ───
 function main() {
   console.log('\n🔧 Decap CMS → 璃幽宇宙 内容转换\n')
@@ -352,6 +414,7 @@ function main() {
   convertPricing()
   convertStats()
   convertFiles()
+  convertMilestones()
 
   console.log('\n✅ 转换完成！\n')
 }

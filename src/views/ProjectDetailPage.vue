@@ -95,6 +95,12 @@
           </div>
         </section>
 
+        <!-- 开发里程碑（数据来自 git tag） -->
+        <section v-if="milestoneData" class="mb-4xl">
+          <h2 class="text-heading-lg text-liyou-text-primary font-heading mb-lg">🧭 开发里程碑</h2>
+          <MilestoneTimeline :data="milestoneData" />
+        </section>
+
         <!-- 技术栈 + 进展（标题同样在方框外） -->
         <section class="grid grid-cols-1 md:grid-cols-2 gap-xl mb-4xl">
           <div class="flex flex-col">
@@ -151,11 +157,13 @@ import { computed, ref, watchEffect } from 'vue'
 import { useRoute } from 'vue-router'
 import { projects } from '../data/projects'
 import type { ProjectFiles } from '../data/files/types'
+import type { ProjectMilestones } from '../data/milestones/types'
 import GradientText from '../components/GradientText.vue'
 import SpotlightCard from '../components/SpotlightCard.vue'
 import GlassCard from '../components/GlassCard.vue'
 import ProjectCard from '../components/ProjectCard.vue'
 import FileTree from '../components/FileTree.vue'
+import MilestoneTimeline from '../components/MilestoneTimeline.vue'
 import { SITE } from '../constants'
 
 const route = useRoute()
@@ -164,15 +172,20 @@ const project = computed(() => projects.find((p) => p.slug === slug.value))
 const otherProjects = computed(() => projects.filter((p) => p.slug !== slug.value))
 
 /**
- * 逐文件架构树：每个项目一个模块，按需加载。
- * 不能把所有项目合成一个文件 —— 那样访问任何一个项目页都会下载全部文件树。
+ * 文件树 / 里程碑：每个项目一个模块，按需加载。
+ * 不能把所有项目合成一个文件 —— 那样访问任何一个项目页都会下载全部数据。
  */
 const fileModules = import.meta.glob<{ default: ProjectFiles }>('../data/files/*.ts')
+const milestoneModules = import.meta.glob<{ default: ProjectMilestones }>('../data/milestones/*.ts')
 const fileData = ref<ProjectFiles | null>(null)
+const milestoneData = ref<ProjectMilestones | null>(null)
 
 watchEffect(async () => {
-  const loader = fileModules[`../data/files/${slug.value}.ts`]
-  fileData.value = loader ? (await loader()).default : null
+  const s = slug.value
+  const fLoader = fileModules[`../data/files/${s}.ts`]
+  const mLoader = milestoneModules[`../data/milestones/${s}.ts`]
+  fileData.value = fLoader ? (await fLoader()).default : null
+  milestoneData.value = mLoader ? (await mLoader()).default : null
 })
 
 function isInternal(url: string) {
