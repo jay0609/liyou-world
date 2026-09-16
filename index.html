@@ -4,27 +4,61 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="林子杰（子弈）——FPS 游戏陪玩 × 独立开发者。CS2 完美魔王 S · 5E S+ · 非优先 TOP1，陪玩按局计费，也做独立游戏开发。" />
-    <meta name="keywords" content="林子杰,子弈,CS2陪玩,FPS陪玩,完美平台,5E,三角洲行动,魔王S,独立开发者,游戏陪玩" />
-    <meta name="author" content="林子杰" />
-    <meta property="og:title" content="林子杰 · 子弈 | FPS 陪玩 × 独立开发者" />
-    <meta property="og:description" content="CS2 完美魔王 S · 5E S+ · 非优先 TOP1。会打，也会聊。" />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://liyou.world" />
-    <meta property="og:image" content="/images/avatar.jpg" />
-    <meta name="twitter:card" content="summary" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- 正文字体：预加载，不阻塞渲染 -->
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600&display=swap" onload="this.onload=null;this.rel='stylesheet'">
-    <!-- 等宽字体：数字 / 标题用，桌面端加载 -->
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" media="(min-width: 768px)" onload="this.onload=null;this.rel='stylesheet'">
-    <!-- 次要字体：异步加载 -->
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript>
-      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-    </noscript>
+
+    <!-- 基础 SEO -->
     <title>林子杰 · 子弈 | FPS 陪玩 × 独立开发者</title>
+    <meta name="description" content="CS2 完美魔王 S · 5E S+ · 非优先 TOP1。会打，也会聊——按局计费的 FPS 陪玩，同时也是独立游戏开发者。" />
+    <meta name="keywords" content="林子杰,子弈,CS2陪玩,FPS陪玩,完美平台,5E,三角洲行动,魔王S,游戏陪练,独立开发者,CS2代打" />
+    <meta name="author" content="林子杰" />
+    <link rel="canonical" href="https://liyou.world/" />
+
+    <!-- Open Graph（微信 / QQ / 抖音 分享卡片）-->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="林子杰 · 子弈" />
+    <meta property="og:locale" content="zh_CN" />
+    <meta property="og:url" content="https://liyou.world/" />
+    <meta property="og:title" content="林子杰 · 子弈 | FPS 陪玩 × 独立开发者" />
+    <meta property="og:description" content="CS2 完美魔王 S · 5E S+ · 非优先 TOP1。会打，也会聊——按局计费的 FPS 陪玩。" />
+    <meta property="og:image" content="https://liyou.world/images/og-cover.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="林子杰 / 子弈 —— FPS 陪玩 × 独立开发者" />
+
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="林子杰 · 子弈 | FPS 陪玩 × 独立开发者" />
+    <meta name="twitter:description" content="CS2 完美魔王 S · 5E S+ · 非优先 TOP1。会打，也会聊。" />
+    <meta name="twitter:image" content="https://liyou.world/images/og-cover.jpg" />
+
+    <!-- 结构化数据 -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "林子杰",
+        "alternateName": "子弈",
+        "url": "https://liyou.world/",
+        "image": "https://liyou.world/images/avatar.jpg",
+        "description": "FPS 游戏陪玩 × 独立开发者。CS2 完美平台魔王 S（rating 1.32）、5E 优先 S+（rating 1.46）、非优先 TOP 1。",
+        "jobTitle": "FPS 游戏陪玩 / 独立游戏开发者",
+        "address": {
+          "@type": "PostalAddress",
+          "addressRegion": "广东",
+          "addressCountry": "CN"
+        },
+        "knowsAbout": ["CS2", "FPS 陪玩", "游戏陪练", "三角洲行动", "独立游戏开发", "Unity"]
+      }
+    </script>
+
+    <!-- 字体：preconnect + 异步加载，不阻塞渲染 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" media="(min-width: 768px)" onload="this.onload=null;this.rel='stylesheet'" />
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript>
+      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
+    </noscript>
   </head>
   <body class="bg-liyou-moon-white text-liyou-text-primary antialiased">
     <div id="app"></div>

@@ -59,7 +59,7 @@ export const stats: StatsGallery = {
               "value": "NO.1105"
             }
           ],
-          "image": "/images/stats/5e-profile.png"
+          "image": "/images/stats/5e-profile.jpg"
         },
         {
           "date": "2026-09-16",
@@ -80,7 +80,7 @@ export const stats: StatsGallery = {
               "value": "1060"
             }
           ],
-          "image": "/images/stats/5e-data.png"
+          "image": "/images/stats/5e-data.jpg"
         },
         {
           "date": "2026-09-16",
@@ -100,7 +100,7 @@ export const stats: StatsGallery = {
               "value": "71%"
             }
           ],
-          "image": "/images/stats/5e-account-a.png"
+          "image": "/images/stats/5e-account-a.jpg"
         },
         {
           "date": "2026-09-16",
@@ -120,7 +120,7 @@ export const stats: StatsGallery = {
               "value": "86%"
             }
           ],
-          "image": "/images/stats/5e-account-s.png"
+          "image": "/images/stats/5e-account-s.jpg"
         },
         {
           "date": "2026-09-16",
@@ -140,7 +140,7 @@ export const stats: StatsGallery = {
               "value": "1.84"
             }
           ],
-          "image": "/images/stats/5e-matches.png"
+          "image": "/images/stats/5e-matches.jpg"
         },
         {
           "date": "2026-09-16",
@@ -160,7 +160,7 @@ export const stats: StatsGallery = {
               "value": "2.00"
             }
           ],
-          "image": "/images/stats/5e-history.png"
+          "image": "/images/stats/5e-history.jpg"
         }
       ]
     },
@@ -187,7 +187,7 @@ export const stats: StatsGallery = {
               "value": "1.67"
             }
           ],
-          "image": "/images/stats/pw-ta6r30-s12.png"
+          "image": "/images/stats/pw-ta6r30-s12.jpg"
         },
         {
           "date": "2026-09-16",
@@ -208,7 +208,7 @@ export const stats: StatsGallery = {
               "value": "21.90"
             }
           ],
-          "image": "/images/stats/pw-profile.png"
+          "image": "/images/stats/pw-profile.jpg"
         },
         {
           "date": "2026-09-16",
@@ -229,7 +229,7 @@ export const stats: StatsGallery = {
               "value": "2.48"
             }
           ],
-          "image": "/images/stats/pw-npc10-aplus.png"
+          "image": "/images/stats/pw-npc10-aplus.jpg"
         },
         {
           "date": "2026-09-16",
@@ -250,7 +250,7 @@ export const stats: StatsGallery = {
               "value": "26.29"
             }
           ],
-          "image": "/images/stats/pw-mgw4xjsm.png"
+          "image": "/images/stats/pw-mgw4xjsm.jpg"
         },
         {
           "date": "2026-09-16",
@@ -271,7 +271,7 @@ export const stats: StatsGallery = {
               "value": "29.41"
             }
           ],
-          "image": "/images/stats/pw-npc6-1943.png"
+          "image": "/images/stats/pw-npc6-1943.jpg"
         },
         {
           "date": "2026-09-16",
@@ -292,7 +292,7 @@ export const stats: StatsGallery = {
               "value": "2.02"
             }
           ],
-          "image": "/images/stats/pw-npc6-s21.png"
+          "image": "/images/stats/pw-npc6-s21.jpg"
         },
         {
           "date": "2026-09-16",
@@ -313,7 +313,7 @@ export const stats: StatsGallery = {
               "value": "1.80"
             }
           ],
-          "image": "/images/stats/pw-matches-s2.png"
+          "image": "/images/stats/pw-matches-s2.jpg"
         },
         {
           "date": "2026-09-16",
@@ -334,7 +334,7 @@ export const stats: StatsGallery = {
               "value": "1.63"
             }
           ],
-          "image": "/images/stats/pw-matches-aug.png"
+          "image": "/images/stats/pw-matches-aug.jpg"
         },
         {
           "date": "2026-09-16",
@@ -355,7 +355,7 @@ export const stats: StatsGallery = {
               "value": "1.75"
             }
           ],
-          "image": "/images/stats/pw-matches.png"
+          "image": "/images/stats/pw-matches.jpg"
         }
       ]
     }

@@ -1,12 +1,13 @@
 {
-  "name": "liyou-world",
+  "name": "ziyi-personal-site",
   "private": true,
   "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "cms:convert": "node scripts/convert-content.cjs",
-    "build": "node scripts/convert-content.cjs && vue-tsc && vite build",
+    "sitemap": "node scripts/gen-sitemap.cjs",
+    "build": "node scripts/convert-content.cjs && node scripts/gen-sitemap.cjs && vue-tsc && vite build",
     "preview": "vite preview",
     "test": "vitest run",
     "test:watch": "vitest",
