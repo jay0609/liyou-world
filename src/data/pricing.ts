@@ -1,0 +1,255 @@
+/**
+ * 由 scripts/convert-content.cjs 自动生成
+ * 编辑请用 Decap CMS：liyou.world/admin
+ */
+
+export interface PriceTier {
+  /** 段位 / 档位名称 */
+  label: string
+  /** 段位对应的分数区间（可选），如 "2001 - 2200" */
+  score?: string
+  /** 价格（元） */
+  price: number
+}
+
+export interface PackageOffer {
+  label: string
+  price: number
+}
+
+export interface PriceGame {
+  name: string
+  icon: string
+  /** 计价单位，如 "局" / "小时" */
+  unit: string
+  /** 附加说明，如「自带双枪 + 过点卡」 */
+  note?: string
+  /** 分数列表头说明，如「分数为完美平台段位分」 */
+  scoreNote?: string
+  /** 包天等打包价（与档位分开显示） */
+  packageOffer?: PackageOffer
+  tiers: PriceTier[]
+}
+
+export interface SelfRankItem {
+  platform: string
+  rank: string
+  rating: string
+}
+
+export interface SelfRankStat {
+  label: string
+  value: string
+}
+
+export interface SelfRank {
+  label: string
+  note?: string
+  /** 历史最高战绩 */
+  historyLabel?: string
+  history: SelfRankItem[]
+  /** 目前数据 */
+  currentLabel?: string
+  current?: SelfRankStat[]
+}
+
+export interface Pricing {
+  /** 档位列标题，如 "客户段位" */
+  tierLabel: string
+  /** 常在线时段 */
+  onlineHours?: string
+  disclaimer: string
+  /** 本人水平（价目表上方的背书） */
+  selfRank?: SelfRank
+  games: PriceGame[]
+}
+
+export const pricing: Pricing = {
+  "tierLabel": "客户段位",
+  "onlineHours": "每天 08:00 - 23:00",
+  "disclaimer": "价格以沟通为准。",
+  "selfRank": {
+    "label": "我的水平",
+    "note": "rating 为平台个人评分，1.00 为平均水平。",
+    "historyLabel": "历史最高战绩",
+    "history": [
+      {
+        "platform": "完美平台",
+        "rank": "魔王 S",
+        "rating": "1.32"
+      },
+      {
+        "platform": "5E 优先",
+        "rank": "S+",
+        "rating": "1.46"
+      },
+      {
+        "platform": "5E 非优先",
+        "rank": "TOP 1",
+        "rating": ""
+      }
+    ],
+    "currentLabel": "目前数据 · 5E 2026 S4",
+    "current": [
+      {
+        "label": "5E 段位",
+        "value": "S · 13 星"
+      },
+      {
+        "label": "Rating",
+        "value": "1.72"
+      },
+      {
+        "label": "RWS",
+        "value": "17.30"
+      },
+      {
+        "label": "ADR",
+        "value": "120.72"
+      },
+      {
+        "label": "胜率",
+        "value": "64%"
+      },
+      {
+        "label": "全服排名",
+        "value": "NO.1105"
+      }
+    ]
+  },
+  "games": [
+    {
+      "name": "CS2 · 完美平台",
+      "icon": "🎯",
+      "unit": "局",
+      "scoreNote": "分数为完美平台段位分。段位越高越难带，价格越高。",
+      "packageOffer": {
+        "label": "包天 · 8 小时",
+        "price": 688
+      },
+      "tiers": [
+        {
+          "label": "B 及以下",
+          "score": "1800 以下",
+          "price": 40
+        },
+        {
+          "label": "B+",
+          "score": "1801 - 2000",
+          "price": 45
+        },
+        {
+          "label": "A",
+          "score": "2001 - 2200",
+          "price": 50
+        },
+        {
+          "label": "A+",
+          "score": "2201 - 2400",
+          "price": 55
+        },
+        {
+          "label": "S",
+          "score": "2400+",
+          "price": 60
+        },
+        {
+          "label": "黄金 S",
+          "price": 70
+        },
+        {
+          "label": "钻石 S",
+          "price": 80
+        },
+        {
+          "label": "魔王 S",
+          "price": 90
+        }
+      ]
+    },
+    {
+      "name": "CS2 · 5E 平台",
+      "icon": "🎯",
+      "unit": "局",
+      "scoreNote": "段位分数与完美平台对齐。",
+      "packageOffer": {
+        "label": "包天 · 8 小时",
+        "price": 688
+      },
+      "tiers": [
+        {
+          "label": "B 及以下",
+          "score": "1800 以下",
+          "price": 40
+        },
+        {
+          "label": "B+",
+          "score": "1801 - 2000",
+          "price": 45
+        },
+        {
+          "label": "A",
+          "score": "2001 - 2200",
+          "price": 50
+        },
+        {
+          "label": "A+",
+          "score": "2201 - 2400",
+          "price": 55
+        },
+        {
+          "label": "S",
+          "score": "2400+",
+          "price": 60
+        },
+        {
+          "label": "10 颗星",
+          "price": 70
+        },
+        {
+          "label": "30 颗星",
+          "price": 80
+        },
+        {
+          "label": "50 颗星以上",
+          "price": 90
+        }
+      ]
+    },
+    {
+      "name": "三角洲行动",
+      "icon": "🪖",
+      "unit": "小时",
+      "note": "自带双枪 + 过点卡",
+      "packageOffer": {
+        "label": "包天 · 8 小时",
+        "price": 888
+      },
+      "tiers": [
+        {
+          "label": "单挑",
+          "price": 60
+        },
+        {
+          "label": "机密",
+          "price": 100
+        },
+        {
+          "label": "绝密",
+          "price": 120
+        }
+      ]
+    },
+    {
+      "name": "小游戏 · Steam",
+      "icon": "🕹️",
+      "unit": "小时",
+      "tiers": [
+        {
+          "label": "任意游戏",
+          "price": 60
+        }
+      ]
+    }
+  ]
+}

@@ -9,13 +9,13 @@
       <div class="relative z-10 text-center">
         <!-- 标题逐字弹出 -->
         <div class="flex justify-center gap-2 sm:gap-4 mb-lg">
-          <span v-for="(char, i) in chars" :key="i" class="splash-char text-display-xl sm:text-[6rem] font-display" :class="i < revealed ? 'revealed' : ''" :style="{ transitionDelay: i * 0.25 + 's', color: i < revealed ? '#F0C0D0' : 'transparent' }">{{ char }}</span>
+          <span v-for="(char, i) in chars" :key="i" class="splash-char text-display-xl sm:text-[6rem] font-display" :class="i < revealed ? 'revealed' : ''" :style="{ transitionDelay: i * 0.25 + 's', color: i < revealed ? '#5CF2DA' : 'transparent' }">{{ char }}</span>
         </div>
         <!-- Typed.js 打字机副标题 -->
         <div class="h-16 sm:h-20">
           <TypedText
-            v-if="revealed >= 4"
-            :strings="['万物有灵，为你解忧']"
+            v-if="revealed >= chars.length"
+            :strings="['会打，也会聊']"
             :typeSpeed="70"
             :startDelay="300"
             :showCursor="true"
@@ -39,7 +39,7 @@ const emit = defineEmits<{ done: [] }>()
 const visible = ref(true)
 const revealed = ref(0)
 const canvasRef = ref<HTMLCanvasElement | null>(null)
-const chars = ['璃', '幽', '宇', '宙']
+const chars = ['子', '弈']
 
 let animId = 0
 let done = false
@@ -66,6 +66,11 @@ async function playSequence() {
 function delay(ms: number) { return new Promise(r => setTimeout(r, ms)) }
 
 onMounted(() => {
+  // ⚠️ 必须先启动开屏序列 —— 它负责结束时 emit('done')，App.vue 才会把整页显示出来。
+  // 之前它被放在下面的 canvas 分支里：一旦 canvas 取不到就 return，
+  // 开屏永远不会结束，整页会一直停在 opacity-0（现象就是「内容全没了」）。
+  playSequence()
+
   const canvas = canvasRef.value
   if (!canvas) return
   const ctx = canvas.getContext('2d')
@@ -89,7 +94,6 @@ onMounted(() => {
     animId = requestAnimationFrame(draw)
   }
   draw()
-  playSequence()
 
   // 保存 resize handler 引用以便清理
   ;(window as any).__splashResizeHandler = resize
@@ -113,7 +117,7 @@ onUnmounted(() => {
 }
 .splash-char.revealed {
   opacity: 1; transform: scale(1);
-  text-shadow: 0 0 30px rgba(240, 192, 208, 0.6), 0 0 60px rgba(240, 192, 208, 0.3);
+  text-shadow: 0 0 30px rgba(92, 242, 218, 0.6), 0 0 60px rgba(92, 242, 218, 0.3);
 }
 .splash-fade-leave-active { transition: opacity 0.6s ease; }
 .splash-fade-leave-to { opacity: 0; }

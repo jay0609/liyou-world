@@ -74,14 +74,14 @@ onUnmounted(() => {
   transition: border-color 0.3s ease;
 }
 .spotlight-card:hover {
-  border-color: rgba(232, 160, 180, 0.35);
+  border-color: rgba(0, 229, 192, 0.35);
 }
 .spotlight-glow {
   position: absolute;
   width: 300px;
   height: 300px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(232, 160, 180, 0.15) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(0, 229, 192, 0.15) 0%, transparent 70%);
   pointer-events: none;
   z-index: 0;
   transition: opacity 0.3s ease;

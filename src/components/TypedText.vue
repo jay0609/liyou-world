@@ -6,6 +6,8 @@
 import { ref, onMounted, onUnmounted, watch } from 'vue'
 import Typed from 'typed.js'
 
+const emit = defineEmits<{ complete: [] }>()
+
 const props = defineProps<{
   strings: string[]
   typeSpeed?: number
@@ -31,6 +33,7 @@ function initTyped() {
     loop: props.loop ?? false,
     showCursor: props.showCursor ?? true,
     cursorChar: props.cursorChar ?? '|',
+    onComplete: () => emit('complete'),
   })
 }
 

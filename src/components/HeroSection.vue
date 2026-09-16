@@ -15,55 +15,93 @@
     <!-- 底部渐变 -->
     <div class="absolute inset-x-0 bottom-0 h-64 bg-gradient-to-t from-liyou-moon-white to-transparent z-1 pointer-events-none"></div>
 
-    <!-- 樱花层 -->
+    <!-- 代码雨层（原樱花层，硬核主题改为二进制字符） -->
     <div class="absolute inset-0 z-1 pointer-events-none overflow-hidden" ref="sakuraRef"></div>
 
     <!-- 主内容 -->
     <div class="relative z-10 flex flex-col items-center gap-2xl px-lg max-w-content mx-auto w-full">
-      <!-- 角色立绘 -->
-      <div class="relative mb-2xl mt-2xl">
+      <!-- 名片 -->
+      <div v-if="showCard" class="relative mb-2xl mt-2xl">
         <div class="absolute -inset-8 rounded-full bg-liyou-pink/5 blur-2xl"></div>
         <div class="absolute -inset-16 rounded-full border border-liyou-light-purple/10 animate-spin ring-1"></div>
         <div class="absolute -inset-20 rounded-full border border-liyou-pink/5 animate-spin ring-2"></div>
 
-        <div class="glass-card w-56 h-72 sm:w-64 sm:h-80 lg:w-72 lg:h-96 flex flex-col items-center justify-center gap-md text-center relative">
+        <component
+          :is="cardTo ? RouterLink : 'div'"
+          v-bind="cardTo ? { to: cardTo } : {}"
+          class="glass-card w-56 h-72 sm:w-64 sm:h-80 lg:w-72 lg:h-96 flex flex-col items-center justify-center gap-md text-center relative"
+          :class="{ 'hero-card--link': cardTo }"
+        >
           <span class="absolute -top-3 -left-3 text-2xl opacity-40">✦</span>
           <span class="absolute -top-3 -right-3 text-2xl opacity-40">✦</span>
           <span class="absolute -bottom-3 -left-3 text-2xl opacity-40">✦</span>
           <span class="absolute -bottom-3 -right-3 text-2xl opacity-40">✦</span>
-          <div class="text-7xl lg:text-8xl opacity-70 animate-float">🌸</div>
-          <p class="text-heading-md text-liyou-pink-glow font-display">璃幽</p>
-          <p class="text-caption text-liyou-text-muted/60">Live2D 即将接入</p>
-        </div>
+          <img
+            v-if="isImgAvatar"
+            :src="avatar"
+            :alt="cardTitle"
+            class="hero-avatar animate-float"
+          />
+          <div v-else class="text-7xl lg:text-8xl opacity-70 animate-float">{{ avatar }}</div>
+          <p class="text-heading-md text-liyou-pink-glow font-display">{{ cardTitle }}</p>
+          <p class="text-caption text-liyou-text-muted/60">{{ cardNote }}</p>
+          <span v-if="cardTo" class="hero-card-hint">查看完整简介 →</span>
+        </component>
         <div class="absolute -bottom-3 left-1/2 -translate-x-1/2 w-40 h-6 bg-liyou-pink-glow/25 blur-xl rounded-full"></div>
       </div>
 
       <!-- Slogan -->
       <div class="text-center">
-        <h1 class="text-display-xl text-liyou-star-white font-display tracking-[0.15em] leading-tight mb-lg drop-shadow-lg hero-slogan">万物有灵</h1>
-        <p class="text-display-lg text-liyou-light-purple font-display tracking-[0.1em] mb-md">为你解忧</p>
-        <p class="text-body-lg text-liyou-text-muted/70 max-w-sm mx-auto">次元解忧杂货店 · 书灵辉光</p>
+        <h1 class="text-display-xl text-liyou-star-white font-display tracking-[0.15em] leading-tight mb-lg drop-shadow-lg hero-slogan">{{ title }}</h1>
+        <p class="text-display-lg text-liyou-light-purple font-display tracking-[0.1em] mb-md">{{ subtitle }}</p>
+        <p v-if="note" class="text-body-lg text-liyou-text-muted/70 max-w-sm mx-auto">{{ note }}</p>
       </div>
 
-      <!-- 四卡片 -->
-      <div class="grid grid-cols-2 sm:grid-cols-4 gap-md lg:gap-lg w-full max-w-2xl">
-        <EntryCard title="书灵志" icon="📖" to="/book-spirit" sub="璃幽的故事" />
-        <EntryCard title="灵境" icon="✨" to="/oc-workshop" sub="璃幽灵境" />
-        <EntryCard title="次元书库" icon="📚" to="/dimension-library" sub="内容生态" />
-        <EntryCard title="粉丝庭院" icon="🏡" to="/fan-garden" sub="社区" />
+      <!-- CTA 插槽 -->
+      <div v-if="$slots.default" class="flex flex-wrap items-center justify-center gap-md">
+        <slot />
       </div>
 
-      <div class="animate-bounce mt-2xl"><span class="text-liyou-star-white/30 text-xl">⌄</span></div>
+      <div v-if="showArrow" class="animate-bounce mt-2xl"><span class="text-liyou-star-white/30 text-xl">⌄</span></div>
     </div>
   </section>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
-import EntryCard from './EntryCard.vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { RouterLink } from 'vue-router'
 import Particles from '@tsparticles/vue3'
 import { loadSlim } from '@tsparticles/slim'
 import type { Engine } from '@tsparticles/engine'
+
+const props = withDefaults(
+  defineProps<{
+    title?: string
+    subtitle?: string
+    note?: string
+    cardTitle?: string
+    cardNote?: string
+    avatar?: string
+    /** 名片点击跳转（留空则不可点） */
+    cardTo?: string
+    showCard?: boolean
+    showArrow?: boolean
+  }>(),
+  {
+    title: '林子杰',
+    subtitle: 'FPS 陪玩 × 独立开发者',
+    note: '会打，也会聊',
+    cardTitle: '子弈',
+    cardNote: 'CS2 · 完美 / 5E',
+    avatar: '🎯',
+    cardTo: '',
+    showCard: true,
+    showArrow: true,
+  }
+)
+
+/** avatar 是图片路径还是 emoji */
+const isImgAvatar = computed(() => /^(https?:)?\//.test(props.avatar))
 
 const sakuraRef = ref<HTMLDivElement | null>(null)
 
@@ -76,8 +114,8 @@ const particleOptions = {
   fullScreen: false,
   fpsLimit: 60,
   particles: {
-    number: { value: 40, density: { enable: true } },  // 从80降到40，减少移动端性能压力
-    color: { value: ['#FFFFFF', '#F0C0D0', '#C4B5D4'] },
+    number: { value: 40, density: { enable: true } }, // 从80降到40，减少移动端性能压力
+    color: { value: ['#FFFFFF', '#5CF2DA', '#8B9AAB'] },
     shape: { type: 'circle' },
     opacity: { value: { min: 0.1, max: 0.6 }, animation: { enable: true, speed: 0.3, sync: false } },
     size: { value: { min: 0.5, max: 2.5 } },
@@ -85,23 +123,28 @@ const particleOptions = {
   },
   interactivity: {
     events: { onHover: { enable: true, mode: 'grab' } },
-    modes: { grab: { distance: 140, links: { opacity: 0.3, color: '#F0C0D0' } } },
+    modes: { grab: { distance: 140, links: { opacity: 0.3, color: '#5CF2DA' } } },
   },
   detectRetina: true,
 }
 
-// 樱花（保持不变）
+// 代码雨（原樱花）
 interface Sakura { el: HTMLDivElement; x: number; y: number; speed: number; sway: number; swaySpeed: number; rotation: number; rotationSpeed: number; size: number; opacity: number }
 const sakuras: Sakura[] = []
+
+/** 下落字符集：二进制 + 少量代码符号 */
+const FALL_CHARS = ['0', '1', '0', '1', '{', '}', ';', '<', '>', '/']
 
 function createSakura() {
   if (!sakuraRef.value) return
   const el = document.createElement('div')
-  el.innerHTML = '🌸'
-  el.style.cssText = 'position:absolute;pointer-events:none;will-change:transform,opacity;line-height:1;'
-  el.style.fontSize = (14 + Math.random() * 18) + 'px'
+  el.textContent = FALL_CHARS[Math.floor(Math.random() * FALL_CHARS.length)]
+  el.style.cssText =
+    'position:absolute;pointer-events:none;will-change:transform,opacity;line-height:1;' +
+    'font-family:ui-monospace,SFMono-Regular,Consolas,monospace;color:rgba(0,229,192,0.55);'
+  el.style.fontSize = (10 + Math.random() * 10) + 'px'
   sakuraRef.value.appendChild(el)
-  sakuras.push({ el, x: Math.random() * 100, y: -5, speed: 0.15 + Math.random() * 0.3, sway: 0, swaySpeed: 0.01 + Math.random() * 0.02, rotation: Math.random() * 360, rotationSpeed: 0.1 + Math.random() * 0.4, size: 16, opacity: 0.4 + Math.random() * 0.5 })
+  sakuras.push({ el, x: Math.random() * 100, y: -5, speed: 0.12 + Math.random() * 0.22, sway: 0, swaySpeed: 0.008 + Math.random() * 0.014, rotation: 0, rotationSpeed: 0, size: 12, opacity: 0.25 + Math.random() * 0.45 })
 }
 
 function animateSakura() {
@@ -152,6 +195,44 @@ onUnmounted(() => { cancelAnimationFrame(sakuraAnimId); sakuras.forEach(s => s.e
 
 /* Hero slogan 文字辉光 */
 .hero-slogan {
-  text-shadow: 0 0 40px rgba(240, 192, 208, 0.3), 0 0 80px rgba(240, 192, 208, 0.15);
+  text-shadow: 0 0 40px rgba(92, 242, 218, 0.3), 0 0 80px rgba(92, 242, 218, 0.15);
 }
+
+/* 头像 */
+.hero-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center 18%;
+  border: 2px solid rgba(0, 229, 192, 0.45);
+  box-shadow: 0 0 32px rgba(0, 229, 192, 0.25);
+}
+@media (min-width: 1024px) {
+  .hero-avatar { width: 148px; height: 148px; }
+}
+
+/* 名片可点击 */
+.hero-card--link {
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+.hero-card--link:hover {
+  transform: translateY(-4px);
+  border-color: rgba(0, 229, 192, 0.55);
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.5), 0 0 32px rgba(0, 229, 192, 0.18);
+}
+.hero-card-hint {
+  position: absolute;
+  bottom: 14px;
+  left: 0;
+  right: 0;
+  font-size: 0.6875rem;
+  letter-spacing: 0.06em;
+  color: var(--liyou-pink);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+.hero-card--link:hover .hero-card-hint { opacity: 1; }
 </style>

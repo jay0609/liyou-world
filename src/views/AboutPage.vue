@@ -1,117 +1,329 @@
 <template>
   <div class="pt-24 pb-4xl px-lg">
     <div class="max-w-content mx-auto">
-      <div class="text-center mb-3xl">
-        <h1 class="text-display-lg text-liyou-deep-indigo font-display tracking-wide mb-md">关于 & 支持</h1>
-        <p class="text-body-lg text-liyou-text-secondary max-w-xl mx-auto">了解璃幽宇宙背后的团队，或者联系我们。</p>
+      <!-- 头部：头像 + 名字 + 定位 -->
+      <div class="about-hero">
+        <div class="avatar-ring">
+          <img class="about-avatar" :src="profile.avatar" :alt="profile.name" />
+        </div>
+        <h1 class="about-name">
+          {{ profile.name }}<span class="about-slash">/</span><span class="about-alias">{{ profile.alias }}</span>
+        </h1>
+        <p class="about-role">{{ profile.role }}</p>
+        <p class="about-tagline">{{ profile.tagline }}</p>
       </div>
 
-      <!-- 关于团队 -->
+      <!-- 基本资料 -->
       <section class="mb-4xl">
-        <h2 class="text-heading-xl text-liyou-text-primary font-heading mb-xl border-l-4 border-liyou-pink pl-md">关于"璃幽宇宙"团队</h2>
-        <GlassCard>
-          <p class="text-body-md text-liyou-text-secondary leading-relaxed mb-lg">
-            璃幽宇宙是一个<b class="text-liyou-pink">以内容创作为核心</b>的次元文化品牌。我们相信——万物有灵，每个灵魂都值得被倾听。
-          </p>
-          <p class="text-body-md text-liyou-text-secondary leading-relaxed mb-lg">
-            我们的使命是：打造一个温暖、有灵性的次元世界，连接创作者与读者，让每一个故事都能找到它的归宿。
-          </p>
-          <div class="grid grid-cols-1 sm:grid-cols-3 gap-lg mt-xl">
-            <div class="text-center p-lg">
-              <span class="text-3xl block mb-sm">🌟</span>
-              <h4 class="text-heading-md text-liyou-text-primary mb-xs">创作</h4>
-              <p class="text-body-sm text-liyou-text-muted">原创世界观、角色、故事</p>
-            </div>
-            <div class="text-center p-lg">
-              <span class="text-3xl block mb-sm">🛠️</span>
-              <h4 class="text-heading-md text-liyou-text-primary mb-xs">工具</h4>
-              <p class="text-body-sm text-liyou-text-muted">OC工坊、创作辅助</p>
-            </div>
-            <div class="text-center p-lg">
-              <span class="text-3xl block mb-sm">💜</span>
-              <h4 class="text-heading-md text-liyou-text-primary mb-xs">社区</h4>
-              <p class="text-body-sm text-liyou-text-muted">创作者与粉丝的温暖庭院</p>
-            </div>
-          </div>
-        </GlassCard>
-      </section>
-
-      <!-- FAQ -->
-      <section class="mb-4xl">
-        <h2 class="text-heading-xl text-liyou-text-primary font-heading mb-xl border-l-4 border-liyou-pink pl-md">常见问题</h2>
-        <div class="space-y-md">
-          <div v-for="(faq, i) in faqs" :key="i" class="glass-card cursor-pointer" @click="toggleFaq(i)">
-            <div class="flex items-center justify-between p-lg">
-              <h4 class="text-heading-md text-liyou-text-primary font-heading">{{ faq.q }}</h4>
-              <span class="text-liyou-text-muted transition-transform duration-200" :class="{ 'rotate-180': openFaqs.includes(i) }">▼</span>
-            </div>
-            <transition name="faq-slide">
-              <div v-if="openFaqs.includes(i)" class="px-lg pb-lg">
-                <p class="text-body-md text-liyou-text-secondary">{{ faq.a }}</p>
-              </div>
-            </transition>
+        <h2 class="about-h2">基本资料</h2>
+        <div class="basics-grid">
+          <div v-for="b in profile.basics" :key="b.label" class="basic-cell">
+            <span class="basic-cell-label">{{ b.label }}</span>
+            <span class="basic-cell-value">{{ b.value }}</span>
           </div>
         </div>
       </section>
 
-      <!-- 合作联系 -->
-      <section>
-        <h2 class="text-heading-xl text-liyou-text-primary font-heading mb-xl border-l-4 border-liyou-pink pl-md">合作联系</h2>
-        <GlassCard>
-          <p class="text-body-md text-liyou-text-secondary mb-lg">
-            如果你对璃幽宇宙感兴趣——无论是商业合作、内容共创、还是技术支持——欢迎联系我们。
-          </p>
-          <div class="space-y-md text-body-md text-liyou-text-secondary">
-            <div class="flex items-center gap-sm">
-              <span class="text-liyou-pink">📧</span>
-              <span>邮箱：contact@liyou.world</span>
+      <!-- 个人标签（tags 为空则不显示） -->
+      <section v-if="profile.tags.length" class="mb-4xl">
+        <h2 class="about-h2">个人标签</h2>
+        <div class="basics-grid">
+          <div v-for="t in profile.tags" :key="t.label" class="basic-cell">
+            <span class="basic-cell-label">{{ t.label }}</span>
+            <span class="basic-cell-value">{{ t.value }}</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 我是什么样的人 -->
+      <section class="mb-4xl">
+        <h2 class="about-h2">我是什么样的人</h2>
+        <div class="prose-block">
+          <p v-for="(p, i) in profile.personality" :key="i">{{ p }}</p>
+        </div>
+      </section>
+
+      <!-- 思维方式 -->
+      <section class="mb-4xl">
+        <h2 class="about-h2">思维方式</h2>
+        <div class="thinking-list">
+          <div v-for="t in profile.thinking" :key="t.title" class="thinking-item">
+            <div class="thinking-head">
+              <span class="thinking-icon">{{ t.icon }}</span>
+              <h3 class="thinking-title">{{ t.title }}</h3>
             </div>
-            <div class="flex items-center gap-sm">
-              <span class="text-liyou-pink">💬</span>
-              <span>QQ群：1105460048</span>
-            </div>
-            <div class="flex items-center gap-sm">
-              <span class="text-liyou-pink">🌐</span>
-              <span>官网：liyou.world</span>
+            <p class="thinking-desc">{{ t.desc }}</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 兴趣爱好 -->
+      <section class="mb-4xl">
+        <h2 class="about-h2">兴趣爱好</h2>
+        <div class="hobby-grid">
+          <div v-for="h in profile.hobbies" :key="h.name" class="hobby-item">
+            <span class="hobby-icon">{{ h.icon }}</span>
+            <span class="hobby-name">{{ h.name }}</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 现在在做什么 -->
+      <section class="mb-4xl">
+        <h2 class="about-h2">现在在做什么</h2>
+        <div class="doing-grid">
+          <div v-for="d in profile.nowDoing" :key="d.title" class="doing-item">
+            <span class="doing-icon">{{ d.icon }}</span>
+            <h3 class="doing-title">{{ d.title }}</h3>
+            <p class="doing-desc">{{ d.desc }}</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 履历 -->
+      <section class="mb-4xl">
+        <h2 class="about-h2">履历</h2>
+        <div class="resume">
+          <div v-for="item in profile.career" :key="item.title" class="resume-item">
+            <span class="resume-period">{{ item.period }}</span>
+            <div class="resume-body">
+              <h3 class="resume-title">{{ item.title }}</h3>
+              <p class="resume-desc">{{ item.desc }}</p>
             </div>
           </div>
-        </GlassCard>
+        </div>
+      </section>
+
+      <!-- CTA -->
+      <section class="about-cta">
+        <router-link to="/#play" class="btn-primary no-underline">查看价目表</router-link>
+        <router-link to="/guide" class="btn-secondary no-underline">陪玩须知</router-link>
       </section>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import GlassCard from '../components/GlassCard.vue'
-import { faqs } from '../data/faqs'
-
-const openFaqs = ref<number[]>([])
-
-function toggleFaq(i: number) {
-  const idx = openFaqs.value.indexOf(i)
-  if (idx > -1) {
-    openFaqs.value.splice(idx, 1)
-  } else {
-    openFaqs.value.push(i)
-  }
-}
+import { profile } from '../data/profile'
 </script>
 
 <style scoped>
-.faq-slide-enter-active,
-.faq-slide-leave-active {
-  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-  overflow: hidden;
+/* ── 头部 ── */
+.about-hero {
+  text-align: center;
+  margin-bottom: 64px;
 }
-.faq-slide-enter-from,
-.faq-slide-leave-to {
-  opacity: 0;
-  max-height: 0;
+.avatar-ring {
+  display: inline-block;
+  padding: 4px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(0, 229, 192, 0.7), rgba(255, 180, 84, 0.5));
+  margin-bottom: 20px;
 }
-.faq-slide-enter-to,
-.faq-slide-leave-from {
-  opacity: 1;
-  max-height: 500px;
+.about-avatar {
+  display: block;
+  width: 128px;
+  height: 128px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center 18%;
+}
+.about-name {
+  font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+  font-size: 1.75rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--liyou-text-primary);
+  margin: 0 0 8px;
+}
+.about-slash { margin: 0 6px; color: var(--liyou-text-muted); }
+.about-alias { color: var(--liyou-pink); }
+.about-role {
+  font-size: 1rem;
+  color: var(--liyou-text-secondary);
+  margin: 0 0 6px;
+}
+.about-tagline {
+  font-size: 0.875rem;
+  color: var(--liyou-text-muted);
+  margin: 0;
+  max-width: 520px;
+  margin-inline: auto;
+}
+
+/* ── 通用标题 ── */
+.about-h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--liyou-text-primary);
+  margin-bottom: 20px;
+  padding-left: 14px;
+  border-left: 3px solid var(--liyou-pink);
+}
+
+/* ── 基本资料 ── */
+.basics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 12px;
+}
+.basic-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 14px 18px;
+  border-radius: 10px;
+  background: rgba(19, 25, 32, 0.7);
+  border: 1px solid rgba(139, 154, 171, 0.18);
+}
+.basic-cell-label {
+  font-size: 0.75rem;
+  color: var(--liyou-text-muted);
+}
+.basic-cell-value {
+  font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+  font-size: 1.0625rem;
+  font-weight: 600;
+  color: var(--liyou-pink);
+}
+
+/* ── 段落 ── */
+.prose-block {
+  max-width: 720px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.prose-block p {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.9;
+  color: var(--liyou-text-secondary);
+}
+
+/* ── 兴趣爱好 ── */
+.hobby-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(118px, 1fr));
+  gap: 12px;
+}
+.hobby-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 20px 10px;
+  border-radius: 10px;
+  background: rgba(19, 25, 32, 0.6);
+  border: 1px solid rgba(139, 154, 171, 0.16);
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+.hobby-item:hover {
+  border-color: rgba(0, 229, 192, 0.4);
+  transform: translateY(-2px);
+}
+.hobby-icon { font-size: 1.5rem; }
+.hobby-name { font-size: 0.8125rem; color: var(--liyou-text-secondary); }
+
+/* ── 思维方式 ── */
+.thinking-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  max-width: 800px;
+}
+.thinking-item {
+  padding: 20px 24px;
+  border-radius: 10px;
+  background: rgba(19, 25, 32, 0.7);
+  border: 1px solid rgba(139, 154, 171, 0.18);
+  border-left: 3px solid rgba(0, 229, 192, 0.55);
+}
+.thinking-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+.thinking-icon { font-size: 1.125rem; }
+.thinking-title {
+  font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--liyou-pink);
+  margin: 0;
+}
+.thinking-desc {
+  margin: 0;
+  font-size: 0.875rem;
+  line-height: 1.85;
+  color: var(--liyou-text-secondary);
+}
+
+/* ── 现在在做什么 ── */.doing-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 12px;
+}
+.doing-item {
+  padding: 20px 22px;
+  border-radius: 10px;
+  background: rgba(19, 25, 32, 0.7);
+  border: 1px solid rgba(139, 154, 171, 0.18);
+  border-top: 3px solid rgba(0, 229, 192, 0.55);
+}
+.doing-icon { font-size: 1.5rem; }
+.doing-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--liyou-text-primary);
+  margin: 10px 0 6px;
+}
+.doing-desc {
+  margin: 0;
+  font-size: 0.8125rem;
+  line-height: 1.7;
+  color: var(--liyou-text-secondary);
+}
+
+/* ── 履历 ── */
+.resume {
+  display: flex;
+  flex-direction: column;
+}
+.resume-item {
+  display: grid;
+  grid-template-columns: 76px 1fr;
+  gap: 16px;
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(139, 154, 171, 0.12);
+}
+.resume-item:last-child { border-bottom: none; }
+.resume-period {
+  font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+  font-size: 0.8125rem;
+  color: var(--liyou-pink);
+  padding-top: 2px;
+}
+.resume-title {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--liyou-text-primary);
+  margin: 0 0 4px;
+}
+.resume-desc {
+  margin: 0;
+  font-size: 0.8125rem;
+  line-height: 1.7;
+  color: var(--liyou-text-secondary);
+}
+
+/* ── CTA ── */
+.about-cta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 56px;
 }
 </style>

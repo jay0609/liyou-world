@@ -1,6 +1,7 @@
 <template>
   <div class="pt-24 pb-4xl px-lg">
     <div class="max-w-content mx-auto">
+      <router-link to="/projects/liyou-mirage" class="inline-flex items-center gap-xs text-body-sm text-liyou-text-muted hover:text-liyou-pink no-underline mb-xl transition-colors">← 返回璃幽灵境</router-link>
       <div class="text-center mb-3xl">
         <GradientText size="xl">璃幽 · 书灵志</GradientText>
         <p class="text-body-lg text-liyou-text-secondary max-w-xl mx-auto mt-lg">她是《万物书》的书灵，也是次元解忧杂货店的主人。</p>
@@ -55,7 +56,7 @@
         <div class="vn-scene glass-card overflow-hidden relative" @click="advanceStory">
           <!-- VN 背景层 -->
           <div class="vn-bg absolute inset-0 bg-liyou-deep-indigo/95"></div>
-          <div class="vn-bg-particles absolute inset-0 opacity-30" ref="bgRef"></div>
+          <div class="vn-bg-particles absolute inset-0 opacity-30"></div>
 
           <!-- 角色立绘区（左） -->
           <div class="vn-character absolute left-0 bottom-0 w-[45%] h-[85%] flex items-end justify-center z-10 pointer-events-none">
@@ -75,7 +76,7 @@
                 </span>
               </div>
               <p class="text-body-lg text-liyou-star-white leading-relaxed" style="min-height:3em;">
-                <TypedText :strings="[currentLine]" :typeSpeed="40" :showCursor="true" />
+                <TypedText :strings="[currentLine]" :typeSpeed="40" :showCursor="true" @complete="isTyping = false" />
               </p>
 
               <!-- 选项（如果有） -->
@@ -144,6 +145,7 @@ function advanceStory() {
   }
   if (currentOptions.value.length > 0) return
   if (lineIndex.value < story.length - 1) {
+    isTyping.value = true
     lineIndex.value++
     currentOptions.value = story[lineIndex.value].options || []
   }
@@ -152,6 +154,7 @@ function advanceStory() {
 function chooseOption(i: number) {
   const opt = currentOptions.value[i]
   if (opt) {
+    isTyping.value = true
     lineIndex.value = opt.next
     currentOptions.value = []
   }
@@ -181,6 +184,6 @@ function chooseOption(i: number) {
   transition: all 0.2s ease;
 }
 .vn-option:hover {
-  background: rgba(232, 160, 180, 0.08);
+  background: rgba(0, 229, 192, 0.08);
 }
 </style>

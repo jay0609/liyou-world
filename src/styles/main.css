@@ -8,28 +8,52 @@
 
 /* === CSS 自定义属性 === */
 :root {
-  /* 主色调 — 全部对齐 DESIGN.md */
-  --liyou-moon-white: #F8F6F3;
-  --liyou-moon-white-soft: #F3F0EC;
-  --liyou-light-purple: #C4B5D4;
-  --liyou-light-purple-soft: #E8E0F0;
-  --liyou-pink: #E8A0B4;
-  --liyou-pink-glow: #F0C0D0;
-  --liyou-deep-indigo: #1E1833;
-  --liyou-deep-indigo-soft: #2D2648;
-  --liyou-glow-gold: #E8C67A;
-  --liyou-star-white: #FFFFFF;
+  /* ===== 深色硬核主题（2026-09-16 换肤）=====
+     变量名沿用旧的（避免改动大量组件），只换值。
+     语义映射：moon-white = 页面底色 · pink = 主强调色 · glow-gold = 次强调色 */
 
-  /* 功能性色 */
-  --liyou-text-primary: #2D2648;
-  --liyou-text-secondary: #6B6380;
-  --liyou-text-muted: #9B93AD;
-  --liyou-text-inverse: #F8F6F3;
-  --liyou-border: rgba(196, 181, 212, 0.3);
-  --liyou-border-active: rgba(232, 160, 180, 0.5);
-  --liyou-success: #7BC89C;
-  --liyou-warning: #E8C67A;
-  --liyou-error: #E08880;
+  /* 底色 / 面 */
+  --liyou-moon-white: #0A0E14;         /* 页面底色 */
+  --liyou-moon-white-soft: #111820;    /* 次级色带 */
+  --liyou-light-purple: #8B9AAB;       /* 次要边框 / 弱强调 */
+  --liyou-light-purple-soft: #1A222C;  /* 弱面 */
+  --liyou-deep-indigo: #0E141B;        /* 深色区块 */
+  --liyou-deep-indigo-soft: #161E27;   /* 深色区块变体 */
+
+  /* 强调色 */
+  --liyou-pink: #00E5C0;               /* 主强调：电子青 */
+  --liyou-pink-glow: #5CF2DA;          /* 主强调亮版 */
+  --liyou-glow-gold: #FFB454;          /* 次强调：琥珀 */
+  --liyou-star-white: #E6EDF3;
+
+  /* 文本（深色底 → 浅色字） */
+  --liyou-text-primary: #E6EDF3;
+  --liyou-text-secondary: #9BA9B8;
+  --liyou-text-muted: #667384;
+  --liyou-text-inverse: #06120F;       /* 强调色上的字（深） */
+
+  /* RGB 三元组 — 仅供 Tailwind alpha 修饰符使用 */
+  --liyou-moon-white-rgb: 10 14 20;
+  --liyou-moon-white-soft-rgb: 17 24 32;
+  --liyou-light-purple-rgb: 139 154 171;
+  --liyou-light-purple-soft-rgb: 26 34 44;
+  --liyou-deep-indigo-rgb: 14 20 27;
+  --liyou-deep-indigo-soft-rgb: 22 30 39;
+  --liyou-pink-rgb: 0 229 192;
+  --liyou-pink-glow-rgb: 92 242 218;
+  --liyou-glow-gold-rgb: 255 180 84;
+  --liyou-star-white-rgb: 230 237 243;
+  --liyou-text-primary-rgb: 230 237 243;
+  --liyou-text-secondary-rgb: 155 169 184;
+  --liyou-text-muted-rgb: 102 115 132;
+  --liyou-text-inverse-rgb: 6 18 15;
+
+  /* 边框 / 状态 */
+  --liyou-border: rgba(139, 154, 171, 0.22);
+  --liyou-border-active: rgba(0, 229, 192, 0.5);
+  --liyou-success: #3FD68C;
+  --liyou-warning: #FFB454;
+  --liyou-error: #FF6B6B;
 
   /* 间距 */
   --space-xs: 4px;
@@ -69,32 +93,33 @@ body {
 @layer components {
   /* 毛玻璃卡片 */
   .glass-card {
-    background: rgba(252, 250, 247, 0.75);
+    background: rgba(19, 25, 32, 0.72);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(196, 181, 212, 0.25);
-    border-radius: 16px;
-    box-shadow: 0 4px 24px rgba(30, 24, 51, 0.04);
+    border: 1px solid rgba(139, 154, 171, 0.18);
+    border-radius: 10px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.35);
     transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .glass-card:hover {
-    background: rgba(252, 250, 247, 0.9);
-    transform: translateY(-4px);
-    box-shadow: 0 8px 40px rgba(30, 24, 51, 0.08), 0 0 20px rgba(232, 160, 180, 0.08);
+    background: rgba(26, 34, 44, 0.85);
+    transform: translateY(-2px);
+    border-color: rgba(0, 229, 192, 0.35);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45), 0 0 20px rgba(0, 229, 192, 0.1);
   }
 
   /* 毛玻璃导航 */
   .glass-nav {
-    background: rgba(252, 250, 247, 0.85);
+    background: rgba(10, 14, 20, 0.82);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(196, 181, 212, 0.15);
+    border-bottom: 1px solid rgba(139, 154, 171, 0.15);
   }
 
   .glass-nav.scrolled {
-    background: rgba(252, 250, 247, 0.98);
-    box-shadow: 0 1px 8px rgba(30, 24, 51, 0.06);
+    background: rgba(10, 14, 20, 0.96);
+    box-shadow: 0 1px 12px rgba(0, 0, 0, 0.5);
   }
 
   /* 主按钮 */
@@ -104,25 +129,26 @@ body {
     justify-content: center;
     background: var(--liyou-pink);
     color: var(--liyou-text-inverse);
-    font-weight: 600;
-    border-radius: 12px;
+    font-weight: 700;
+    border-radius: 8px;
     padding: 12px 28px;
     min-height: 48px;
     transition: all 0.2s ease;
     cursor: pointer;
     border: none;
     font-size: 0.9375rem;
+    letter-spacing: 0.02em;
   }
 
   .btn-primary:hover {
-    filter: brightness(1.08);
-    transform: scale(1.03);
-    box-shadow: 0 0 24px rgba(232, 160, 180, 0.4);
+    filter: brightness(1.1);
+    transform: translateY(-1px);
+    box-shadow: 0 0 24px rgba(0, 229, 192, 0.45);
   }
 
   .btn-primary:active {
-    transform: scale(0.98);
-    box-shadow: 0 0 12px rgba(232, 160, 180, 0.2);
+    transform: translateY(0);
+    box-shadow: 0 0 12px rgba(0, 229, 192, 0.25);
   }
 
   .btn-primary:disabled {
@@ -140,18 +166,20 @@ body {
     background: transparent;
     border: 1px solid var(--liyou-light-purple);
     color: var(--liyou-text-primary);
-    font-weight: 600;
-    border-radius: 12px;
+    font-weight: 700;
+    border-radius: 8px;
     padding: 12px 28px;
     min-height: 48px;
     transition: all 0.2s ease;
     cursor: pointer;
     font-size: 0.9375rem;
+    letter-spacing: 0.02em;
   }
 
   .btn-secondary:hover {
     background: var(--liyou-light-purple-soft);
     border-color: var(--liyou-pink);
+    color: var(--liyou-pink);
   }
 
   /* 幽灵按钮 */
@@ -179,17 +207,17 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(196, 181, 212, 0.4);
+  background: rgba(139, 154, 171, 0.3);
   border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(196, 181, 212, 0.6);
+  background: rgba(0, 229, 192, 0.5);
 }
 
 /* === 选中颜色 === */
 ::selection {
-  background: rgba(232, 160, 180, 0.25);
+  background: rgba(0, 229, 192, 0.25);
   color: var(--liyou-text-primary);
 }
 

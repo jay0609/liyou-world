@@ -12,7 +12,7 @@ export interface SiteAnnouncement {
 
 export const siteAnnouncement: SiteAnnouncement = {
   "visible": true,
-  "text": "璃幽灵境(LiyouMirage)先行版正式发布！璃幽IP专属桌面AI创作伴侣——点击灵境了解详情。",
+  "text": "璃幽灵境(LiyouMirage)先行版正式发布！璃幽IP专属桌面AI创作伴侣——点击查看详情。",
   "date": "2026年5月15日",
-  "link": "/oc-workshop"
+  "link": "/projects/liyou-mirage"
 }

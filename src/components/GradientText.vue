@@ -22,7 +22,7 @@ const sizeClass = computed(() => {
 
 <style scoped>
 .gradient-text {
-  background: linear-gradient(135deg, #E8A0B4 0%, #C4B5D4 40%, #F0C0D0 70%, #E8C67A 100%);
+  background: linear-gradient(135deg, #00E5C0 0%, #8B9AAB 40%, #5CF2DA 70%, #FFB454 100%);
   background-size: 300% 300%;
   -webkit-background-clip: text;
   background-clip: text;

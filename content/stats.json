@@ -1,0 +1,192 @@
+{
+  "albums": [
+    {
+      "platform": "5E 平台",
+      "icon": "5E",
+      "items": [
+        {
+          "date": "2026-09-16",
+          "season": "2026 S4",
+          "title": "S · 13 星",
+          "caption": "账号 需要up芬CS2NPC · 新赛季冲分阶段 · 42 场",
+          "stats": [
+            { "label": "Rating", "value": "1.72" },
+            { "label": "胜率", "value": "64%" },
+            { "label": "全服排名", "value": "NO.1105" }
+          ],
+          "image": "/images/stats/5e-profile.png"
+        },
+        {
+          "date": "2026-09-16",
+          "season": "2026 S4",
+          "title": "数据中心",
+          "caption": "账号 需要up芬CS2NPC · 42 场",
+          "stats": [
+            { "label": "RWS", "value": "17.30" },
+            { "label": "ADR", "value": "120.72" },
+            { "label": "总击杀", "value": "1060" }
+          ],
+          "image": "/images/stats/5e-data.png"
+        },
+        {
+          "date": "2026-09-16",
+          "title": "A · Rating 2.06",
+          "caption": "账号 老婆不在家玩把cs · 17 场 · 时长 614h",
+          "stats": [
+            { "label": "Rating", "value": "2.06" },
+            { "label": "RWS", "value": "20.83" },
+            { "label": "胜率", "value": "71%" }
+          ],
+          "image": "/images/stats/5e-account-a.png"
+        },
+        {
+          "date": "2026-09-16",
+          "title": "S · Rating 1.93",
+          "caption": "账号 hrgaye4736 · 14 场 · 全国 NO.5w+",
+          "stats": [
+            { "label": "Rating", "value": "1.93" },
+            { "label": "RWS", "value": "22.51" },
+            { "label": "胜率", "value": "86%" }
+          ],
+          "image": "/images/stats/5e-account-s.png"
+        },
+        {
+          "date": "2026-09-16",
+          "title": "比赛记录",
+          "caption": "优先排位 · 逐场数据",
+          "stats": [
+            { "label": "地图", "value": "荒漠迷城" },
+            { "label": "RWS", "value": "16.37" },
+            { "label": "Rating", "value": "1.84" }
+          ],
+          "image": "/images/stats/5e-matches.png"
+        },
+        {
+          "date": "2026-09-16",
+          "title": "历史战绩",
+          "caption": "近三个月 · 全部模式",
+          "stats": [
+            { "label": "击杀", "value": "29" },
+            { "label": "RWS", "value": "20.39" },
+            { "label": "Rating", "value": "2.00" }
+          ],
+          "image": "/images/stats/5e-history.png"
+        }
+      ]
+    },
+    {
+      "platform": "完美平台",
+      "icon": "PW",
+      "items": [
+        {
+          "date": "2026-09-16",
+          "season": "2026 S1",
+          "title": "S · 12 星",
+          "caption": "账号 Ta6r30 K17ler · 28 场 · 爆头率 53.1% · 全国 No.5000+",
+          "stats": [
+            { "label": "胜率", "value": "89%" },
+            { "label": "ADR", "value": "122" },
+            { "label": "Rating Pro", "value": "1.67" }
+          ],
+          "image": "/images/stats/pw-ta6r30-s12.png"
+        },
+        {
+          "date": "2026-09-16",
+          "season": "天梯历史",
+          "title": "A+ 2240",
+          "caption": "账号 勇义先生 · Rating Pro 1.69",
+          "stats": [
+            { "label": "ADR", "value": "125" },
+            { "label": "K/D", "value": "2.11" },
+            { "label": "RWS", "value": "21.90" }
+          ],
+          "image": "/images/stats/pw-profile.png"
+        },
+        {
+          "date": "2026-09-16",
+          "season": "2026 S2",
+          "title": "A+ 2180",
+          "caption": "账号 NPC10.0 · 8 场 · 爆头率 56.6%",
+          "stats": [
+            { "label": "Rating Pro", "value": "1.94" },
+            { "label": "ADR", "value": "149" },
+            { "label": "K/D", "value": "2.48" }
+          ],
+          "image": "/images/stats/pw-npc10-aplus.png"
+        },
+        {
+          "date": "2026-09-16",
+          "season": "2026 S2",
+          "title": "A 2002",
+          "caption": "账号 mgw4xjsm · 8 场 · 爆头率 50.9%",
+          "stats": [
+            { "label": "Rating Pro", "value": "2.12" },
+            { "label": "ADR", "value": "164" },
+            { "label": "RWS", "value": "26.29" }
+          ],
+          "image": "/images/stats/pw-mgw4xjsm.png"
+        },
+        {
+          "date": "2026-09-16",
+          "season": "2026 S2",
+          "title": "A 1943",
+          "caption": "账号 NPC6.0 · 5 场 · 胜率 100%",
+          "stats": [
+            { "label": "Rating Pro", "value": "2.50" },
+            { "label": "ADR", "value": "181" },
+            { "label": "RWS", "value": "29.41" }
+          ],
+          "image": "/images/stats/pw-npc6-1943.png"
+        },
+        {
+          "date": "2026-09-16",
+          "season": "S21",
+          "title": "A 1915 · 31 场",
+          "caption": "账号 NPC6.0 · 场次最足的一张 · 爆头率 54.3%",
+          "stats": [
+            { "label": "Rating Pro", "value": "1.82" },
+            { "label": "ADR", "value": "135" },
+            { "label": "K/D", "value": "2.02" }
+          ],
+          "image": "/images/stats/pw-npc6-s21.png"
+        },
+        {
+          "date": "2026-09-16",
+          "season": "2026 S2",
+          "title": "比赛记录 · 9 月",
+          "caption": "天梯绿色对局 · 逐场数据",
+          "stats": [
+            { "label": "比分", "value": "13:6" },
+            { "label": "ADR", "value": "125" },
+            { "label": "Rating Pro", "value": "1.80" }
+          ],
+          "image": "/images/stats/pw-matches-s2.png"
+        },
+        {
+          "date": "2026-09-16",
+          "season": "2026 S2",
+          "title": "比赛记录 · 8 月",
+          "caption": "天梯绿色对局 · 逐场数据",
+          "stats": [
+            { "label": "比分", "value": "13:11" },
+            { "label": "ADR", "value": "110" },
+            { "label": "Rating Pro", "value": "1.63" }
+          ],
+          "image": "/images/stats/pw-matches-aug.png"
+        },
+        {
+          "date": "2026-09-16",
+          "season": "S16",
+          "title": "比赛记录 · 天梯匹配",
+          "caption": "S16 赛季 · 逐场数据",
+          "stats": [
+            { "label": "比分", "value": "13:5" },
+            { "label": "ADR", "value": "125" },
+            { "label": "Rating Pro", "value": "1.75" }
+          ],
+          "image": "/images/stats/pw-matches.png"
+        }
+      ]
+    }
+  ]
+}

@@ -11,10 +11,13 @@
     <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full bg-liyou-pink/5 blur-[150px] pointer-events-none"></div>
 
     <div class="relative z-10 pt-20 pb-4xl px-lg">
+      <div class="max-w-content mx-auto mb-lg">
+        <router-link to="/projects/liyou-mirage" class="inline-flex items-center gap-xs text-body-sm text-liyou-star-white/60 hover:text-liyou-pink-glow no-underline transition-colors">← 返回璃幽灵境</router-link>
+      </div>
       <div class="max-w-content mx-auto text-center mb-2xl">
         <h1
           class="text-display-lg font-display tracking-wider mb-md"
-          style="color: #F0C0D0; text-shadow: 0 0 30px rgba(240, 192, 208, 0.4)"
+          style="color: #5CF2DA; text-shadow: 0 0 30px rgba(92, 242, 218, 0.4)"
         >
           次元星图
         </h1>
@@ -73,7 +76,7 @@
       >
         <div
           class="glass-card max-w-2xl mx-auto p-xl"
-          style="background: rgba(30, 24, 51, 0.92); border-color: rgba(232, 160, 180, 0.25)"
+          style="background: rgba(14, 20, 27, 0.92); border-color: rgba(0, 229, 192, 0.25)"
         >
           <div class="flex items-center justify-between mb-lg">
             <div class="flex items-center gap-sm">
@@ -91,7 +94,7 @@
             </button>
           </div>
 
-          <div class="rounded-card p-lg" style="min-height: 160px; background: rgba(30, 24, 51, 0.6)">
+          <div class="rounded-card p-lg" style="min-height: 160px; background: rgba(14, 20, 27, 0.6)">
             <span
               v-if="currentLoreSpeaker"
               class="text-caption px-sm py-xs rounded-full inline-block mb-sm"
@@ -210,7 +213,7 @@ const particleOptions = {
   fpsLimit: 60,
   particles: {
     number: { value: 80, density: { enable: true } },
-    color: { value: ['#FFFFFF', '#F0C0D0', '#C4B5D4'] },
+    color: { value: ['#FFFFFF', '#5CF2DA', '#8B9AAB'] },
     shape: { type: 'circle' as const },
     opacity: {
       value: { min: 0.1, max: 0.5 },
@@ -231,18 +234,18 @@ const particleOptions = {
 
 <style scoped>
 .map-node {
-  background: rgba(30, 24, 51, 0.75);
-  border-color: rgba(196, 181, 212, 0.15);
+  background: rgba(14, 20, 27, 0.75);
+  border-color: rgba(139, 154, 171, 0.15);
   min-width: 60px;
 }
 .map-node:hover {
-  border-color: rgba(232, 160, 180, 0.4);
-  background: rgba(45, 38, 72, 0.85);
-  box-shadow: 0 0 30px rgba(232, 160, 180, 0.15);
+  border-color: rgba(0, 229, 192, 0.4);
+  background: rgba(22, 30, 39, 0.85);
+  box-shadow: 0 0 30px rgba(0, 229, 192, 0.15);
 }
 .map-node--active {
-  border-color: rgba(232, 160, 180, 0.5);
-  box-shadow: 0 0 40px rgba(232, 160, 180, 0.25);
+  border-color: rgba(0, 229, 192, 0.5);
+  box-shadow: 0 0 40px rgba(0, 229, 192, 0.25);
 }
 
 @media (max-width: 640px) {
