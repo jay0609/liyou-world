@@ -245,6 +245,10 @@ export const pricing: Pricing = {
       "icon": "🕹️",
       "unit": "小时",
       "note": "不限于以下，任意游戏都可以问",
+      "packageOffer": {
+        "label": "包天 · 8 小时",
+        "price": 500
+      },
       "tiers": [
         {
           "label": "我的世界",
