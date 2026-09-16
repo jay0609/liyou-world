@@ -297,6 +297,11 @@ export const projects: Project[] = [
       { label: '记忆层', value: '7 层' },
       { label: '测试', value: '5 个' },
     ],
+    screenshots: [
+      { image: '/images/projects/minecraft-numen/03-split-work.jpg', caption: '两个 AI 同伴自己商量分工：豆包守家整理基地，deepseek 外出探索找资源' },
+      { image: '/images/projects/minecraft-numen/01-farming.jpg', caption: '干活中：豆包收麦子（它在对话里自己推断出「这个整合包得右键收割」），deepseek 在挖石头' },
+      { image: '/images/projects/minecraft-numen/02-boat.jpg', caption: 'deepseek 自己找配方 → 做木板 → 拼船 → 走到海边放船出海，跳成就「扬帆起航」' },
+    ],
     links: [
       { label: '上游 · minecraft-numen', url: 'https://github.com/Dwinovo/minecraft-numen' },
       { label: '上游 · numen-api', url: 'https://github.com/Dwinovo/numen-api' },
