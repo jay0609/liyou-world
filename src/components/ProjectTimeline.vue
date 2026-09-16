@@ -2,7 +2,7 @@
   <div class="tl">
     <!-- 起点说明 -->
     <p class="tl-intro">
-      按开发时间排列 —— <strong>从上往下读，就是这个作品集的演进过程</strong>。
+      按开发时间<strong>从近到远</strong>排列 —— 最上面是最近在做的，越往下越早。
       时间取自 git 提交或源码文件的修改时间，具体到天可能有偏差。
     </p>
 
@@ -65,7 +65,7 @@ import { projects, type Project } from '../data/projects'
 const dated = computed(() => projects.filter((p) => p.period?.start))
 const undated = computed(() => projects.filter((p) => !p.period?.start))
 
-/** 按起始月份分组，月份从早到晚 */
+/** 按起始月份分组，月份从近到远 */
 const months = computed(() => {
   const map = new Map<string, Project[]>()
   for (const p of dated.value) {
@@ -74,10 +74,10 @@ const months = computed(() => {
     map.get(key)!.push(p)
   }
   return [...map.entries()]
-    .sort((a, b) => a[0].localeCompare(b[0]))
+    .sort((a, b) => b[0].localeCompare(a[0]))
     .map(([key, items]) => ({
       key,
-      items: items.sort((a, b) => a.period!.start.localeCompare(b.period!.start)),
+      items: items.sort((a, b) => b.period!.start.localeCompare(a.period!.start)),
     }))
 })
 
