@@ -1,0 +1,216 @@
+/**
+ * 由 scripts/convert-content.cjs 自动生成
+ * 编辑请改 content/files/sos-zombie-cs2.json
+ */
+import type { ProjectFiles } from './types'
+
+const data: ProjectFiles = {
+  "slug": "sos-zombie-cs2",
+  "sections": [
+    {
+      "id": "main",
+      "title": "SOSZombie（CounterStrikeSharp）",
+      "root": "SOSZombie",
+      "total": 39,
+      "files": [
+        {
+          "path": "Audio/SoundManager.cs",
+          "title": "音效系统 · 16项 · .ogg格式 · 路径 sound/sos_zombie/",
+          "desc": ""
+        },
+        {
+          "path": "Combat/DamageSystem.cs",
+          "title": "伤害计算系统 · 从 skills.json 读取技能倍率",
+          "desc": ""
+        },
+        {
+          "path": "Combat/GrenadeManager.cs",
+          "title": "旧手雷管理器 · 废弃后仅保留 TickFlareAndRecovery（照明弹 Glow + 冰冻恢复）",
+          "desc": "新的魔法手雷由 MagicGrenadeManager 接管"
+        },
+        {
+          "path": "Combat/KnockbackSystem.cs",
+          "title": "击退系统 · 含武器击退系数、部位乘数、技能/道具/抗性叠加",
+          "desc": ""
+        },
+        {
+          "path": "Combat/WeaponCustomizer.cs",
+          "title": "自定义武器系统 v2.0 — 全武器接管引擎伤害 + 弹匣/备弹/后坐力/精度",
+          "desc": "引擎负责: 弹道 / Hitscan / 命中判定 / 动画 / 模型 / 音效 插件负责: 伤害值 / 弹匣 / 备弹 / 后坐力 / 精度"
+        },
+        {
+          "path": "Core/BotManager.cs",
+          "title": "BOT 管理器 · 统一管理 BOT 生命周期、武器、商店、技能",
+          "desc": "所有 BOT 差异化行为在此闭环，不动共用层"
+        },
+        {
+          "path": "Core/ConfigManager.cs",
+          "title": "全局配置加载器 · 从 JSON 文件加载所有可配置数据",
+          "desc": ""
+        },
+        {
+          "path": "Core/GameConfig.cs",
+          "title": "全局游戏配置 · 从 config.json 加载，改数值不用重编译",
+          "desc": ""
+        },
+        {
+          "path": "Core/GameLoop.cs",
+          "title": "回合主循环 —— 模式机制类型与回合调度",
+          "desc": ""
+        },
+        {
+          "path": "Core/GameState.cs",
+          "title": "全局游戏状态 · 跨回合/跨系统共享",
+          "desc": ""
+        },
+        {
+          "path": "Core/InfectionSystem.cs",
+          "title": "感染玩家为僵尸 · 2.1 感染判定优先级",
+          "desc": ""
+        },
+        {
+          "path": "Core/LightingSystem.cs",
+          "title": "（已废弃）Dark Mode v3 —— CS2 不支持",
+          "desc": ""
+        },
+        {
+          "path": "Core/PlayerData.cs",
+          "title": "PlayerData (玩家数据中心) — 唯一权威数据源 / Single Source of Truth",
+          "desc": "铁律 (Iron Rules): ① 所有系统只写 PlayerData，禁止裸写 pawn.Xxx / All systems write ONLY to PlayerData, never pawn.Xxx directly ② ApplyPlayerStats() 是唯一出口，只读 PlayerData → 只写引擎 Schema / Sole bridge from PlayerData to engine ③ 角色切换走 ResetRoleState() → 写新角色 → ApplyPlayerStats() / Role switch: reset → write → apply ④ ApplyPlayerStats 只在状态变更时调用，不在 Tick 里跑 / Only called on state change, not every tick"
+        },
+        {
+          "path": "Database/PlayerDataStore.cs",
+          "title": "玩家数据持久化（SQLite）· SteamID + 时长 + VIP等级 + 累计数据",
+          "desc": ""
+        },
+        {
+          "path": "Economy/EconomyService.cs",
+          "title": "经济服务 — 弹药袋 + 经验系统",
+          "desc": "从 SOSZombie partial class 中独立出来"
+        },
+        {
+          "path": "Grenades/MagicGrenadeManager.cs",
+          "title": "魔法手雷管理器 v1.0 — 纯叠加，不杀原生实体",
+          "desc": "4 个 Hook 入口 + 4 个魔法函数 + 燃烧 DOT + 击退弹持续推力"
+        },
+        {
+          "path": "Grenades/MagicGrenadeParams.cs",
+          "title": "魔法投掷物类型枚举",
+          "desc": ""
+        },
+        {
+          "path": "Help/TutorialSystem.cs",
+          "title": "新手引导与全局帮助 · F1帮助面板 / 首次进入引导 / 低等级提示",
+          "desc": ""
+        },
+        {
+          "path": "Helpers.cs",
+          "title": "通用辅助方法",
+          "desc": ""
+        },
+        {
+          "path": "MenuManager.cs",
+          "title": "菜单管理器 · WasdMenu 屏幕中央数字直选",
+          "desc": ""
+        },
+        {
+          "path": "Menus/ShopMenu.cs",
+          "title": "道具商店菜单 — WasdMenu 数字直选",
+          "desc": ""
+        },
+        {
+          "path": "Menus/SkillMenu.cs",
+          "title": "技能树菜单 — 人类技能树 (K键) + 僵尸技能树 (K键)",
+          "desc": ""
+        },
+        {
+          "path": "Menus/WeaponSelectMenu.cs",
+          "title": "武器选择菜单 — 开局弹窗 + 主副武器 + 手雷商店 + 玩家出生",
+          "desc": ""
+        },
+        {
+          "path": "Menus/ZombieClassMenu.cs",
+          "title": "僵尸职业选择菜单 — 13 种僵尸职业",
+          "desc": ""
+        },
+        {
+          "path": "Modes/ExtremeMode.cs",
+          "title": "极限模式",
+          "desc": ""
+        },
+        {
+          "path": "Modes/GameModes.cs",
+          "title": "游戏模式管理 · 8种模式 · OP可切换",
+          "desc": ""
+        },
+        {
+          "path": "Modes/HeroMode.cs",
+          "title": "超级英雄对抗（末日）—— 复仇之神 vs 幸存者单挑",
+          "desc": ""
+        },
+        {
+          "path": "Modes/LegionMode.cs",
+          "title": "军团模式 —— 双方各出复仇之神与幸存者",
+          "desc": ""
+        },
+        {
+          "path": "Modes/MultiInfectionMode.cs",
+          "title": "群体感染模式 —— 开局多只僵尸",
+          "desc": ""
+        },
+        {
+          "path": "Modes/NemesisMode.cs",
+          "title": "复仇之神模式 —— 一只高血秒杀的复仇者对抗全体人类",
+          "desc": ""
+        },
+        {
+          "path": "Modes/NormalMode.cs",
+          "title": "普通感染模式 —— 一人变母体，感染扩散",
+          "desc": ""
+        },
+        {
+          "path": "Modes/SurvivorMode.cs",
+          "title": "幸存者模式 —— 一名幸存者对全体僵尸，无限子弹重甲",
+          "desc": ""
+        },
+        {
+          "path": "Modes/TeamBattleMode.cs",
+          "title": "阵营对抗模式",
+          "desc": ""
+        },
+        {
+          "path": "Permissions/IdentitySystem.cs",
+          "title": "身份权限系统 · OP/SVIP/VIP(1-10)/普通",
+          "desc": ""
+        },
+        {
+          "path": "Services/ItemEffectApplier.cs",
+          "title": "道具效果应用器 (Application Layer) — 三层架构的\"应用层\"",
+          "desc": "这是唯一有权直接操作引擎实体 (GiveNamedItem / pawn.Health) 的服务类 铁律: ① 所有购买前置检查 (限购 / 母体禁止 / 全局单次) 都在此处完成，不在 ShopManager ② 返回 false 时 ShopManager 负责退款 ③ 其他系统 (Knockback / Infection) 读取 PlayerData 标记，不经过本类"
+        },
+        {
+          "path": "Shop/ShopItemDefinition.cs",
+          "title": "道具定义层 (Definition Layer) — 纯数据，不含任何业务逻辑",
+          "desc": "从 shop_items.json 加载，GM 改配置无需重编译"
+        },
+        {
+          "path": "Shop/ShopManager.cs",
+          "title": "道具商店 — 三层架构的\"协调层\" (Coordination Layer)",
+          "desc": "职责 (只剩下 3 件事): ① 从 JSON 加载道具定义 ② 按 ID 查找道具 ③ 扣弹药袋 → 委托 ItemEffectApplier → 失败退款 不再包含任何 if (item.Id == \"xxx\") 的业务逻辑。 所有效果逻辑在 ItemEffectApplier，所有数据定义在 shop_items.json。"
+        },
+        {
+          "path": "Skills/SkillTrees.cs",
+          "title": "人类技能树 · 16项 · 满级110点 · K键手动加点 · 每局免费重置1次",
+          "desc": ""
+        },
+        {
+          "path": "SOSZombie.cs",
+          "title": "SOS军团 CS1.6 西南僵尸服 → CS2 移植 v4.0",
+          "desc": "基座: Custom (game_type 3, game_mode 0) · 引擎管回合"
+        }
+      ]
+    }
+  ]
+}
+
+export default data

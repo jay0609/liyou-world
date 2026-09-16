@@ -320,4 +320,49 @@ export const projects: Project[] = [
       { label: '开发阶段', value: 'P1–P6' },
     ],
   },
+
+  {
+    slug: 'sos-zombie-cs2',
+    name: 'SOS 军团 · CS2 版',
+    tagline: '把 CS1.6 的西南僵尸服，第三代移植到 CS2',
+    icon: '🧟',
+    category: '游戏工具/插件',
+    status: '开发中',
+    concept:
+      '同一个 SOS 军团的第三代：最早是 CS1.6 的 AMXX 插件，后来移植到 Zombie Plague 5.0.8a，这一代用 C# 重写跑在 CS2 上（CounterStrikeSharp 框架）。8 种模式、13 种僵尸职业、21 件道具、16 项人类技能，内容全部放 JSON 里，改数值不用重新编译。',
+    philosophy:
+      '插件写大了最容易烂在「一改数值就要重编译」和「逻辑和配置搅在一起」。所以这一代坚持两件事：一是能配的都进 JSON（config.json 74 项、zombies.json 13 条、shop_items.json 21 条），二是道具走三层——定义层只管数据、应用层只管效果、协调层只管流程，谁都不越界。',
+    highlights: [
+      '从 AMXX（Pawn）→ Zombie Plague → CounterStrikeSharp（C#）的第三代移植',
+      '8 种游戏模式：普通感染 · 群体感染 · 复仇之神 · 幸存者 · 军团 · 超级英雄对抗（末日）· 极限 · 阵营对抗',
+      '13 种僵尸职业 + 16 项人类技能树（满级 110 点，K 键加点，每局免费重置 1 次）',
+      '道具系统三层架构：定义层（纯数据）/ 应用层（效果）/ 协调层（流程）',
+      '全武器接管引擎伤害：弹匣 / 备弹 / 后坐力 / 精度 / 击退系数 / 部位乘数 / 技能与道具叠加',
+      '内容全部 JSON 化：config.json 74 项 · zombies.json 13 条 · shop_items.json 21 条',
+      '玩家数据持久化到 SQLite：SteamID + 时长 + VIP 等级 + 累计数据',
+      '身份权限分四级：OP / SVIP / VIP(1-10) / 普通',
+      '自定义菜单用 WasdMenu 屏幕中央数字直选，不依赖 CS2 原生菜单',
+    ],
+    tech: ['C#', 'CounterStrikeSharp', 'SQLite', 'CS2'],
+    progress: {
+      done: 'v4.0.0。Core / Combat / Modes / Skills / Shop / Menus / Economy / Permissions / Database / Audio 十个模块全部落地；伤害、击退、感染、模式、商店、技能树、武器接管已实现。',
+      next: '继续补道具效果与应用层，把旧手雷管理器的遗留逻辑清干净。',
+    },
+    architecture: [
+      { layer: 'Core', role: 'GameState 全局状态 · PlayerData 唯一权威数据源 · ConfigManager 配置加载 · BotManager · InfectionSystem · GameLoop 回合主循环' },
+      { layer: 'Modes', role: '8 种模式的规则实现（都是 partial class SOSZombie 的一部分）+ GameModes 统一切换' },
+      { layer: 'Combat', role: 'DamageSystem 伤害（读技能倍率）· KnockbackSystem 击退（武器系数 × 部位 × 抗性）· WeaponCustomizer 全武器接管' },
+      { layer: 'Skills / Shop', role: '16 项技能树 + 道具三层架构（定义 / 应用 / 协调）' },
+      { layer: 'Grenades / Economy / Database', role: '魔法手雷（纯叠加，不杀原生实体）· 弹药袋 + 经验 · SQLite 持久化' },
+      { layer: 'Menus / Help / Audio / Permissions', role: 'WasdMenu 各面板 · 新手引导 · 音效 · 四级身份权限' },
+    ],
+    scale: [
+      { label: '代码文件', value: '39 个' },
+      { label: '僵尸职业', value: '13 种' },
+      { label: '游戏模式', value: '8 种' },
+      { label: '道具', value: '21 件' },
+      { label: '配置项', value: '74 项' },
+      { label: '版本', value: 'v4.0.0' },
+    ],
+  },
 ]
