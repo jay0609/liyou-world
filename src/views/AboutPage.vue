@@ -82,7 +82,7 @@
 
       <!-- 履历 -->
       <section class="mb-4xl">
-        <h2 class="about-h2">履历</h2>
+        <h2 class="about-h2">经历</h2>
         <div class="resume">
           <div v-for="item in profile.career" :key="item.title" class="resume-item">
             <span class="resume-period">{{ item.period }}</span>
