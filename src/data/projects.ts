@@ -124,6 +124,16 @@ export const projects: Project[] = [
       { label: '设计文档', value: '17 份' },
       { label: '测试文件', value: '38' },
     ],
+    screenshots: [
+      {
+        image: '/images/projects/soszombie/02-main-menu.jpg',
+        caption: '总菜单：数字键直选 9 项（选择武器 / 购买装备 / 僵尸类型 / 升级菜单 / 解除卡住 / 帮助 / 版本 / 设置 / 模式）；上方实时显示「最近僵尸 #0（母体僵尸）· 正前方 6.1 m」',
+      },
+      {
+        image: '/images/projects/soszombie/01-weapon-menu.jpg',
+        caption: '武器选择：主武器 14 把（AK-47 / MP5 / XM1014 / M4A1 / Galil / FAMAS / SG-552…）；右上角是弹药袋与成就进度',
+      },
+    ],
   },
 
   {
