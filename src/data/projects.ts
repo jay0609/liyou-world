@@ -216,6 +216,17 @@ export const projects: Project[] = [
       { label: '后端测试', value: '44.9 KB' },
       { label: '版本', value: 'v0.7.0' },
     ],
+    screenshots: [
+      { image: '/images/projects/liyou-mirage/01-onboarding.jpg', caption: '首次引导：它自称「次元解忧杂货店」——这一屏走完，USER.md 就有内容了' },
+      { image: '/images/projects/liyou-mirage/02-chat.jpg', caption: '聊天主界面：日期分隔 + 气泡 + 语气（它管你叫「老板」）' },
+      { image: '/images/projects/liyou-mirage/06-memory.jpg', caption: '记忆库：角色设定 / 重要瞬间 / 羁绊 / 你的世界 / 技能 五个入口，可搜索、可导出训练数据' },
+      { image: '/images/projects/liyou-mirage/03-world.jpg', caption: '世界观编辑器：分类 → 条目 两级结构' },
+      { image: '/images/projects/liyou-mirage/04-novel.jpg', caption: '小说创作：卷 → 章 树形结构 + 编辑区' },
+      { image: '/images/projects/liyou-mirage/05-assets.jpg', caption: '素材库：图片 / 文本 / 链接三类 + 标签筛选' },
+      { image: '/images/projects/liyou-mirage/09-digital-twin.jpg', caption: '数字分身：让它学一个人的说话方式' },
+      { image: '/images/projects/liyou-mirage/08-diagnostic.jpg', caption: '诊断中心：FATAL / ERROR / WARN / INFO 四级 + 一键导出 JSON 报告' },
+      { image: '/images/projects/liyou-mirage/07-settings.jpg', caption: '个人设置：它怎么称呼你（默认「老板」）' },
+    ],
     links: [
       { label: 'GitHub', url: 'https://github.com/jay0609/liyou-mirage' },
       { label: '世界观 · 书灵志', url: '/projects/liyou-mirage/lore' },
