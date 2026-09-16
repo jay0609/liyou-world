@@ -27,6 +27,7 @@
             <span class="text-body-sm px-lg py-sm rounded-full border border-liyou-pink/30 bg-liyou-pink/5 text-liyou-pink">{{ project.category }}</span>
             <span class="text-body-sm px-lg py-sm rounded-full border border-liyou-light-purple/30 bg-liyou-light-purple/10 text-liyou-light-purple">{{ project.status }}</span>
           </div>
+          <p v-if="project.statusNote" class="proj-status-note">{{ project.statusNote }}</p>
           <div class="text-5xl mb-md">{{ project.icon }}</div>
           <GradientText size="xl">{{ project.name }}</GradientText>
           <p class="text-body-lg text-liyou-text-secondary mt-md">{{ project.tagline }}</p>

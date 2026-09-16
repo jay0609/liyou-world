@@ -28,6 +28,11 @@ export interface Project {
   category: ProjectCategory
   status: ProjectStatus
   /**
+   * \u72b6\u6001\u8bf4\u660e \u2014\u2014 \u4e00\u53e5\u8bdd\u8bf4\u6e05\u695a\u8fd9\u4e2a\u72b6\u6001\u662f\u4ec0\u4e48\u610f\u601d\u3002
+   * \u5f03\u5751\u7684\u5fc5\u987b\u5199\u4e3a\u4ec0\u4e48\u505c\uff0c\u5b8c\u6210\u7684\u5199\u5230\u4ec0\u4e48\u7a0b\u5ea6\u3002
+   */
+  statusNote?: string
+  /**
    * 上游来源说明。非原创项目必须写 —— 说明基于谁的项目做了什么，
    * 避免让人误以为是完全从零写的。
    */
@@ -142,7 +147,8 @@ export const projects: Project[] = [
     tagline: '把星河 SOSZOMBIE 复刻到 ZP 5.0.8a · AMXX 插件',
     icon: '🧟',
     category: '游戏工具/插件',
-    status: '已发布',
+    status: '\u5b8c\u5584\u4e2d',
+    statusNote: '13 \u4e2a\u81ea\u7814\u63d2\u4ef6\u5df2\u4e0a\u7ebf\uff0c\u673a\u5668\u4eba\u505a\u4e86 14 \u8f6e\u5b9e\u9a8c\u6784\u5efa\uff1b\u73b0\u5728\u5728\u8865\u7ec6\u8282\uff08\u6280\u80fd\u7cfb\u7edf\u7684 v2 \u91cd\u5efa\u7248\u8fd8\u6ca1\u90e8\u7f72\uff09\u3002',
     period: { start: '2026-09-08', end: '2026-09-11', note: 'SOS 第二代 · 紧接 CS2 版' },
     upstream: '服务端插件全部自研；机器人部分基于开源项目 YaPB 4.4.957 改写（13 文件 +1651 行）',
     concept:
@@ -260,7 +266,8 @@ export const projects: Project[] = [
     tagline: '给开源的 Minecraft AI 同伴框架加记忆层与 31 个工具',
     icon: '🧠',
     category: 'AI 应用',
-    status: '开发中',
+    status: '\u5df2\u5b8c\u6210',
+    statusNote: '\u4e03\u5c42\u8bb0\u5fc6\u3001\u81ea\u4e3b\u6027\u3001\u65e5\u8bb0\u4e0e 31 \u4e2a\u5de5\u5177\u5168\u90e8\u843d\u5730\uff0c5 \u4e2a\u6d4b\u8bd5\u901a\u8fc7\u3002\u8fd9\u662f\u7ed9\u4e0a\u6e38\u9879\u76ee\u505a\u7684\u6269\u5c55\uff0c\u8fd9\u4e00\u5757\u505a\u5b8c\u5373\u4ea4\u4ed8\u3002',
     period: { start: '2026-08-18', end: '2026-09-01' },
     upstream: '基于 dwinovo 的开源项目 Numen（LGPL-3.0）做的扩展，不是从零写的项目',
     concept:
@@ -314,7 +321,8 @@ export const projects: Project[] = [
     tagline: '46 城 · 行军制 · 结束回合 —— 三国志 11 式的单机策略',
     icon: '🏯',
     category: '游戏',
-    status: '开发中',
+    status: '\u5f03\u5751\u4e2d',
+    statusNote: '\u529f\u80fd\u5168\u8dd1\u901a\u4e86\uff0846 \u57ce / 21 \u5efa\u7b51 / 44 \u4e2a\u96c6\u6210\u6d4b\u8bd5\uff09\u4e4b\u540e\u63a8\u5012\u91cd\u6784\u6210\u4e09\u5c42\u67b6\u6784\uff0c\u753b\u9762\u9000\u56de\u65b9\u5757\uff1b\u968f\u540e\u8f6c\u53bb\u505a tick \u5236\u7248\u672c\u3002\u4e0d\u662f\u505a\u4e0d\u4e0b\u53bb\uff0c\u662f\u88ab\u4e0b\u4e00\u4e2a\u60f3\u6cd5\u53d6\u4ee3\u4e86\u3002',
     period: { start: '2026-07-24', end: '2026-07-28', note: '紧跟 SOS CS2 版' },
     concept:
       '一张 100×100 的地图，46 座城，从一座城开始打到统一。玩法照三国志 11 来：点主城弹出浮动菜单（出征 / 招募 / 升级 / 情报），出征是行军制而不是瞬移，行动完点「结束回合」交给 AI。跑在腾讯团结引擎上。',
@@ -359,7 +367,8 @@ export const projects: Project[] = [
     tagline: '把 CS1.6 的西南僵尸服，第三代移植到 CS2',
     icon: '🧟',
     category: '游戏工具/插件',
-    status: '开发中',
+    status: '\u5f03\u5751\u4e2d',
+    statusNote: '\u505a\u5b8c 5 \u5929\u540e\u8f6c\u56de CS1.6 \u91cd\u505a\u3002\u540c\u4e00\u5957\u73a9\u6cd5\u5728 CS2 \u91cc\u53d7\u5230\u63d2\u4ef6\u6846\u67b6\u9650\u5236\uff0c\u9000\u56de AMXX \u751f\u6001\u66f4\u5b8c\u6574\u7684\u5730\u65b9\u3002',
     period: { start: '2026-07-19', end: '2026-07-23', note: 'SOS 第一代 · 7 月连做三个项目的第一枪' },
     concept:
       '同一个 SOS 军团的第三代：最早是 CS1.6 的 AMXX 插件，后来移植到 Zombie Plague 5.0.8a，这一代用 C# 重写跑在 CS2 上（CounterStrikeSharp 框架）。8 种模式、13 种僵尸职业、21 件道具、16 项人类技能，内容全部放 JSON 里，改数值不用重新编译。',
@@ -405,7 +414,8 @@ export const projects: Project[] = [
     tagline: 'tick 制 RTS 单机 · 参考《权力的游戏：凛冬将至》',
     icon: '🐉',
     category: '游戏',
-    status: '开发中',
+    status: '\u5f03\u5751\u4e2d',
+    statusNote: '3 \u5468\u505a\u5230 356 \u4e2a C# \u6587\u4ef6\uff0c\u7136\u540e\u8f6c\u5411 SOS \u7cfb\u5217\uff08CS1.6 \u2192 Unity\uff09\u3002',
     period: { start: '2026-07-28', end: '2026-08-17', note: '紧跟 gamebate 的回合制版本，这次改成实时 tick' },
     concept:
       '一个实时制（tick）的单机策略游戏，参考腾讯的《权力的游戏：凛冬将至》。和上一个三国式 SLG 最大的区别是：**不要「结束回合」**——实时决策、AI 持续行动、1x/2x/4x 变速、空格暂停。',
@@ -445,7 +455,8 @@ export const projects: Project[] = [
     tagline: '把璃幽灵境抽成框架 —— 锻造 Agent 的底座',
     icon: '⚒️',
     category: 'AI 应用',
-    status: '开发中',
+    status: '\u5f03\u5751\u4e2d',
+    statusNote: 'v0.6 \u4e4b\u540e\u505c\u4e86\u3002\u5b83\u662f\u4ece\u7483\u5e7d\u5e7b\u5883\u62bd\u51fa\u7684\u6846\u67b6\u7248\uff1a\u53ef\u590d\u7528\u7684\u90e8\u5206\u62bd\u5b8c\uff0c\u5e94\u7528\u90a3\u8fb9\u66f4\u9700\u8981\u5b83\uff0c\u4e8e\u662f\u5c31\u6ca1\u4e86\u7ee7\u7eed\u7684\u7406\u7531\u3002',
     period: { start: '2026-05-19', end: '2026-06-25', note: '从璃幽灵境（LiyouDesk）同一条线抽出的框架版' },
     upstream: '与璃幽灵境同源 —— 从同一套代码里把「可复用部分」抽出来做成框架',
     concept:
