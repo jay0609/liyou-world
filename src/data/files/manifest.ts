@@ -5,5 +5,6 @@ export const fileTreeSlugs: string[] = [
   "minecraft-numen",
   "slg-three-kingdoms",
   "sos-zombie-cs2",
-  "soszombie"
+  "soszombie",
+  "verge-of-the-firmament"
 ]
