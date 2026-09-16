@@ -43,6 +43,12 @@
           </div>
         </section>
 
+        <!-- 截图（放在概念之前，访客先看东西再读文字） -->
+        <section v-if="project.screenshots?.length" class="mb-4xl">
+          <h2 class="text-heading-lg text-liyou-text-primary font-heading mb-lg">📷 截图</h2>
+          <ProjectGallery :shots="project.screenshots" />
+        </section>
+
         <!-- 概念 + 理念（标题在方框外，与「核心亮点」统一） -->
         <section class="grid grid-cols-1 md:grid-cols-2 gap-xl mb-4xl">
           <div class="flex flex-col">
@@ -177,6 +183,7 @@ import GlassCard from '../components/GlassCard.vue'
 import ProjectCard from '../components/ProjectCard.vue'
 import FileTree from '../components/FileTree.vue'
 import MilestoneTimeline from '../components/MilestoneTimeline.vue'
+import ProjectGallery from '../components/ProjectGallery.vue'
 import { SITE } from '../constants'
 
 const route = useRoute()

@@ -48,6 +48,8 @@ export interface Project {
   fileTree?: string
   /** 规模数据 */
   scale?: { label: string; value: string }[]
+  /** 项目截图（主图 + 缩略图条 + 全屏） */
+  screenshots?: { image: string; caption: string; date?: string }[]
   links?: { label: string; url: string }[]
 }
 
@@ -273,5 +275,76 @@ export const projects: Project[] = [
 │   ├── Scripts/        ← 243 个 C# 脚本
 │   └── Scenes/
 └── Docs/`,
+  },
+
+  {
+    slug: 'slg-three-kingdoms',
+    name: '三国式 SLG 单机',
+    tagline: '46 城 · 行军制 · 结束回合 —— 三国志 11 式的单机策略',
+    icon: '🏯',
+    category: '游戏',
+    status: '开发中',
+    concept:
+      '一张 100×100 的地图，46 座城，从一座城开始打到统一。玩法照三国志 11 来：点主城弹出浮动菜单（出征 / 招募 / 升级 / 情报），出征是行军制而不是瞬移，行动完点「结束回合」交给 AI。跑在腾讯团结引擎上。',
+    philosophy:
+      '这个项目中途做了一次很硬的取舍：功能已经全跑通了（46 城、建筑前置、野怪营地、伤兵、天气、迷雾都在），但代码是 82 个文件互相 FindObjectOfType。于是推倒重写成三层——Backend 纯 C# 零 UnityEngine 引用、Frontend 只管显示、中间用 CommandBus 单向流转。视觉暂时退回方块，换来的是 44 个测试能跑。',
+    highlights: [
+      '三层分离：Backend（纯 C#，零 UnityEngine 引用）/ Frontend（Unity）/ Bridge（CommandBus）',
+      '数据流单向：CommandBus → CommandValidator → System；View 只读 GameState，不直接调 System',
+      '强类型 GameEventBus 取代旧的 string 事件总线；全局零 FindObjectsOfType',
+      '路线重构后 Phase 1–6 完成，53 个文件 / 44 个测试 / 0 编译错误',
+      '三国志 11 式交互：浮动菜单、行军制（路上会遭遇战）、结束回合制、敌兵限流',
+      '46 城 + 21 种建筑 + 45 条等级前置规则；3 兵种带克制',
+      '4 类资源节点（农场 / 矿场 / 林场 / 金矿，L1–L5）+ 10 级野怪营地（流寇 → 叛军帝都）',
+      '伤兵系统、粮草消耗、天气、迷雾、随机事件（丰收 / 疫病 / 山贼 / 援军）',
+      '像素风：32×32 城池 / 16×16 士兵 / 8 种地形 × 4 变体（确定性选变体打破重复感）',
+    ],
+    tech: ['团结引擎 1.9.3', 'C#', 'Unity 2022.3', 'A* 寻路', 'Tilemap'],
+    progress: {
+      done: '旧版功能完整可玩（招募→出征→行军→AI 对战→攻城→占城→统一）；新版三层架构 Phase 1–6 完成，44 个测试通过、零编译错误，画面用方块占位。',
+      next: '把 Frontend 显示层重新接到新架构上，恢复像素风视觉。',
+    },
+    architecture: [
+      { layer: 'Backend', role: '纯 C#，零 UnityEngine 引用 —— Data（配置表 / 模型）/ Systems（移动 / 战斗 / 经济 / AI）/ Bridge（CommandBus + 事件）' },
+      { layer: 'Bridge', role: 'CommandBus → CommandValidator → System 单向流；GameEventBus 强类型事件；EventHistory 环形队列' },
+      { layer: 'Frontend', role: 'Unity 侧 —— Bootstrap / Input / Views / Sync（GameStateRenderer）/ UI（HUD / 面板 / 日志）' },
+      { layer: 'Tests', role: 'Phase 1–6 集成测试，覆盖骨架 → 地图 → 寻路 → 行为系统 → 全流程统一' },
+      { layer: '数据表', role: 'TerrainDataTable（8 地形）· TroopDataTable（3 兵种 + 克制）· BuildingDataTable（20 建筑 + 45 前置）· CityDataTable（46 城）' },
+    ],
+    scale: [
+      { label: '代码文件', value: '53 个' },
+      { label: '集成测试', value: '44 个' },
+      { label: '地图', value: '100×100' },
+      { label: '城池', value: '46 座' },
+      { label: '建筑', value: '21 种' },
+      { label: '开发阶段', value: 'P1–P6' },
+    ],
+    screenshots: [
+      {
+        image: '/images/projects/slg-game/01-map-full.jpg',
+        caption: '完整地图：46 城 + 资源节点 + 野怪营地，顶栏是资源/人口/治安/粮草/回合，右下「结束回合」',
+        date: '2026-07-28',
+      },
+      {
+        image: '/images/projects/slg-game/02-map-mid.jpg',
+        caption: '中期：城池换成像素 sprite，紫色方块是野怪营地（角标 L1–L7 是等级）',
+        date: '2026-07-27',
+      },
+      {
+        image: '/images/projects/slg-game/03-terrain.jpg',
+        caption: '地形层：8 种地形 × 4 变体，Perlin 噪声做色偏，避免大片重复',
+        date: '2026-07-26',
+      },
+      {
+        image: '/images/projects/slg-game/04-early.jpg',
+        caption: '早期版本：点主城的浮动菜单（状态 / 经济 / 军事 / 建筑）',
+        date: '2026-07-26',
+      },
+      {
+        image: '/images/projects/slg-game/05-refactor.jpg',
+        caption: '推倒重构后：三层架构跑通，画面暂时退回方块 —— 换来 44 个测试',
+        date: '2026-07-28',
+      },
+    ],
   },
 ]
