@@ -17,6 +17,7 @@ const STATIC_PAGES = [
   ['/about', 'monthly', '0.8'],
   ['/guide', 'monthly', '0.9'],
   ['/projects', 'weekly', '0.8'],
+  ['/timeline', 'weekly', '0.8'],
   ['/journal', 'daily', '0.8'],
 ]
 
