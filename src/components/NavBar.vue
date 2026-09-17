@@ -41,7 +41,7 @@
           </transition>
         </div>
 
-        <router-link to="/timeline" class="nav-link" @click="closeAll">\u65f6\u95f4\u7ebf</router-link>
+        <router-link to="/orders" class="nav-link" @click="closeAll">接单记录</router-link>
         <router-link to="/journal" class="nav-link" @click="closeAll">动态</router-link>
         <router-link to="/about" class="nav-link" @click="closeAll">关于我</router-link>
       </div>
@@ -92,7 +92,7 @@
           </router-link>
         </div>
 
-        <router-link to="/timeline" class="m-link" @click="closeAll"><span class="m-icon">\U0001F4C5</span> \u65f6\u95f4\u7ebf</router-link>
+        <router-link to="/orders" class="m-link" @click="closeAll"><span class="m-icon">📅</span> 接单记录</router-link>
         <router-link to="/journal" class="m-link" @click="closeAll">
           <span class="m-icon">📔</span> 动态
           <span class="m-hint">每日记录</span>

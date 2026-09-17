@@ -35,7 +35,7 @@ const GuidePage = () => import('./views/GuidePage.vue')
 const ProjectsPage = () => import('./views/ProjectsPage.vue')
 const ProjectDetailPage = () => import('./views/ProjectDetailPage.vue')
 const JournalPage = () => import('./views/JournalPage.vue')
-const TimelinePage = () => import('./views/TimelinePage.vue')
+const OrdersPage = () => import('./views/OrdersPage.vue')
 const NotFoundPage = () => import('./views/NotFoundPage.vue')
 
 const router = createRouter({
@@ -49,7 +49,7 @@ const router = createRouter({
     { path: '/projects', name: 'projects', component: ProjectsPage, meta: { title: '我的项目', description: '个人开发项目作品集——每个项目的概念与理念。' } },
     { path: '/projects/:slug', name: 'project', component: ProjectDetailPage, meta: { title: '项目', description: '个人开发项目作品集——概念、理念与进展。' } },
     { path: '/journal', name: 'journal', component: JournalPage, meta: { title: '每日动态', description: '每天记一次——做了什么、练了什么、学了什么。' } },
-      { path: '/timeline', name: 'timeline', component: TimelinePage, meta: { title: '\u65f6\u95f4\u7ebf', description: '\u5f00\u53d1\u91cc\u7a0b\u7891 \u002b \u63a5\u5355\u8bb0\u5f55\u2014\u2014\u6211\u4e00\u76f4\u5728\u505a\u7684\u4e8b\u3002' } },
+      { path: '/orders', name: 'orders', component: OrdersPage, meta: { title: '接单记录', description: '每一单都记在这儿，包括战绩——接了谁、打了什么、打成什么样。' } },
     // 旧 IP 页面路径重定向（保留旧链接可访问）
     { path: '/book-spirit', redirect: '/projects/liyou-mirage/lore' },
     { path: '/oc-workshop', redirect: '/projects/liyou-mirage' },
