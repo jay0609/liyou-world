@@ -55,7 +55,7 @@ export const ORDERS: OrderRecord[] = [
     date: '2026-09-17',
     game: '三角洲行动',
     detail: '机密 2 小时 ＋ 绝密 3 小时',
-    tag: '高总',
+    tag: '帅的一逼的高总',
   },
 ]
 
