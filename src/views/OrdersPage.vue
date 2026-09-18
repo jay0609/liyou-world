@@ -34,29 +34,50 @@
         <h2 class="ord-month">{{ g.label }}</h2>
 
         <article v-for="o in g.items" :key="o.key" class="ord-card">
-          <header class="ord-card-head">
-            <span class="ord-date">{{ o.date.slice(5) }}</span>
-            <span class="ord-game">{{ o.game }}</span>
-            <span v-if="o.repeat" class="ord-repeat">回头客</span>
-          </header>
+          <div class="ord-card-main">
+            <header class="ord-card-head">
+              <span class="ord-date">{{ o.date.slice(5) }}</span>
+              <span class="ord-game">{{ o.game }}</span>
+              <span v-if="o.repeat" class="ord-repeat">回头客</span>
+            </header>
 
-          <p class="ord-detail">
-            {{ o.detail }}
-            <span v-if="o.tag" class="ord-tag">· {{ o.tag }}</span>
-          </p>
+            <p class="ord-detail">
+              {{ o.detail }}
+              <span v-if="o.tag" class="ord-tag">· {{ o.tag }}</span>
+            </p>
 
-          <p v-if="o.quote" class="ord-quote">「{{ o.quote }}」</p>
+            <p v-if="o.quote" class="ord-quote">「{{ o.quote }}」</p>
+          </div>
 
+          <!-- 战绩截图（可放可不放） -->
           <div v-if="o.images?.length" class="ord-shots">
             <button
-              v-for="(src, i) in o.images"
-              :key="i"
               type="button"
-              class="ord-shot"
-              @click="open(src)"
+              class="shot-nav"
+              :disabled="o.images.length < 2"
+              aria-label="上一张"
+              @click="stepShot(o.key, o.images, -1)"
             >
-              <img :src="src" :alt="`战绩截图 ${i + 1}`" loading="lazy" />
+              ‹
             </button>
+
+            <button type="button" class="shot-thumb" @click="open(o.images, curShot(o.key))">
+              <img :src="o.images[curShot(o.key)]" alt="战绩截图" loading="lazy" />
+            </button>
+
+            <button
+              type="button"
+              class="shot-nav"
+              :disabled="o.images.length < 2"
+              aria-label="下一张"
+              @click="stepShot(o.key, o.images, 1)"
+            >
+              ›
+            </button>
+
+            <span v-if="o.images.length > 1" class="shot-count">
+              {{ curShot(o.key) + 1 }} / {{ o.images.length }}
+            </span>
           </div>
         </article>
       </section>
@@ -64,9 +85,32 @@
 
     <!-- 灯箱 -->
     <Teleport to="body">
-      <div v-if="lightbox" class="ord-lb" @click="lightbox = ''">
-        <img :src="lightbox" alt="战绩截图" />
-        <button type="button" class="ord-lb-close" aria-label="关闭" @click="lightbox = ''">✕</button>
+      <div v-if="lightbox" class="ord-lb" @click="closeLb">
+        <button
+          v-if="lbImages.length > 1"
+          type="button"
+          class="ord-lb-nav ord-lb-prev"
+          aria-label="上一张"
+          @click.stop="stepLb(-1)"
+        >
+          ‹
+        </button>
+
+        <img :src="lbImages[lbIdx]" alt="战绩截图" @click.stop />
+
+        <button
+          v-if="lbImages.length > 1"
+          type="button"
+          class="ord-lb-nav ord-lb-next"
+          aria-label="下一张"
+          @click.stop="stepLb(1)"
+        >
+          ›
+        </button>
+
+        <button type="button" class="ord-lb-close" aria-label="关闭" @click="closeLb">✕</button>
+
+        <span v-if="lbImages.length > 1" class="ord-lb-count">{{ lbIdx + 1 }} / {{ lbImages.length }}</span>
       </div>
     </Teleport>
   </div>
@@ -83,9 +127,39 @@ interface Entry extends OrderRecord {
 
 const MONTH_CN = ['', '1 月', '2 月', '3 月', '4 月', '5 月', '6 月', '7 月', '8 月', '9 月', '10 月', '11 月', '12 月']
 
-const lightbox = ref('')
-const open = (src: string) => {
-  lightbox.value = src
+/** 每张卡片当前显示第几张截图（key = 订单 key） */
+const shotIdx = ref<Record<string, number>>({})
+
+const curShot = (key: string) => shotIdx.value[key] ?? 0
+
+/** 循环取模 —— 到头了绕回去 */
+function cycle(len: number, cur: number, delta: number) {
+  return (cur + delta + len) % len
+}
+
+function stepShot(key: string, imgs: string[], delta: number) {
+  if (imgs.length < 2) return
+  shotIdx.value[key] = cycle(imgs.length, curShot(key), delta)
+}
+
+// 灯箱
+const lightbox = ref(false)
+const lbImages = ref<string[]>([])
+const lbIdx = ref(0)
+
+function open(imgs: string[], i: number) {
+  lbImages.value = imgs
+  lbIdx.value = i
+  lightbox.value = true
+}
+
+function stepLb(delta: number) {
+  if (lbImages.value.length < 2) return
+  lbIdx.value = cycle(lbImages.value.length, lbIdx.value, delta)
+}
+
+function closeLb() {
+  lightbox.value = false
 }
 
 /** 本地日期 YYYY-MM-DD（不用 toISOString，它按 UTC 会差一天） */
@@ -218,11 +292,19 @@ const groups = computed(() => {
 
 /* ── 单条卡片 ── */
 .ord-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
   padding: 16px 18px;
   border-radius: 12px;
   margin-bottom: 12px;
   background: rgba(19, 25, 32, 0.55);
   border: 1px solid rgba(139, 154, 171, 0.14);
+}
+
+.ord-card-main {
+  flex: 1;
+  min-width: 0;
 }
 
 .ord-card-head {
@@ -275,17 +357,43 @@ const groups = computed(() => {
   color: var(--liyou-text-muted);
 }
 
-/* ── 战绩截图 ── */
+/* ── 战绩截图框（可放可不放）── */
 .ord-shots {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  gap: 8px;
-  margin-top: 12px;
+  position: relative;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
-.ord-shot {
+.shot-nav {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  border: 1px solid rgba(139, 154, 171, 0.3);
+  background: rgba(19, 25, 32, 0.9);
+  color: var(--liyou-text-muted);
+  font-size: 0.875rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.shot-nav:hover:not(:disabled) {
+  color: var(--liyou-cyan, #00e5c0);
+  border-color: rgba(0, 229, 192, 0.5);
+}
+
+.shot-nav:disabled {
+  opacity: 0.2;
+  cursor: default;
+}
+
+.shot-thumb {
+  width: 132px;
   padding: 0;
-  border: 1px solid rgba(139, 154, 171, 0.18);
+  border: 1px solid rgba(139, 154, 171, 0.2);
   border-radius: 8px;
   overflow: hidden;
   background: none;
@@ -293,17 +401,29 @@ const groups = computed(() => {
   transition: border-color 0.2s, transform 0.2s;
 }
 
-.ord-shot:hover {
-  border-color: rgba(0, 229, 192, 0.45);
+.shot-thumb:hover {
+  border-color: rgba(0, 229, 192, 0.5);
   transform: translateY(-2px);
 }
 
-.ord-shot img {
+.shot-thumb img {
   display: block;
   width: 100%;
   height: auto;
 }
 
+.shot-count {
+  position: absolute;
+  right: 34px;
+  bottom: 6px;
+  padding: 1px 7px;
+  border-radius: 999px;
+  font-size: 0.625rem;
+  font-family: var(--liyou-font-mono, ui-monospace, monospace);
+  color: var(--liyou-text);
+  background: rgba(4, 8, 12, 0.75);
+  pointer-events: none;
+}
 /* ── 灯箱 ── */
 .ord-lb {
   position: fixed;
@@ -321,6 +441,44 @@ const groups = computed(() => {
   max-width: 100%;
   max-height: 100%;
   border-radius: 10px;
+}
+
+.ord-lb-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1px solid rgba(139, 154, 171, 0.35);
+  background: rgba(19, 25, 32, 0.85);
+  color: var(--liyou-text);
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.ord-lb-nav:hover {
+  color: var(--liyou-cyan, #00e5c0);
+  border-color: rgba(0, 229, 192, 0.55);
+}
+
+.ord-lb-prev { left: 20px; }
+.ord-lb-next { right: 20px; }
+
+.ord-lb-count {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 4px 14px;
+  border-radius: 999px;
+  font-size: 0.8125rem;
+  font-family: var(--liyou-font-mono, ui-monospace, monospace);
+  color: var(--liyou-text);
+  background: rgba(4, 8, 12, 0.8);
+  pointer-events: none;
 }
 
 .ord-lb-close {
