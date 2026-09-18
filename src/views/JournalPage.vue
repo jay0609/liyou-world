@@ -25,23 +25,20 @@
         </div>
       </div>
 
-      <!-- 日期筛选（只有多于一条时才显示） -->
-      <div v-if="journal.length > 1" class="journal-filter">
-        <button
-          class="filter-chip"
-          :class="{ 'is-active': activeDate === '' }"
-          @click="activeDate = ''"
-        >
-          全部 <span class="filter-count">{{ journal.length }}</span>
+      <!-- 翻页：一次只显示一天，默认最新 -->
+      <div v-if="allDates.length > 1" class="journal-filter journal-nav">
+        <button class="filter-chip nav-arrow" :disabled="!canOlder" @click="goOlder">
+          ← 更早
         </button>
-        <button
-          v-for="e in journal"
-          :key="e.date"
-          class="filter-chip"
-          :class="{ 'is-active': activeDate === e.date }"
-          @click="activeDate = e.date"
-        >
-          {{ e.date.slice(5) }}
+
+        <span class="filter-chip is-active nav-current">
+          {{ activeDate.slice(5) }}
+          <span v-if="currentEntry?.weekday" class="nav-weekday">{{ currentEntry.weekday }}</span>
+          <span class="nav-index">{{ idx + 1 }} / {{ allDates.length }}</span>
+        </span>
+
+        <button class="filter-chip nav-arrow" :disabled="!canNewer" @click="goNewer">
+          更近 →
         </button>
       </div>
 
@@ -61,12 +58,32 @@ import GradientText from '../components/GradientText.vue'
 import JournalCard from '../components/JournalCard.vue'
 import { journal } from '../data/journal'
 
-/** 空字符串 = 全部 */
-const activeDate = ref('')
+/** 去重后的记录日期，新的在前 */
+const allDates = computed(() => [...new Set(journal.map((e) => e.date))].sort().reverse())
 
-const shown = computed(() =>
-  activeDate.value ? journal.filter((e) => e.date === activeDate.value) : journal
-)
+/**
+ * 当前显示的日期。
+ * 默认显示最新的一天 —— 主动态点进来，永远看到的是最近那条记录。
+ */
+const activeDate = ref(allDates.value[0] ?? '')
+
+const shown = computed(() => journal.filter((e) => e.date === activeDate.value))
+
+const currentEntry = computed(() => shown.value[0])
+
+/** 0 = 最新。索引越大越早 */
+const idx = computed(() => Math.max(0, allDates.value.indexOf(activeDate.value)))
+
+const canNewer = computed(() => idx.value > 0)
+const canOlder = computed(() => idx.value < allDates.value.length - 1)
+
+function goNewer() {
+  if (canNewer.value) activeDate.value = allDates.value[idx.value - 1]
+}
+
+function goOlder() {
+  if (canOlder.value) activeDate.value = allDates.value[idx.value + 1]
+}
 
 /** 本地日期 → YYYY-MM-DD（不要用 toISOString，它按 UTC 会差一天） */
 function toDateStr(d: Date) {
@@ -76,9 +93,6 @@ function toDateStr(d: Date) {
 function daysBetween(a: string, b: string) {
   return Math.round((Date.parse(`${b}T00:00:00`) - Date.parse(`${a}T00:00:00`)) / 86400000)
 }
-
-/** 去重后的记录日期，新的在前 */
-const allDates = computed(() => [...new Set(journal.map((e) => e.date))].sort().reverse())
 
 const totalDays = computed(() => allDates.value.length)
 
@@ -187,5 +201,34 @@ const monthDays = computed(() => {
   text-align: center;
   padding: 64px 0;
   color: var(--liyou-text-muted, #9a93a8);
+}
+/* ── 翻页条 ── */
+.journal-nav {
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.nav-arrow:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.nav-current {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: default;
+}
+
+.nav-weekday {
+  opacity: 0.7;
+  font-size: 0.8125rem;
+}
+
+.nav-index {
+  opacity: 0.55;
+  font-size: 0.75rem;
+  font-family: var(--liyou-font-mono, ui-monospace, monospace);
 }
 </style>

@@ -50,7 +50,14 @@ export interface OrderRecord {
  *   },
  * ]
  */
-export const ORDERS: OrderRecord[] = []
+export const ORDERS: OrderRecord[] = [
+  {
+    date: '2026-09-17',
+    game: '三角洲行动',
+    detail: '机密 2 小时 ＋ 绝密 3 小时',
+    tag: '高总',
+  },
+]
 
 /** 加微信的入口（和站上其他地方一致） */
 export const ORDER_CONTACT_HINT = '加微信说一声就行'
