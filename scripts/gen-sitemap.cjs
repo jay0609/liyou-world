@@ -15,10 +15,11 @@ const OUT = path.join(ROOT, 'public', 'sitemap.xml')
 const STATIC_PAGES = [
   ['/', 'daily', '1.0'],
   ['/about', 'monthly', '0.8'],
-  ['/guide', 'monthly', '0.9'],
+  ['/business', 'monthly', '0.9'],
   ['/projects', 'weekly', '0.8'],
-  ['/orders', 'weekly', '0.8'],
-  ['/journal', 'daily', '0.8'],
+  
+  ['/records', 'daily', '0.8'],
+  ['/thoughts', 'weekly', '0.7'],
 ]
 
 // 从 src/data/projects.ts 里抓 slug（避免为了构建去引 TS）

@@ -36,6 +36,9 @@ const ProjectsPage = () => import('./views/ProjectsPage.vue')
 const ProjectDetailPage = () => import('./views/ProjectDetailPage.vue')
 const JournalPage = () => import('./views/JournalPage.vue')
 const OrdersPage = () => import('./views/OrdersPage.vue')
+const ThoughtsPage = () => import('./views/ThoughtsPage.vue')
+const BusinessPage = () => import('./views/BusinessPage.vue')
+const RecordsPage = () => import('./views/RecordsPage.vue')
 const NotFoundPage = () => import('./views/NotFoundPage.vue')
 
 const router = createRouter({
@@ -50,6 +53,9 @@ const router = createRouter({
     { path: '/projects/:slug', name: 'project', component: ProjectDetailPage, meta: { title: '项目', description: '个人开发项目作品集——概念、理念与进展。' } },
     { path: '/journal', name: 'journal', component: JournalPage, meta: { title: '每日动态', description: '每天记一次——做了什么、练了什么、学了什么。' } },
       { path: '/orders', name: 'orders', component: OrdersPage, meta: { title: '接单记录', description: '每一单都记在这儿，包括战绩——接了谁、打了什么、打成什么样。' } },
+      { path: '/thoughts', name: 'thoughts', component: ThoughtsPage, meta: { title: '\u601d\u8003', description: '\u60f3\u5199\u5c31\u5199\u2014\u2014\u5927\u591a\u662f\u8ddf AI \u6765\u56de\u63a8\u51fa\u6765\u7684\u4e1c\u897f\u3002' } },
+      { path: '/business', name: 'business', component: BusinessPage, meta: { title: '业务', description: '陪练师 —— 价目、接单记录、陪练须知。' } },
+      { path: '/records', name: 'records', component: RecordsPage, meta: { title: '记录', description: '每天在干嘛，和这个站改了什么。' } },
     // 旧 IP 页面路径重定向（保留旧链接可访问）
     { path: '/book-spirit', redirect: '/projects/liyou-mirage/lore' },
     { path: '/oc-workshop', redirect: '/projects/liyou-mirage' },
