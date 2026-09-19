@@ -23,7 +23,7 @@
     </div>
 
     <div v-show="tab === 'station'">
-      <ThoughtsPage :only="'站记'" />
+      <StationLog />
     </div>
   </div>
 </template>
@@ -31,7 +31,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import JournalPage from './JournalPage.vue'
-import ThoughtsPage from './ThoughtsPage.vue'
+import StationLog from '../components/StationLog.vue'
 
 const tabs = [
   { key: 'journal', label: '动态' },

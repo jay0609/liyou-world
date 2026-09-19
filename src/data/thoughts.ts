@@ -4,6 +4,8 @@
  * 想写就写，不追求篇数。每篇一个日期 + 标题 + 正文。
  * 正文用最简单的结构：段落 + 小标题（h）+ 要点列表（list）。
  *
+ * ⚠️ 站记（这个网站改了什么）不在这里 —— 见 src/components/StationLog.vue
+ *
  * 怎么加：往 THOUGHTS 数组最前面插一条（或者告诉我，我加）。
  */
 
@@ -19,57 +21,28 @@ export interface ThoughtBlock {
 export type ThoughtCategory = '推演' | '站记'
 
 export interface Thought {
-  /** 分类：推演（想问题）/ 站记（这个站的开发记录） */
-  category: ThoughtCategory
-
-  /** 下一步要做什么（站记用） */
-  next?: string[]
   /** 日期 YYYY-MM-DD */
   date: string
   /** 标题 */
   title: string
   /** 一句话摘要，列表页显示 */
   summary: string
+  /** 分类 */
+  category: ThoughtCategory
   /** 标签 */
   tags?: string[]
+  /** 下一步要做什么（可选） */
+  next?: string[]
   /** 正文 */
   blocks: ThoughtBlock[]
 }
 
 export const THOUGHTS: Thought[] = [
   {
-    date: '2026-09-19',
-    category: '站记',
-    title: '加了「思考」栏目',
-    summary:
-      '把昨天那篇 AGI 推演搬上了站，顺手给「思考」分了类。以后这个站改了什么，也记在这儿。',
-    tags: ['建站', '开发'],
-    next: [
-      '给还没截图的项目补图（Verge / 三国SLG / CS2版 / 权御）',
-      '把项目源码挂到站上（先做私有仓库备份）',
-      '备案 + 搬阿里云（等旧主体注销完）',
-    ],
-    blocks: [
-      {
-        h: '做了什么',
-        list: [
-          '加了「思考」栏目，导航上多一项',
-          '把昨天那篇 AGI / ASI / RSI 的推演整理上去（七部分）',
-          '给「思考」分了类：推演 / 站记',
-          '站记每篇写清楚：做了什么、下一步做什么',
-        ],
-      },
-      {
-        h: '为什么加「站记」',
-        p: '想让人看到这个站是活的 —— 不只是放在那儿，是一直在改。写清楚下一步要做什么，等于给了一个承诺。',
-      },
-    ],
-  },
-  {
     date: '2026-09-18',
     title: 'AGI、ASI、RSI，和物理权限',
     summary:
-      '在「印象」坐了一下午，跟 AI 来回推了三个多小时。这份是那天的产出——七部分，其中第六部分是我自己的架构设计。',
+      '在「印象」坐了一下午，跟 AI 来回推了三个多小时。这份是那天的产出——七部分，其中第六部分是我自己的架构设计。结论之一是：ASI 完全不可能达到，因为 AGI 都没出现。',
     category: '推演',
     tags: ['AI', 'AGI', 'RSI', '推演'],
     blocks: [
