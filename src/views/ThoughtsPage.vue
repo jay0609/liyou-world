@@ -8,7 +8,7 @@
     </header>
 
     <!-- 分类 -->
-    <div v-if="!only" class="th-tabs">
+    <div style="display:none" class="th-tabs">
       <button
         v-for="c in cats"
         :key="c"
@@ -75,7 +75,7 @@ const cats = ['全部', '推演', '站记']
 const sorted = computed(() => [...THOUGHTS].sort((a, b) => b.date.localeCompare(a.date)))
 
 const base = computed(() =>
-  props.only ? sorted.value.filter((t) => t.category === props.only) : sorted.value,
+  props.only ? sorted.value.filter((t) => t.category === props.only) : sorted.value.filter((t) => t.category === '推演'),
 )
 const filtered = computed(() => (cat.value === '全部' ? base.value : base.value.filter((t) => t.category === cat.value)))
 

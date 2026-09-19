@@ -8,7 +8,7 @@
 
       <!-- 桌面导航 -->
       <div class="hidden md:flex items-center gap-lg flex-1 ml-lg">
-        <router-link to="/business" class="nav-link" @click="closeAll">业务</router-link>
+        <router-link to="/business" class="nav-link" @click="closeAll">个人业务</router-link>
 
         <!-- 个人项目：下拉 -->
         <div class="dropdown" @mouseenter="projOpen = true" @mouseleave="projOpen = false">
@@ -73,7 +73,7 @@
           <span class="m-hint">首页</span>
         </router-link>
         <router-link to="/business" class="m-link" @click="closeAll">
-          <span class="m-icon">🎯</span> 业务
+          <span class="m-icon">🎯</span> 个人业务
           <span class="m-hint">战绩 · 价目表</span>
         </router-link>
 

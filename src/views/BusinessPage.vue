@@ -1,7 +1,7 @@
 <template>
   <div class="biz-page">
     <header class="biz-head">
-      <h1 class="biz-title">业务</h1>
+      <h1 class="biz-title">个人业务</h1>
       <p class="biz-sub">现在只有一块：陪练。AI 那块还在想。</p>
     </header>
 
