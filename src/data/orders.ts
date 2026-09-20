@@ -52,6 +52,11 @@ export interface OrderRecord {
  */
 export const ORDERS: OrderRecord[] = [
   {
+    date: '2026-09-19',
+    game: '三角洲行动',
+    detail: '2.5 小时',
+    tag: '最强一突的高总',
+  },  {
     date: '2026-09-17',
     game: '三角洲行动',
     detail: '机密 2 小时 ＋ 绝密 3 小时',
