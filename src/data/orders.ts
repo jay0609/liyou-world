@@ -52,21 +52,29 @@ export interface OrderRecord {
  */
 export const ORDERS: OrderRecord[] = [
   {
+    date: '2026-09-20',
+    game: '三角洲行动',
+    detail: '16:30-22:00 · 4 小时（中途休息已扣除）',
+    tag: '小高',
+    repeat: true,
+  },  {
     date: '2026-09-19',
     game: '三角洲行动',
     detail: '2.5 小时',
-    tag: '最强一突的高总',
-  },  {
-    date: '2026-09-17',
-    game: '三角洲行动',
-    detail: '机密 2 小时 ＋ 绝密 3 小时',
-    tag: '帅的一逼的高总',
+    tag: '小高',
+    repeat: true,
   },  {
     date: '2026-09-18',
     game: '三角洲行动 · 航天基地 / 巴克什',
     detail: '绝密 · 7 局 · 2.5 小时',
     tag: '俱乐部外派单',
     images: ['/images/orders/2026-09-18-delta-1.jpg'],
+  },  {
+    date: '2026-09-17',
+    game: '三角洲行动',
+    detail: '机密 2 小时 ＋ 绝密 3 小时',
+    tag: '小高',
+    repeat: true,
   },
 ]
 
