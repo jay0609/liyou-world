@@ -52,6 +52,21 @@ export interface OrderRecord {
  */
 export const ORDERS: OrderRecord[] = [
   {
+    date: '2026-09-27',
+    game: 'CSGO',
+    detail: '6 把 · 19:12-22:20',
+    tag: 'nigo 派单',
+  },  {
+    date: '2026-09-25',
+    game: 'CSGO',
+    detail: '陪玩店派单 · 11:07-12:07',
+    tag: '陪玩店',
+  },  {
+    date: '2026-09-24',
+    game: 'CSGO',
+    detail: '陪玩店派单 · 约 15:20-16:20',
+    tag: '陪玩店',
+  },  {
     date: '2026-09-20',
     game: '三角洲行动',
     detail: '16:30-22:00 · 4 小时（中途休息已扣除）',
